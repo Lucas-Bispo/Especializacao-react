@@ -3,6 +3,8 @@ import { Post } from '../src/Post';
 import { Header } from './components/Header';
 // Devesse de importar as funcoes dentro o app
 // Propriedades ou atributos, sao elementos de cada teg
+import './global.css';
+
 
 export function App() {
   // Sintax correta
