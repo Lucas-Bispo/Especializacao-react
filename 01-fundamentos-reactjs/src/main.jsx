@@ -1,7 +1,8 @@
 import React from 'react' // pacote Coração que tem funcionalidades para tudo, MOBILE, TV, WEB..
 import ReactDOM from 'react-dom/client' // integração do coração com hmtl 
-import { App } from './App'
+import { App } from './App';
 
+import styles from 'App.module.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(// Função importada da DOM para criar o html a partir de uma raiz
   // Metodo RENDER garante a renderização da funções que retornam html ou html puro
