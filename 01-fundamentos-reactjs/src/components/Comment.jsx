@@ -1,5 +1,6 @@
 import styles from './Comment.module.css';
 import { Trash } from 'phosphor-react';
+import { ThumbsUp } from 'phosphor-react';
 
 export function Comment() {
     return (

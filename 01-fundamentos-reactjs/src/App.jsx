@@ -8,29 +8,27 @@ import './global.css';
 import styles from './App.module.css';
 
 
-
-
 export function App() {
   // Sintax correta
   return (
     <div> 
 
-    <Header />
+      <Header />
 
-    <div className={styles.wrapper}>
+      <div className={styles.wrapper}>
 
-      <Sidebar />
+        <Sidebar />
 
-      <main>
-      <Post 
-      author="Lucas Bispo"
-      content="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Temporibus in magnam veniam dicta assumenda. Incidunt rerum voluptates fugit velit pariatur consequuntur aspernatur perferendis porro, ut quo laborum soluta atque repellendus."   
-      />
-      <Post 
-      author="Lucas Oliveira"
-      content="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Temporibus in magnam veniam dicta assumenda. Incidunt rerum voluptates fugit velit pariatur consequuntur aspernatur perferendis porro, ut quo laborum soluta atque repellendus."   
-      />
-      </main>
+        <main>
+          <Post 
+          author="Lucas Bispo"
+          content="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Temporibus in magnam veniam dicta assumenda. Incidunt rerum voluptates fugit velit pariatur consequuntur aspernatur perferendis porro, ut quo laborum soluta atque repellendus."   
+          />
+          <Post 
+          author="Lucas Oliveira"
+          content="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Temporibus in magnam veniam dicta assumenda. Incidunt rerum voluptates fugit velit pariatur consequuntur aspernatur perferendis porro, ut quo laborum soluta atque repellendus."   
+        />
+        </main>
     </div>
 
     
