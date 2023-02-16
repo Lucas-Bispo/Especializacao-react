@@ -6,7 +6,7 @@ export function Comment() {
     return (
         
         <div className={styles.comment}>
-            <img src="https://github.com/Lucas-Bispo.png" alt="" />
+            <Avatar src="https://github.com/Lucas-Bispo.png" alt="" />
 
             <div className={styles.commentBox}>
                 <div className={styles.commentContent}>
