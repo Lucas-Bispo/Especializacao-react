@@ -12,8 +12,8 @@
 
 .profile {
     display: flex;
-    flex-direction: column;/*Nome um baixo do outro*/
-    align-items: center;
+    flex-direction: column; /*Nome um baixo do outro*/
+    align-items: center; /*Alinha ao centro*/
 
     margin-top: calc(0px - 1.5rem - 6px);
 }
