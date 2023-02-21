@@ -1,4 +1,5 @@
 :root { //Fazer varredura no projeto FIGMA para pegar todas as cores, setar como variaveis
+    // setando variaveis de cores
     --white: #ffffff;
     --gray-100: #e1e1e6;
     --gray-300: c4c4cc;
@@ -21,7 +22,7 @@
     box-shadow: 0 0 0 2px var(--green-500);
 }
 
-*{
+*{ // Remover margens e lados
     margin: 0; 
     padding: 0;
     box-sizing: border-box; // Faz com que nao aumente o elemento e sim comprimam para dentro

@@ -8,7 +8,7 @@ import './global.css';
 import styles from './App.module.css';
 
 
-export function App() {
+export function App() { // funçã que exporta html
   // Sintax correta
   return (
     <div> 
