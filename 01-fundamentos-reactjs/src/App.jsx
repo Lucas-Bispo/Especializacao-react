@@ -4,21 +4,24 @@ import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
 // Devesse de importar as funcoes dentro o app
 // Propriedades ou atributos, sao elementos de cada teg
-import './global.css';
 import styles from './App.module.css';
+import './global.css';
+
+
+// author: {avatar_url: "", name: "", role: ""}
+// publisher: Date
+// content: String
+// Criacao de Objeto
 
 
 export function App() { // funçã que exporta html
   // Sintax correta
   return (
     <div> 
-
       <Header />
 
       <div className={styles.wrapper}>
-
         <Sidebar />
-
         <main>
           <Post 
           author="Lucas Bispo"
