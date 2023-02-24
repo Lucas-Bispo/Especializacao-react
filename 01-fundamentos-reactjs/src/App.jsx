@@ -13,6 +13,18 @@ import './global.css';
 // content: String
 // Criacao de Objeto
 
+const posts = [ // array de objetos
+  {
+    id: 1,
+    author: {
+      avatar: 'https://github.com/diego3g.png',
+      name: 'Diego Fernades',
+      role: 'CTO'
+    },
+    content
+  },
+];
+
 
 export function App() { // funçã que exporta html
   // Sintax correta
