@@ -21,8 +21,14 @@ const posts = [ // array de objetos
       name: 'Diego Fernades',
       role: 'CTO'
     },
-    content
+    content: [
+      { type: 'paragraph', content: 'Fala galera', },
+      { type: 'paragraph', content: 'Acabe de subir um projeto no meu protifolio, E um projeto que fiz no NLW, Return, evento da rockeseat. O nome' },
+      {tyoe: 'paragraph', content: 'jane.desegin/doctorcare'},
+  
+    ],
   },
+
 ];
 
 
