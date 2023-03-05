@@ -5,7 +5,7 @@ import styles from './Post.module.css';
 
 
 
-export function Post(){ // A ideai de componentes é separar pontos repetitivos atraves de html e exportar atraves das funcoes
+export function Post(props){ // A ideai de componentes é separar pontos repetitivos atraves de html e exportar atraves das funcoes
     return(
         <article className={styles.post}>
             <header>

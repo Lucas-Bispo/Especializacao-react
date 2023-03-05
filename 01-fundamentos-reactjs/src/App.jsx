@@ -54,8 +54,14 @@ export function App() { // funçã que exporta html
       <div className={styles.wrapper}>
         <Sidebar />
         <main>
-          {posts.forEach(post => { // percorre o arry mas nao tem retorno
-            <Post/>
+          {posts.map(post => { // percorre o arry mas nao tem retorno
+            return ( 
+              <Post
+                author={post.author}
+                content={post.content}
+                publishedAt={post.publishedAt}
+              />
+            )
           })}
 
         </main>
