@@ -10,7 +10,7 @@ export function Post(props){ // A ideai de componentes é separar pontos repetit
         <article className={styles.post}>
             <header>
                 <div className={styles.author}>
-                    <Avatar hasBorder={true} src="https://github.com/Lucas-Bispo.png" />
+                    <Avatar scr={props.author.avatarUrl} />
                     <div>
                         <strong>Val pao com ovo</strong>
                         <span>Web Developer</span>
