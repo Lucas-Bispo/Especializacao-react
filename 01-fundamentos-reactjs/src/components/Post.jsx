@@ -4,16 +4,16 @@ import styles from './Post.module.css';
 
 
 
-
-export function Post(props){ // A ideai de componentes é separar pontos repetitivos atraves de html e exportar atraves das funcoes
+ // fazer desestruturacao 
+export function Post({author, publishedAt}){ // A ideai de componentes é separar pontos repetitivos atraves de html e exportar atraves das funcoes
     return(
         <article className={styles.post}>
             <header>
                 <div className={styles.author}>
-                    <Avatar scr={props.author.avatarUrl} />
+                    <Avatar scr={author.avatarUrl} />
                     <div className={styles.authorInfo}>
-                        <strong>{props.author.name}</strong>
-                        <span>{props.author.role}</span>
+                        <strong>{author.name}</strong>
+                        <span>{author.role}</span>
                     </div>
                 </div>
             
