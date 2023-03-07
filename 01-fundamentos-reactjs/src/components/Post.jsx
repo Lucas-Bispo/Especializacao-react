@@ -11,9 +11,9 @@ export function Post(props){ // A ideai de componentes é separar pontos repetit
             <header>
                 <div className={styles.author}>
                     <Avatar scr={props.author.avatarUrl} />
-                    <div>
-                        <strong>Val pao com ovo</strong>
-                        <span>Web Developer</span>
+                    <div className={styles.authorInfo}>
+                        <strong>{props.author.name}</strong>
+                        <span>{props.author.role}</span>
                     </div>
                 </div>
             
