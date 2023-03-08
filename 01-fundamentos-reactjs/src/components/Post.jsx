@@ -6,6 +6,13 @@ import styles from './Post.module.css';
 
  // fazer desestruturacao 
 export function Post({author, publishedAt}){ // A ideai de componentes é separar pontos repetitivos atraves de html e exportar atraves das funcoes
+    
+    const publishedDataFormatted = new Intl.DateTimeFormat('pt-BR', {
+        day: '2-digit',
+        month: 'long',
+        timeStyle: 'full',
+    });
+    
     return(
         <article className={styles.post}>
             <header>
@@ -17,7 +24,11 @@ export function Post({author, publishedAt}){ // A ideai de componentes é separa
                     </div>
                 </div>
             
-                <time title="31 de Janeiro as 07:04h" dateTime="2023-01-31">Publicado há 1h </time>
+                <time title="31 de Janeiro as 07:04h" dateTime="2023-01-31">
+                    {publishedAt.toString()} 
+                
+                </time>
+
 
 
             </header> 
