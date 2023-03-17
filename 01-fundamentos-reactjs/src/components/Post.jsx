@@ -11,8 +11,7 @@ import styles from './Post.module.css';
  // fazer desestruturacao 
 export function Post({author, publishedAt, content}){ // A ideai de componentes é separar pontos repetitivos atraves de html e exportar atraves das funcoes
     
-    const publishedDataFormatted = new Intl.DateTimeFormat('pt-BR', 
-        const publishedDataFormatted = format(publishedAt, "d 'de' LLLL 'as' HH:mm'h'",{
+    const publishedDataFormated = format(publishedAt, "d 'de' LLLL 'as' HH:mm'h'",{
             locale: ptBr,
     }) // Implentando data de maneira dinamica e formatada em ptbr com a ultilizacao da biblioteca date-fns
     
@@ -43,7 +42,7 @@ export function Post({author, publishedAt, content}){ // A ideai de componentes 
             </header> 
 
             <div className={styles.content}>
-                {content.map.(line=>{
+                {content.map(line=>{
                     if(line.type === 'paragraph'){
                         return <p>{line.content}</p>;
                     }else if (line.type === 'link'){
