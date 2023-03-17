@@ -11,14 +11,14 @@ import styles from './Post.module.css';
  // fazer desestruturacao 
 export function Post({author, publishedAt, content}){ // A ideai de componentes é separar pontos repetitivos atraves de html e exportar atraves das funcoes
     
-    const publishedDataFormated = format(publishedAt, "d 'de' LLLL 'as' HH:mm'h'",{
-            locale: ptBr,
-    }) // Implentando data de maneira dinamica e formatada em ptbr com a ultilizacao da biblioteca date-fns
+    const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'as' HH:mm'h'",{
+        locale: ptBR,
+      }) // Implentando data de maneira dinamica e formatada em ptbr com a ultilizacao da biblioteca date-fns
     
-    const publishedDaateRelativeRoNow = formatDistanceToNow(publishedAt,{
+      const publishedDateRelativeTonow = formatDistanceToNow(publishedAt,{
         locale: ptBR,
         addSuffix: true,
-    })
+      })
 
 
     return(
