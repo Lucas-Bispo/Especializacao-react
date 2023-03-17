@@ -1,4 +1,5 @@
-import { format } from 'date-fns';
+import { format, formatDistanceToNow } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
 
 import { Avatar } from './Avatar';
 import { Comment } from './Comment';
@@ -8,12 +9,19 @@ import styles from './Post.module.css';
 
 
  // fazer desestruturacao 
-export function Post({author, publishedAt}){ // A ideai de componentes é separar pontos repetitivos atraves de html e exportar atraves das funcoes
+export function Post({author, publishedAt, content}){ // A ideai de componentes é separar pontos repetitivos atraves de html e exportar atraves das funcoes
     
-    const publishedDataFormatted = new Intl.DateTimeFormat('pt-BR', {
-        const publishedDataFormatted = format(publishedAt, "d 'de' LLLL 'as' HH:mm'h'")
-    });
+    const publishedDataFormatted = new Intl.DateTimeFormat('pt-BR', 
+        const publishedDataFormatted = format(publishedAt, "d 'de' LLLL 'as' HH:mm'h'",{
+            locale: ptBr,
+    }) // Implentando data de maneira dinamica e formatada em ptbr com a ultilizacao da biblioteca date-fns
     
+    const publishedDaateRelativeRoNow = formatDistanceToNow(publishedAt,{
+        locale: ptBR,
+        addSuffix: true,
+    })
+
+
     return(
         <article className={styles.post}>
             <header>
@@ -25,8 +33,8 @@ export function Post({author, publishedAt}){ // A ideai de componentes é separa
                     </div>
                 </div>
             
-                <time title="31 de Janeiro as 07:04h" dateTime="2023-01-31">
-                    {publishedAt.toString()} 
+                <time title={publishedDateFormatted} dateTime={publishedAt.toISOString()}>
+                   {publishedDateRelativeTonow}
                 
                 </time>
 
@@ -35,17 +43,14 @@ export function Post({author, publishedAt}){ // A ideai de componentes é separa
             </header> 
 
             <div className={styles.content}>
-                <p>Fala galeraa 👋</p>
-
-                <p>Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀</p>
-
-                <p> <a href=''> 👉 jane.design/doctorcare </a></p>
-
-                <p> 
-                    <a>  #novoprojeto</a>{' '}
-                    <a>#nlw</a> 
-                    <a>#rocketseat</a>
-                </p>
+                {content.map.(line=>{
+                    if(line.type === 'paragraph'){
+                        return <p>{line.content}</p>;
+                    }else if (line.type === 'link'){
+                        return <p><a href="">{line.content}</a></p>
+                    }
+                })}
+                
             </div>
 
             <form className={styles.commentForm}>
