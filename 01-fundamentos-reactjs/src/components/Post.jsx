@@ -1,5 +1,8 @@
+import { format } from 'date-fns';
+
 import { Avatar } from './Avatar';
 import { Comment } from './Comment';
+
 import styles from './Post.module.css';
 
 
@@ -8,9 +11,7 @@ import styles from './Post.module.css';
 export function Post({author, publishedAt}){ // A ideai de componentes é separar pontos repetitivos atraves de html e exportar atraves das funcoes
     
     const publishedDataFormatted = new Intl.DateTimeFormat('pt-BR', {
-        day: '2-digit',
-        month: 'long',
-        timeStyle: 'full',
+        const publishedDataFormatted = format(publishedAt, "d 'de' LLLL 'as' HH:mm'h'")
     });
     
     return(
