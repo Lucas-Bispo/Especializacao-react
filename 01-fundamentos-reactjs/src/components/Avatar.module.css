@@ -1,16 +1,17 @@
 .avatar {
+    /*box-sizing: initial;*/ // Comentário sobre a propriedade box-sizing, que é uma propriedade CSS que define como o tamanho total de um elemento é calculado.
+    width: 3rem; // Define a largura do elemento com uma unidade relativa, 3rem é igual a 48px por padrão
+    height: 3rem; // Define a altura do elemento com uma unidade relativa, 3rem é igual a 48px por padrão
+    border-radius: 8px; // Define o raio dos cantos do elemento em 8px
 
-    /*box-sizing: initial;*/
-    width: 3rem;
-    height: 3rem;
-    border-radius: 8px;
 }
 
 .avatarWithBorder {
-    /*box-sizing: initial;*/
-    width: calc(3rem + 12px);
-    height: calc(3rem + 12px);
-    border-radius: 8px;
-    border: 4px solid var(--gray-800);
-    outline: 2px solid var(--green-500);
+    /*box-sizing: initial;*/ // Comentário sobre a propriedade box-sizing, que é uma propriedade CSS que define como o tamanho total de um elemento é calculado.
+    width: calc(3rem + 12px); // Define a largura do elemento usando a função calc() para calcular a largura do elemento com base em uma expressão aritmética (3rem + 12px = 60px)
+    height: calc(3rem + 12px); // Define a altura do elemento usando a função calc() para calcular a altura do elemento com base em uma expressão aritmética (3rem + 12px = 60px)
+    border-radius: 8px; // Define o raio dos cantos do elemento em 8px
+    border: 4px solid var(--gray-800); // Define a borda do elemento com uma largura de 4px, um estilo sólido e uma cor cinza escuro, que é definida por uma variável CSS
+    outline: 2px solid var(--green-500); // Define o contorno do elemento com uma largura de 2px, um estilo sólido e uma cor verde, que é definida por uma variável CSS
+
 }
