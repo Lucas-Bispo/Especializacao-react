@@ -1,23 +1,15 @@
-:root { //Fazer varredura no projeto FIGMA para pegar todas as cores, setar como variaveis
-<<<<<<< HEAD
-=======
-    // setando variaveis de cores
->>>>>>> parent of 61efddf (:memo: Add or update documentation.)
-    --white: #ffffff;
-    --gray-100: #e1e1e6;
-    --gray-300: c4c4cc;
-    --gray-400: #8d8d99;
-    --gray-600: #323238;
-    --gray-700: #29292e;
-    --gray-800: #202024;
-    --gray-900: #121214;
-
-    --green-300: #00B37E;
-    --green-500: #00875f;
-
-    --red-500: #F75A68;
- 
-
+:root { // Define o seletor de raiz, que é usado para declarar variáveis CSS globais
+    --white: #ffffff; // Define uma variável chamada white com a cor branca
+    --gray-100: #e1e1e6; // Define uma variável chamada gray-100 com uma cor cinza claro
+    --gray-300: c4c4cc; // Define uma variável chamada gray-300 com uma cor cinza médio
+    --gray-400: #8d8d99; // Define uma variável chamada gray-400 com uma cor cinza
+    --gray-600: #323238; // Define uma variável chamada gray-600 com uma cor cinza escuro
+    --gray-700: #29292e; // Define uma variável chamada gray-700 com uma cor cinza mais escuro
+    --gray-800: #202024; // Define uma variável chamada gray-800 com uma cor cinza ainda mais escuro
+    --gray-900: #121214; // Define uma variável chamada gray-900 com uma cor cinza muito escuro
+    --green-300: #00B37E; // Define uma variável chamada green-300 com uma cor verde claro
+    --green-500: #00875f; // Define uma variável chamada green-500 com uma cor verde
+    --red-500: #F75A68; // Define uma variável chamada red-500 com uma cor vermelho
 }
 
 :focus {
@@ -25,14 +17,10 @@
     box-shadow: 0 0 0 2px var(--green-500);
 }
 
-<<<<<<< HEAD
-*{
-=======
-*{ // Remover margens e lados
->>>>>>> parent of 61efddf (:memo: Add or update documentation.)
-    margin: 0; 
-    padding: 0;
-    box-sizing: border-box; // Faz com que nao aumente o elemento e sim comprimam para dentro
+*{ // Define uma regra que aplica a todos os elementos, exceto ao próprio elemento raiz (:root)
+    margin: 0; // Define a margem externa como 0
+    padding: 0; // Define o preenchimento interno como 0
+    box-sizing: border-box; // Define o modelo de caixa como "border-box" (a largura e altura do elemento incluem o preenchimento e a borda)
 }
 
 body {
