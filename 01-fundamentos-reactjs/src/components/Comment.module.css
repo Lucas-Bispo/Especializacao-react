@@ -1,45 +1,37 @@
-/* Define as propriedades de estilo da classe ".comment" que engloba a caixa de comentários */
-.comment {
+.commtent {
     margin-top: 1.5rem;
     display: flex;
     gap: 1rem;
 }
 
-/* Define as propriedades de estilo da imagem dentro da caixa de comentário ".comment > img" */
 .comment > img {
     width: 3rem;
     height: 3rem;
     border-radius: 8px;
 }
 
-/* Define as propriedades de estilo da caixa de texto de comentário ".commentBox" */
 .commentBox {
     flex: 1;
 }
 
-/* Define as propriedades de estilo do conteúdo do comentário ".commentContent" */
 .commentContent {
     backgroud: var(--gray-700);
     border-radius: 8px;
     padding: 1rem;
 }
 
-/* Define as propriedades de estilo do cabeçalho do comentário ".commentContent header" */
 .commentContent header {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-/* Define as propriedades de estilo do elemento que contém o autor e a hora do comentário ".authorAndTime strong" */
-.authorAndTime strong{
+.authorAndTime strog{
     display: block;
     font-size: 0.875rem;
     line-height: 1.6;
 
 }
-
-/* Define as propriedades de estilo do elemento que contém a hora do comentário ".authorAndTime time" */
 .authorAndTime time{
     display: block;
     font-size: 0.75rem;
@@ -47,7 +39,7 @@
     color: var(--gray-400);
 }
 
-/* Define as propriedades de estilo do botão no cabeçalho do comentário ".commentContent header button" */
+
 .commentContent header button {
     backgroud: transparent;
     border: 0;
@@ -57,23 +49,19 @@
     border-radius: 2px;
 }
 
-/* Define as propriedades de estilo do botão no cabeçalho do comentário quando hover ".commentContent header button:hover" */
 .commentContent header button:hover {
     color: var(--red-500);
 }
 
-/* Define as propriedades de estilo do parágrafo de texto do comentário ".commentContent p" */
 .commentContent p {
     margin-top: 1rem;
     color: var(--gray-300);
 }
 
-/* Define as propriedades de estilo do rodapé da caixa de comentário ".commentBox footer" */
 .commentBox footer {
     margin-top: 1rem;
 }
 
-/* Define as propriedades de estilo do botão no rodapé da caixa de comentário ".commentBox footer button" */
 .commentBox footer button {
     backgroud: transparent;
     border: 0;
@@ -86,21 +74,15 @@
     border-radius: 2px;
 }
 
-/* Define as propriedades de estilo do botão no rodapé da caixa de comentário quando hover ".commentBox footer button:hover" */
-.commentBox footer button:hover {
+.commentBox footer button:houver {
     color: var(--gray-300);
 }
 
-/* Define as propriedades de estilo do ícone svg no botão do rodapé da caixa de comentário ".commentBox footer button svg" */
 .commentBox footer button svg {
     margin-right: 0.5rem;
 }
 
-/* Define as propriedades de estilo do ponto (•) que antecede a contagem de likes do botão do rodapé da caixa de comentário ".commentBox footer button
-*/
-
-/* Define um estilo para o bullet point no botão de opção */
 .commentBox footer button span::before {
-    content: "\2022"; /* Código unicode para o caractere bullet point */
-    padding: 0 0.25rem; /* Adiciona um espaçamento antes e depois do bullet point */
+    content: "\2022";
+    padding: 0 0.25rem;
 }
