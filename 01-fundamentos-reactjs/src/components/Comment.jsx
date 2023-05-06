@@ -1,37 +1,58 @@
+import { useState } from "react";
 import styles from './Comment.module.css';
-import { Trash } from 'phosphor-react';
-import { ThumbsUp } from 'phosphor-react';
 
+import { ThumbsUp, Trash } from 'phosphor-react';
 import { Avatar } from './Avatar';
 
-export function Comment() {
-    return (
-        
-        <div className={styles.comment}>
-            <Avatar hasBorder={false} src="https://github.com/Lucas-Bispo.png" alt="" />
+interface CommentProps {
+  content: string;
+  onDeleteComment: (comment: string) => void;
+}
 
-            <div className={styles.commentBox}>
-                <div className={styles.commentContent}>
-                    <header>
+export function Comment({ content, onDeleteComment }: CommentProps) {
+  const [likeCount, setLikeCount] = useState(0);
 
-                        <div className={styles.autorAndTime}>
-                            <strong> Lucas Bispo </strong>
-                            <time title="31 de Janeiro as 07:04h" dateTime="2023-01-31">Publicado há 1h </time>
-                        </div>
+  function handleDeleteComment() {
+    onDeleteComment(content);
+  }
 
-                        <button title="Deletar comentario">
-                            <Trash size={24} />                            
-                        </button>
-8
-                    </header>
-                </div>
-                <footer>
-                    <button>
-                        <ThumbsUp />
-                            Apludir <span>20</span>
-                    </button>
-                </footer>
+  function handleLikeComment() {
+    setLikeCount((state) => {
+      return state + 1
+    });
+  }
+
+  return (
+    <div className={styles.comment}>
+      <Avatar
+        hasBorder={false}
+        src="https://github.com/diego3g.png"
+        alt=""
+      />
+
+      <div className={styles.commentBox}>
+        <div className={styles.commentContent}>
+          <header>
+            <div className={styles.authorAndTime}>
+              <strong>Diego Fernandes</strong>
+              <time title="11 de Maio às 08:13h" dateTime="2022-05-11 08:13:00">Cerca de 1h atrás</time>
             </div>
+
+            <button onClick={handleDeleteComment} title="Deletar comentário">
+              <Trash size={24} />
+            </button>
+          </header>
+
+          <p>{content}</p>
         </div>
-    )
+
+        <footer>
+          <button onClick={handleLikeComment}>
+            <ThumbsUp />
+            Aplaudir <span>{likeCount}</span>
+          </button>
+        </footer>
+      </div>
+    </div>
+  )
 }
