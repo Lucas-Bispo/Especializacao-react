@@ -1,0 +1,10 @@
+.header{ /* Estilizacao de cabecalho*/
+    background: var(--gray-800);/* Cor de fundo a base de variavel setada no global*/
+    display: flex; 
+    justify-content: center; 
+    padding: 1.25rem 0; /* distancia de frente e fundo*/
+}
+
+.header img { 
+    height: 2rem; /*Reduzindo o tamanho do icone do cabeçalho*/
+}

@@ -1,0 +1,21 @@
+.wrapper{/*Div por padrao dem 100% de largura*/
+    max-width:70rem; /* Largura maxima*/
+    margin: 2rem auto;/* Centralizado na tela */
+    padding: 0 1rem;/* Se diminuir menor que 70 abre um espacinho para nao ficar colodo*/
+
+    display: grid;
+    grid-template-columns: 256px 1fr; /*Primeira coluna tera 256 e a outra sera movel */
+    gap: 2rem;/*Espaçamento de 2 entre as colunas*/
+    align-items: flex-start;/*Alinhado para o top */
+}
+
+@media (max-width: 768px) { 
+    html {
+        font-size: 85.5%;
+    }
+
+    .wrapper { 
+        grid-template-coluns: 1fr;
+
+    }
+}
