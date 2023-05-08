@@ -1,3 +1,9 @@
+/*
+:root: Define as variáveis CSS, que são usadas em todo o documento.
+--white, --gray-100, --gray-300, --gray-400, --gray-600, --gray-700, 
+--gray-800, --gray-900, --green-300, --green-500, --red-500: 
+São as variáveis de cores usadas em todo o documento.
+*/
 :root {
     --white: #fff;
     --gray-100: #e1e1e6;
@@ -13,24 +19,44 @@
   
     --red-500: #F75A68;
   }
-  
+  /*
+  :focus: Define o estilo CSS para um elemento que tem foco.
+  outline: transparent: Remove a borda ao redor do elemento que recebeu foco.
+  box-shadow: 0 0 0 2px var(--green-500): Define uma sombra ao redor do elemento que recebeu foco com a cor verde-500.
+  */
   :focus {
     outline: transparent;
     box-shadow: 0 0 0 2px var(--green-500);
   }
+  /*
+    * Define as propriedades para todos os elementos HTML.
+     margin: 0: Define que o elemento não terá margem.
+     padding: 0: Define que o elemento não terá preenchimento.
+     box-sizing: border-box: Define que a largura e a altura do elemento incluem a borda e o preenchimento.
   
+  */
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
-  
+  /*
+  body: Define as propriedades para o elemento <body> do HTML.
+  background: var(--gray-900): Define a cor de fundo para o elemento <body> com a cor cinza-900.
+  color: var(--gray-300): Define a cor do texto para o elemento <body> com a cor cinza-300.
+  -webkit-font-smoothing: antialiased;: Define o suavização da fonte para o elemento <body>.
+  */
   body {
     background: var(--gray-900);
     color: var(--gray-300);
     -webkit-font-smoothing: antialiased;
   }
-  
+  /*
+  body, input, textarea, button: Define as propriedades para os elementos <body>, <input>, <textarea> e <button> do HTML.
+  font-family: "Roboto", sans-serif;: Define a fonte para esses elementos.
+  font-weight: 400;: Define a espessura da fonte.
+  font-size: 1rem;: Define o tamanho da fonte.
+  */
   body, input, textarea, button {
     font-family: "Roboto", sans-serif;
     font-weight: 400;
