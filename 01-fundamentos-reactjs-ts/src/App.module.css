@@ -9,6 +9,12 @@
     align-items: flex-start;/*Alinhado para o top */
 }
 
+/*O código dentro do @media (max-width: 768px) define um estilo diferente para a classe 
+.wrapper quando a largura da tela for menor ou igual a 768px. Nesse caso, a propriedade 
+font-size do elemento html é reduzida para 85.5% e a propriedade grid-template-columns 
+é modificada para que a div tenha apenas uma coluna. Isso permite que o conteúdo seja exibido 
+de forma mais legível em telas menores.*/
+
 @media (max-width: 768px) { 
     html {
         font-size: 85.5%;
