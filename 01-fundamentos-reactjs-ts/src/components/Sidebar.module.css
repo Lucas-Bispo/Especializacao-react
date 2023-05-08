@@ -1,64 +1,67 @@
+/* Define as propriedades da sidebar */
 .sidebar {
-    background: var(--gray-800);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  
-  .cover {
-    width: 100%;
-    height: 72px;
-    object-fit: cover;
-  }
-  
-  .profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  
-    margin-top: calc(0px - 1.5rem - 6px);
-  }
-  
-  .profile strong {
-    margin-top: 1rem;
-    color: var(--gray-100);
-    line-height: 1.6;
-  }
-  
-  .profile span {
-    font-size: 0.875rem;
-    color: var(--gray-400);
-    line-height: 1.6;
-  }
-  
-  .sidebar footer {
-    border-top: 1px solid var(--gray-600);
-    margin-top: 1.5rem;
-    padding: 1.5rem 2rem 2rem;
-  }
-  
-  .sidebar footer a {
-    width: 100%;
-    background: transparent;
-    color: var(--green-500);
-    border: 1px solid var(--green-500);
-    border-radius: 8px;
-    height: 50px;
-    padding: 0 1.5rem;
-    font-weight: bold;
-    display: block;
-    text-decoration: none;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-    gap: 0.5rem;
-  
-    transition: color 0.1s, background-color 0.1s;
-  }
-  
-  .sidebar footer a:hover {
-    background: var(--green-500);
-    color: var(--white);
-  }
-  
+background: var(--gray-800); /*Define a cor de fundo */
+border-radius: 8px; /* Define a borda arredondada */
+overflow: hidden; /*Esconde o conteúdo que ultrapassa as bordas */
+}
+
+/* Define o estilo da imagem de capa */
+.cover {
+width: 100%; /* Define a largura */
+height: 72px; /* Define a altura */
+object-fit: cover; /* Faz com que a imagem cubra todo o espaço do elemento */
+}
+
+/* Define o estilo do perfil */
+.profile {
+display: flex; /* Define que os elementos internos sejam exibidos em linha */
+flex-direction: column; /* Define a direção da linha para coluna */
+align-items: center; /* Alinha os elementos no centro */
+margin-top: calc(0px - 1.5rem - 6px); /* Define a margem superior */
+}
+
+/* Define o estilo do nome do perfil */
+.profile strong {
+margin-top: 1rem; /* Define a margem superior */
+color: var(--gray-100); /* Define a cor do texto */
+line-height: 1.6; /* Define a altura da linha */
+}
+
+/* Define o estilo da descrição do perfil */
+.profile span {
+font-size: 0.875rem; /* Define o tamanho da fonte */
+color: var(--gray-400); /* Define a cor do texto */
+line-height: 1.6; /* Define a altura da linha */
+}
+
+/* Define o estilo do rodapé da sidebar */
+.sidebar footer {
+border-top: 1px solid var(--gray-600); /* Define a borda superior */
+margin-top: 1.5rem; /* Define a margem superior */
+padding: 1.5rem 2rem 2rem; /* Define o preenchimento */
+}
+
+/* Define o estilo do link do rodapé */
+.sidebar footer a {
+width: 100%; /* Define a largura */
+background: transparent; /* Define a cor de fundo */
+color: var(--green-500); /* Define a cor do texto */
+border: 1px solid var(--green-500); /*/ Define a borda */
+border-radius: 8px; /* Define a borda arredondada */
+height: 50px; /* Define a altura */
+padding: 0 1.5rem; /* Define o preenchimento */
+font-weight: bold; /* Define a espessura da fonte */
+display: block; /* Define como bloco */
+text-decoration: none; /* Remove a decoração do link */
+display: flex; /* Define que os elementos internos sejam exibidos em linha */
+align-items: center; /* Alinha os elementos no centro */
+justify-content: center; /* Justifica os elementos no centro */
+gap: 0.5rem; /* Define o espaçamento entre os elementos */
+transition: color 0.1s, background-color 0.1s; /* Define a transição de cor do texto e de cor de fundo */
+}
+
+/* Define o estilo do link do rodapé quando o cursor está sobre ele */
+.sidebar footer a:hover {
+background: var(--green-500); /* Define a cor de fundo */
+color: var(--white); /* Define a cor do texto */
+}
