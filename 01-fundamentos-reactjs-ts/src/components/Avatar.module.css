@@ -1,13 +1,19 @@
+/*A classe .avatar define um estilo de tamanho e forma para a imagem do avatar.
+ A imagem terá uma largura e altura de 3rem e bordas arredondadas com 8px de raio.*/
 .avatar {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 8px;
-  }
-  
-  .avatarWithBorder {
-    width: calc(3rem + 12px);
-    height: calc(3rem + 12px);
-    border-radius: 8px;
-    border: 4px solid var(--gray-800);
-    outline: 2px solid var(--green-500);
-  }
+  width: 3rem;
+  height: 3rem;
+  border-radius: 8px;
+}
+  /*
+  Já a classe .avatarWithBorder define um estilo adicional para o componente quando 
+  o atributo hasBorder for definido como verdadeiro. Essa classe adiciona uma borda 
+  de 4px com a cor var(--gray-800) ao redor da imagem, além de uma borda de 2px com a cor var(--green-500) 
+  em volta da borda interna. As dimensões do avatar com borda são ligeiramente maiores, sendo 3rem + 12px para largura e altura.*/
+.avatarWithBorder {
+  width: calc(3rem + 12px);
+  height: calc(3rem + 12px);
+  border-radius: 8px;
+  border: 4px solid var(--gray-800);
+  outline: 2px solid var(--green-500);
+}
