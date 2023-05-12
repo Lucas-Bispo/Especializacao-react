@@ -1,8 +1,10 @@
 import { useState } from "react";
 
-import styles from './ToDoList.module.css';
 
-function TodoList() {
+import style from './ToDoList.module.css';
+
+
+export function TodoList() {
     /* Criar um componente funcional TodoList que representará a lista de tarefas. 
      * Dentro dele, vamos criar um estado tasks que será um array de objetos contendo 
      * a descrição da tarefa e um booleano indicando se a tarefa foi concluída ou não.
@@ -31,15 +33,13 @@ function TodoList() {
   }
 
   return (
-    <div>
-      {/* Entrada de texto */}
-      <input type="text" value={newTaskDescription} onChange={handleNewTaskDescriptionChange} />
-      {/* Botão para adicionar tarefa */}
-      <button onClick={handleAddTask}>Adicionar</button>
-      {/* Lista de tarefas */}
-      {/* Campos de estatísticas */}
-    </div>
+  <div className={style.task}>
+    {/* Entrada de texto */}
+    <input className={style.layout} type="text" value={newTaskDescription} onChange={handleNewTaskDescriptionChange} />
+    {/* Botão para adicionar tarefa */}
+    <button className={style.buttonlayout} onClick={handleAddTask}>Criar</button>
+    {/* Lista de tarefas */}
+    {/* Campos de estatísticas */}
+  </div>
   );
 }
-
-export default TodoList;
