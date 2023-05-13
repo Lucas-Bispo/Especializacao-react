@@ -1,0 +1,56 @@
+.TarefasConcluidas{
+    color: #4EA8DE;
+    width: 106px;
+    height: 17px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    width: 50px;
+    height: 50px;
+    
+    position: absolute;
+    top: 250px;
+    left: 490px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.Total{
+    color: #8284FA;
+    width: 106px;
+    height: 17px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    width: 50px;
+    height: 50px;
+    
+    position: absolute;
+    top: 250px;
+    left: 1090px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.lista{
+   
+    width: 106px;
+    height: 17px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    width: 50px;
+    height: 50px;
+    
+    position: absolute;
+    top: 350px;
+    left: 552px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}

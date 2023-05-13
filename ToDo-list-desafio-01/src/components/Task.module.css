@@ -18,6 +18,43 @@
     padding: 16px;
     border-radius: 8px;
     background-color: #1e6f9f;
-    margin-left: 880px;
+    margin-left: 780px;
   }
+  
+
+.layout {
+    /* Input */
+
+
+box-sizing: border-box;
+
+/* Auto layout */
+
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 16px;
+gap: 8px;
+
+width: 638px;
+height: 54px;
+position: absolute;
+/* Gray 500 */
+
+background: #262626;
+/* Gray 700 */
+
+border: 1px solid #0D0D0D;
+border-radius: 8px;
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 1;
+margin-left: 480px;
+
+margin-top: 173px;
+
+}
   
