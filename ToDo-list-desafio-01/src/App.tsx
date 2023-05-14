@@ -1,19 +1,18 @@
+import './global.css'
+import styles from './App.module.css'
+import { Header } from "./components/Header"
+import { NewTask } from './components/NewTask'
 
-import { Header } from "./components/Header";
-import { Task } from "./components/Task";
-import { TaskList } from "./components/TaskList";
+export function App() {
 
-//import styles from './App.module.css';<TodoList />
-import './global.css';
-
-
-export function App(){
-    return(
-        <div>
-            <Header />
-            <Task />
-            <TaskList />
-            
-        </div>
-    );
+  return (
+    <div>
+      <Header/>
+      <div className={styles.container}>
+        <main className={styles.main}>
+          <NewTask/>
+        </main>
+      </div>
+    </div>
+  );
 }
