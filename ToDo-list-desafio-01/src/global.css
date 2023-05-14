@@ -24,3 +24,17 @@
 body {
   background: var(--gray-600);
 }
+:focus {
+  outline: transparent;
+  box-shadow: 0 0 0 2px var(--dark-purple);
+}
+body {
+  background: var(--gray-600);
+  -webkit-font-smoothing: antialiased;
+}
+body, input, textarea, button {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  color: var(--gray-100);
+}
