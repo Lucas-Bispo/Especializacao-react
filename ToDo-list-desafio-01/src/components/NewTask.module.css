@@ -1,0 +1,70 @@
+.newTask {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.newTask > input {
+  box-sizing: border-box;
+  padding: 16px;
+  background: var(--gray-500);
+  border: 1px solid var(--gray-700);
+  border-radius: 8px;
+  flex-grow: 1;
+}
+.newTask > button {
+  background: var(--dark-blue);
+  border: 0;
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  line-height: 20px;
+  font-weight: 700;
+
+  transition: background 0.1s;
+}
+.newTask > button:not(:disabled):hover {
+  background: var(--blue);
+}
+.newTask > button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.containerCount {
+  margin: 4rem 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.containerCount > p {
+  display: flex;
+  gap: 8px;
+  font-weight: 700;
+}
+.containerCount > p:first-child {
+  color: var(--blue);
+}
+.containerCount > p:nth-child(n+2) {
+  color: var(--purple);
+}
+.containerCount > p > span {
+  display: flex;
+  padding: 2px 8px;
+  background: var(--gray-400);
+  border-radius: 999px;
+  color: var(--gray-200);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 15px;
+}
+.taskList {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
