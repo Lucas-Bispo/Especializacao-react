@@ -1,42 +1,51 @@
-import { useState } from 'react';
-import styles from './Task.module.css';
+import styles from './Task.module.css'
+import { Check, Trash } from 'phosphor-react'
 
-interface Task {
-  id: number;
-  text: string;
-  completed: boolean;
+interface TasksProps {
+  content: string
+  id: number
+  isChecked: boolean
+  onDeleteTask: (id: number) => void 
+  progress: (progressTask: number | boolean) => void
+  completeTask: (taskChecked: number) => void
 }
-interface TaskProps {
-    onCreateTask: (task: string) => void;
+
+export function Task(props: TasksProps) {
+
+  function handleCheckbox() {
+    props.completeTask(props.id)
   }
   
+  function handleDeleteTask() {
+    props.onDeleteTask(props.id)
+  
+  }
 
-export function Task({ onCreateTask }: TaskProps) {
-  const [taskText, setTaskText] = useState('');
-
-  function handleTaskTextChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setTaskText(event.target.value);
+  function handleCountCompleteTask(){
+    props.progress(props.isChecked)
   }
 
   return(
-    <div className={styles.task}>
-      <input
-        className={styles.layout}
-        type="text"
-        placeholder="Adicione uma nova tarefa"
-        value={taskText}
-        onChange={handleTaskTextChange}
-      />
-      <div className={styles.button}>
-        <button className={styles.buttonlayout} onClick={() => {
-          if (taskText.trim() === '') {
-            return;
+    <div className={styles.taskList} >
+      <div className={styles.task}>
+        <label className={styles.checkbox}>
+          <input 
+            type="checkbox" 
+            checked={props.isChecked} 
+            onClick={handleCheckbox} 
+            onChange={handleCountCompleteTask}
+          />
+          <span>
+            {props.content}
+          </span> 
+          {props.isChecked ? 
+            <div className={styles.checked}>
+              <Check size={12} weight="bold" color="var(--gray-100)" data-type="svg"/>
+            </div> : 
+            <div className={styles.check}></div>
           }
-          onCreateTask(taskText);
-          setTaskText('');
-        }}>
-          Criar
-        </button>
+        </label>
+        <Trash onClick={handleDeleteTask} className={styles.trashIcon} size={24}/>
       </div>
     </div>
   );
