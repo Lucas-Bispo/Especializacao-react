@@ -1,11 +1,10 @@
-import styles from './Header.module.css';
+import styles from './Header.module.css'
+import logo from '../assets/logo.svg'
 
-import Logo from '../assets/Logo.svg';
-
-export function Header(){
-    return (
-        <header className={styles.header}>
-            <img src={Logo} alt="Logo ToDo" />
-        </header>
-    );
+export function Header() {
+  return(
+    <header className={styles.header}>
+       <img src={logo} alt="ToDo List"/>
+    </header>
+  );
 }
