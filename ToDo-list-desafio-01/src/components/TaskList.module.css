@@ -50,7 +50,7 @@
     
     position: absolute;
     top: 350px;
-    left: 552px;
+    left: 872px;
     transition: all 0.3s ease;
     white-space: nowrap;
 }
@@ -63,4 +63,13 @@
     margin-top: 340px;
     position: absolute;
     left: 912px;
+}
+.check{
+    appearance: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    outline: none;
+    cursor: pointer;
 }
