@@ -1,4 +1,5 @@
-:root{
+/* Define as variáveis de cores utilizadas na aplicação */
+:root {
   --gray-100: #F2F2F2;
   --gray-200: #D9D9D9;
   --gray-300: #808080;
@@ -12,26 +13,27 @@
   --blue: #4EA8DE;
   --blueDark: #1E6F9F;
   --danger: #E25858;
-
 }
 
+/* Define que todos os elementos da página tenham margem e padding 0 e box-sizing como border-box */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Define a cor de fundo da página como a cor cinza mais escura */
 body {
   background: var(--gray-600);
 }
+
+/* Define que quando um elemento estiver em foco, a borda ficará transparente e o box-shadow ficará na cor roxa escura */
 :focus {
   outline: transparent;
   box-shadow: 0 0 0 2px var(--dark-purple);
 }
-body {
-  background: var(--gray-600);
-  -webkit-font-smoothing: antialiased;
-}
+
+/* Define a fonte padrão da página como Inter, sans-serif, tamanho 1rem e cor cinza claro */
 body, input, textarea, button {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
