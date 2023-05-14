@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './TaskList.module.css';
 import { Task } from './Task';
-
+import Clipboard from '../assets/Clipboard.svg';
 
 interface TaskItemProps {
     task: Task;
@@ -43,27 +43,39 @@ interface TaskItemProps {
     const totalTasks = tasks.length;
   
     return (
-      <div >
+        <div>
+        <div>
         <Task onCreateTask={handleAddTask} />
-        <ul className={styles.lista}>
-          {tasks.map((task) => (
-            <li key={task.id}>
-              <label>
-                <input
-                  className={styles.check}
-                  type="checkbox"
-                  checked={task.completed}
-                  onChange={() => handleToggleTaskCompleted(task.id)}
-                />
-                {task.text}
-              </label>
-              <button onClick={() => handleDeleteTask(task.id)}>Excluir</button>
-            </li>
-          ))}
-        </ul>
+        {tasks.length > 0 ? (
+          <ul className={styles.lista}>
+            {tasks.map((task) => (
+              <li key={task.id}>
+                <label>
+                  <input
+                    className={styles.check}
+                    type="checkbox"
+                    checked={task.completed}
+                    onChange={() => handleToggleTaskCompleted(task.id)}
+                  />
+                  {task.text}
+                </label>
+                <button onClick={() => handleDeleteTask(task.id)}>Excluir</button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+
+            <>
+                <img src={Clipboard} className={styles.clipe}/>
+                <div className={styles.paragrafo}>
+                    <p>Você ainda não tem tarefas cadastradas. Crie tarefas e organize seus itens a fazer.</p>
+                </div>
+            </>
+        )}
         <div>
           <span className={styles.TarefasConcluidas}>Tarefas concluídas: {completedTasks.length}</span>
           <span className={styles.Total}>  Total de tarefas: {totalTasks}</span>
+        </div>
         </div>
       </div>
     );
