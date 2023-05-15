@@ -1,13 +1,24 @@
 .header {
-    /* position: absolute; */
-    height: 200px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--gray-700);
-  }
-  .header img {
-    height: 3rem;
-    margin-top: -8px;
-  }
+  /* position: absolute; */
+  /* Define o seletor para a classe "header" */
+  height: 200px;
+  /* Define a altura do elemento para 200 pixels */
+  width: 100%;
+  /* Define a largura do elemento para 100% do seu elemento pai */
+  display: flex;
+  /* Define o elemento como um container flexível */
+  justify-content: center;
+  /* Centraliza o conteúdo horizontalmente */
+  align-items: center;
+  /* Centraliza o conteúdo verticalmente */
+  background: var(--gray-700);
+  /* Define a cor de fundo usando a variável CSS "--gray-700" */
+}
+
+.header img {
+  /* Define o seletor para a tag <img> dentro do elemento com a classe "header" */
+  height: 3rem;
+  /* Define a altura da imagem para 3 rem */
+  margin-top: -8px;
+  /* Define uma margem negativa para mover a imagem um pouco para cima */
+}
