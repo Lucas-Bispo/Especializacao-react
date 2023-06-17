@@ -5,7 +5,7 @@ import { Router } from "./Routes";
 import { BrowserRouter } from "react-router-dom";
 import { CartContextProvider } from "./contexts/CartContext";
 
-export function App() {
+function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
@@ -17,4 +17,6 @@ export function App() {
     </ThemeProvider>
   );
 }
+
+export default App;
 
