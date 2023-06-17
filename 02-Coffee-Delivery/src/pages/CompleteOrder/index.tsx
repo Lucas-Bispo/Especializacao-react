@@ -1,4 +1,4 @@
-import { CompleteOrderForm } from "./components/CompleteOrderForm";
+import { CompleteOrderForm } from "./components/CompleteOrderForm/AddressForm";
 import { SelectedCoffees } from "./components/SelectedCoffees";
 import { CompleteOrderContainer } from "./styles";
 import { useForm, FormProvider } from "react-hook-form";
