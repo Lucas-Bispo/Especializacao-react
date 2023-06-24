@@ -8,9 +8,10 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
-  }, "dependencies": {
+  },
+  "dependencies": {
     "@hookform/resolvers": "^2.9.7",
-    "@radix-ui/react-dialog": "^1.0.0",
+    "@radix-ui/react-dialog": "^1.0.4",
     "@radix-ui/react-radio-group": "^1.0.0",
     "axios": "^0.27.2",
     "phosphor-react": "^1.4.1",
