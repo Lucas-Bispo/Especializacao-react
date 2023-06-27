@@ -4,14 +4,14 @@ import { X, ArrowCircleUp, ArrowCircleDown } from 'phosphor-react'
 import { useForm, Controller } from 'react-hook-form'
 import { useContextSelector } from 'use-context-selector'
 import { z } from 'zod'
-import { TransactionsContext } from '../../contexts/TransactionsContext.tsx'
+import { TransactionsContext } from '../../contexts/TransactionsContext'
 import {
   CloseButton,
   Content,
   Overlay,
   TransactionType,
   TransactionTypeButton,
-} from './styles.ts'
+} from './styles'
 
 const newTransactionFormSchema = z.object({
   description: z.string(),

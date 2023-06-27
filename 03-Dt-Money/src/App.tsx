@@ -1,8 +1,9 @@
 import { ThemeProvider } from "styled-components";
-import { TransactionsProvider } from "./contexts/TransactionsContext.tsx";
-import { Transactions } from "./pages/Transactions/index.tsx";
-import { GlobalStyle } from "./styles/global.ts";
-import { defaultTheme } from "./styles/themes/default.ts";
+import { TransactionsProvider } from "./contexts/TransactionsContext";
+import { Transactions } from "./pages/Transactions";
+import { GlobalStyle } from "./styles/global";
+import { defaultTheme } from "./styles/themes/default";
+
 
 
 export function App() {
