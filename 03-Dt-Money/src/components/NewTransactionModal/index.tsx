@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod/dist/zod.js'
-import { Dialog } from '@radix-ui/react-dialog'
+import * as Dialog from "@radix-ui/react-dialog";
 import { X, ArrowCircleUp, ArrowCircleDown } from 'phosphor-react'
 import { useForm, Controller } from 'react-hook-form'
 import { useContextSelector } from 'use-context-selector'
