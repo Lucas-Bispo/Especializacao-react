@@ -1,7 +1,12 @@
 import { Route, Routes } from "react-router-dom";
 import { DefaultLayout } from "./layouts/DefaultLayout";
+//import { Blog } from "./pages/Blog";
+//import { Post } from "./pages/Post/components";
 import { Blog } from "./pages/Blog";
-import { Post } from "./pages/Post";
+import { Post } from "./pages/Blog/components/Post";
+//import { Post } from "./pages/Post";
+
+
 
 export function Router() {
   return (
