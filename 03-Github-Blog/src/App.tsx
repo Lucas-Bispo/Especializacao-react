@@ -1,14 +1,17 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { App } from "./App";
+import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import { Router } from "./Router";
+import { GlobalStyles } from "./styles/global";
+import { defaultTheme } from "./styles/theme/defaultTheme";
 
-//import moment from "moment";
-//import "moment/dist/locale/pt-br";
+export function App() {
+  return (
+    <BrowserRouter>
+      <ThemeProvider theme={defaultTheme}>
+        <GlobalStyles />
 
-//moment.locale("pt-br");
-
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+        <Router />
+      </ThemeProvider>
+    </BrowserRouter>
+  );
+}
