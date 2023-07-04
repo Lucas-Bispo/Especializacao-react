@@ -1,10 +1,17 @@
 {
   "compilerOptions": {
+    // Define a opção composite como true, permitindo a construção de projetos compostos
     "composite": true,
+    // Define a opção skipLibCheck como true, ignorando a verificação de bibliotecas
     "skipLibCheck": true,
+    // Define a opção module como "ESNext", especificando o formato do módulo a ser usado
     "module": "ESNext",
+    // Define a opção moduleResolution como "bundler", indicando que o sistema de resolução de módulos será o bundler
     "moduleResolution": "bundler",
+    // Define a opção allowSyntheticDefaultImports como true, permitindo importações sintéticas de valores padrão
     "allowSyntheticDefaultImports": true
   },
   "include": ["vite.config.ts"]
+  // Define a propriedade include como uma lista de arquivos ou diretórios a serem incluídos no processo de compilação
+  // Neste caso, apenas o arquivo 'vite.config.ts' será incluído
 }
