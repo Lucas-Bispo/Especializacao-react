@@ -8,8 +8,8 @@ import { App } from "./App";
 // Cria uma nova instância do ReactDOM e renderiza o componente App na raiz da página.
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    // Inicia o modo estrito do React, que ajuda a detectar erros no código React.
+    {/*// Inicia o modo estrito do React, que ajuda a detectar erros no código React.*/}
     <App />
-    // Renderiza o componente App na página.
+    {/*// Renderiza o componente App na página.*/}
   </React.StrictMode>,
 );
