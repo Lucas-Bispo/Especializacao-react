@@ -13,11 +13,18 @@ import {
   TransactionTypeButton,
 } from './styles'
 
+
 const newTransactionFormSchema = z.object({
   description: z.string(),
   price: z.number(),
   category: z.string(),
   type: z.enum(['income', 'outcome']),
+/*
+Este código define um esquema Zod para um formulário de nova transação. 
+O esquema Zod é usado para validar os dados inseridos pelo usuário no formulário.
+O esquema Zod é composto por um conjunto de campos, cada um dos quais tem um tipo. 
+Os tipos podem ser strings, números, enums, etc.
+*/
 })
 
 type NewTransactionFormInputs = z.infer<typeof newTransactionFormSchema>
