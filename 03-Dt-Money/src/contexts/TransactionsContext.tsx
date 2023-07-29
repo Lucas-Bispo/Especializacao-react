@@ -1,80 +1,91 @@
-import { ReactNode, useState, useCallback, useEffect } from "react"
-import { createContext } from "use-context-selector"
-import { api } from "../lib/axios"
+import { ReactNode, useState, useCallback, useEffect } from "react";
+import { createContext } from "use-context-selector";
+import { api } from "../lib/axios";
 
+// A interface `Transaction` define as propriedades de uma transação.
 interface Transaction {
-  id: number
-  description: string
-  type: 'income' | 'outcome'
-  price: number
-  category: string
-  createdAt: string
+  id: number;
+  descrição: string;
+  tipo: "receita" | "despesa";
+  preço: number;
+  categoria: string;
+  criadaEm: string;
 }
 
+// A interface `CreateTransactionInput` define as propriedades de uma transação que pode ser criada.
 interface CreateTransactionInput {
-  description: string
-  price: number
-  category: string
-  type: 'income' | 'outcome'
+  descrição: string;
+  preço: number;
+  categoria: string;
+  tipo: "receita" | "despesa";
 }
 
+// A interface `TransactionContextType` define o tipo do `TransactionsContext`.
 interface TransactionContextType {
-  transactions: Transaction[]
-  fetchTransactions: (query?: string) => Promise<void>
-  createTransaction: (data: CreateTransactionInput) => Promise<void>
+  transações: Transaction[];
+  buscarTransações: (consulta?: string) => Promise<void>;
+  criarTransação: (dados: CreateTransactionInput) => Promise<void>;
 }
 
+// A interface `TransactionsProviderProps` define as propriedades do componente `TransactionsProvider`.
 interface TransactionsProviderProps {
-  children: ReactNode
+  filhos: ReactNode;
 }
 
-export const TransactionsContext = createContext({} as TransactionContextType)
+// O `TransactionsContext` é um contexto personalizado que é usado para armazenar as transações e fornecer métodos para buscar e criar transações.
+export const TransactionsContext = createContext({} as TransactionContextType);
 
-export function TransactionsProvider({ children }: TransactionsProviderProps) {
-  const [transactions, setTransactions] = useState<Transaction[]>([])
+// O componente `TransactionsProvider` é o provedor do `TransactionsContext`.
+export function TransactionsProvider({ filhos }: TransactionsProviderProps) {
+  // O estado do componente `TransactionsProvider` é um array de transações.
+  const [transações, setTransações] = useState<Transaction[]>([]);
 
-  const fetchTransactions = useCallback(async (query?: string) => {
-    const response = await api.get('transactions', {
+  // A função `buscarTransações` é usada para buscar as transações da API.
+  const buscarTransações = useCallback(async (consulta?: string) => {
+    const resposta = await api.get('transações', {
       params: {
-        _sort: 'createdAt',
+        _sort: 'criadaEm',
         _order: 'desc',
-        q: query,
+        q: consulta,
       },
-    })
+    });
 
-    setTransactions(response.data)
-  }, [])
+    setTransações(resposta.data);
+  }, []);
 
-  const createTransaction = useCallback(
-    async (data: CreateTransactionInput) => {
-      const { description, price, category, type } = data
+  // A função `criarTransação` é usada para criar uma nova transação.
+  const criarTransação = useCallback(
+    async (dados: CreateTransactionInput) => {
+      const { descrição, preço, categoria, tipo } = dados;
 
-      const response = await api.post('transactions', {
-        description,
-        price,
-        category,
-        type,
-        createdAt: new Date(),
-      })
+      const resposta = await api.post('transações', {
+        descrição,
+        preço,
+        categoria,
+        tipo,
+        criadaEm: new Date(),
+      });
 
-      setTransactions((state) => [response.data, ...state])
+      setTransações((estado) => [resposta.data, ...estado]);
     },
     [],
-  )
+  );
 
+  // O gancho `useEffect` é usado para buscar as transações quando o componente monta.
   useEffect(() => {
-    fetchTransactions()
-  }, [fetchTransactions])
+    buscarTransações();
+  }, [buscarTransações]);
 
+  // O componente `TransactionsContext.Provider` é usado para fornecer o `TransactionContext` aos seus filhos.
   return (
     <TransactionsContext.Provider
       value={{
-        transactions,
-        fetchTransactions,
-        createTransaction,
+        transações,
+        buscarTransações,
+        criarTransação,
       }}
     >
-      {children}
+      {filhos}
     </TransactionsContext.Provider>
-  )
+  );
 }
