@@ -1,9 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
+// Função App que representa o componente principal da aplicação.
+function App() {
+  return (
+    // Renderiza o título "Hello World" na tela.
+    <h1>Hello World</h1>
+  )
+}
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-)
+export default App
