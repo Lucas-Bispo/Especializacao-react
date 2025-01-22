@@ -1,160 +1,150 @@
-import { format, formatDistanceToNow } from 'date-fns'; // importando funções de formatação de data
-import ptBR from 'date-fns/locale/pt-BR'; // importando locale para formatação de data em português do Brasil
-import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react'; // importando hooks do React
+import { format, formatDistanceToNow } from 'date-fns'; // Importa funções para formatar datas: 'format' para formatação específica e 'formatDistanceToNow' para calcular a distância entre datas.
+import ptBR from 'date-fns/locale/pt-BR'; // Importa a localização brasileira para formatar datas em português.
 
-import { Avatar } from './Avatar'; // importando componente Avatar
-import { Comment } from './Comment'; // importando componente Comment
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react'; 
+// Importa hooks do React: 
+// - useState para gerenciar estados do componente.
+// - ChangeEvent, FormEvent, InvalidEvent para tipagem de eventos em campos de formulário.
 
-import styles from './Post.module.css'; // importando estilos do módulo Post
+import { Avatar } from './Avatar'; // Importa o componente Avatar, usado para exibir a foto de perfil do autor.
+import { Comment } from './Comment'; // Importa o componente Comment, usado para renderizar comentários.
 
-// interface de autor do post
+import styles from './Post.module.css'; // Importa os estilos do componente Post, aplicando CSS modularizado.
+
+// Define a interface para o autor do post, incluindo nome, função e URL do avatar.
 interface Author {
-  name: string;
-  role: string;
-  avatarUrl: string;
+  name: string; // Nome do autor.
+  role: string; // Função ou cargo do autor.
+  avatarUrl: string; // URL da imagem do avatar.
 }
 
-// interface de conteúdo do post
+// Define a interface para o conteúdo do post.
 interface Content {
-  type: 'paragraph' | 'link';
-  content: string;
+  type: 'paragraph' | 'link'; // Define o tipo de conteúdo: parágrafo ou link.
+  content: string; // Texto do conteúdo.
 }
 
-// interface de tipo de post
+// Define a interface para o tipo de post.
 export interface PostType {
-  id: number;
-  author: Author;
-  publishedAt: Date;
-  content: Content[];
+  id: number; // ID único do post.
+  author: Author; // Informações do autor do post.
+  publishedAt: Date; // Data de publicação do post.
+  content: Content[]; // Conteúdo do post, como texto ou links.
 }
 
-// interface de props do componente Post
+// Define a interface para as props do componente Post.
 interface PostProps {
-  post: PostType;
+  post: PostType; // O post que será renderizado.
 }
 
+// Função principal que representa o componente Post.
 export function Post({ post }: PostProps) {
-  // estado para armazenar os comentários do post
+  // Estado que armazena os comentários do post.
   const [comments, setComments] = useState([
-    'Post muito bacana, hein?!'
+    'Post muito bacana, hein?!' // Comentário inicial.
   ]);
 
-  // estado para armazenar o texto do novo comentário
+  // Estado que armazena o texto do novo comentário.
   const [newCommentText, setNewCommentText] = useState('');
 
-  // formata a data de publicação do post
+  // Formata a data de publicação do post para um formato legível.
   const publishedDateFormatted = format(post.publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
-    locale: ptBR,
+    locale: ptBR, // Define a localização brasileira.
   });
 
-  // formata a data de publicação do post em relação ao tempo atual
+  // Calcula a distância da data de publicação para o tempo atual.
   const publishedDateRelativeToNow = formatDistanceToNow(post.publishedAt, {
-    locale: ptBR,
-    addSuffix: true
+    locale: ptBR, // Define a localização brasileira.
+    addSuffix: true, // Adiciona sufixo como "há X tempo".
   });
 
-  // função para lidar com a criação de um novo comentário
+  // Função que lida com a submissão de um novo comentário.
   function handleCrateNewComment(event: FormEvent) {
-    event.preventDefault()
+    event.preventDefault(); // Impede o comportamento padrão do formulário.
 
-    // adiciona o novo comentário ao array de comentários
-    setComments([...comments, newCommentText]);
+    setComments([...comments, newCommentText]); // Adiciona o novo comentário ao estado.
 
-    // limpa o campo de texto do novo comentário
-    setNewCommentText('');
+    setNewCommentText(''); // Limpa o campo de texto do novo comentário.
   }
 
-  // função para lidar com a mudança do texto do novo comentário
+  // Função que lida com mudanças no campo de texto do novo comentário.
   function handleNewCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    // remove a mensagem de erro de campo obrigatório, se houver
-    event.target.setCustomValidity('');
-
-    // atualiza o estado do texto do novo comentário
-    setNewCommentText(event.target.value);
+    event.target.setCustomValidity(''); // Reseta mensagens de erro de validação.
+    setNewCommentText(event.target.value); // Atualiza o estado com o novo valor do texto.
   }
 
-  // função para lidar com o evento de campo inválido do novo comentário
+  // Função que lida com a validação do campo de texto do comentário.
   function handleNewCommentInvalid(event: InvalidEvent<HTMLTextAreaElement>) {
-    // define a mensagem de erro para campo obrigatório
-    event.target.setCustomValidity('Esse campo é obrigatório!');
+    event.target.setCustomValidity('Esse campo é obrigatório!'); // Define a mensagem de erro para campo vazio.
   }
 
-  // função para deletar um comentário
+  // Função que exclui um comentário específico.
   function deleteComment(commentToDelete: string) {
-    // filtra os comentários, removendo o comentário a ser deletado
-    const commentsWithoutDeletedOne = comments.filter(comment => {
-      return comment !== commentToDelete;
-    })
-
-    // atualiza o estado dos comentários
-    setComments(commentsWithoutDeletedOne);
+    const commentsWithoutDeletedOne = comments.filter(comment => comment !== commentToDelete);
+    // Filtra o estado para remover o comentário especificado.
+    setComments(commentsWithoutDeletedOne); // Atualiza o estado com os comentários restantes.
   }
 
-  // verifica se o campo de texto do novo comentário está vazio
+  // Verifica se o campo de texto do novo comentário está vazio.
+  const isNewCommentEmpty = newCommentText.length === 0;
 
-  const isNewCommentEmpty = newCommentText.length === 0; // verifica se o campo de novo comentário está vazio
-
-return (
-  <article className={styles.post}>
-    <header>
-      {/* Seção de informações do autor do post */}
-      <div className={styles.author}>
-        <Avatar src={post.author.avatarUrl} />
-        <div className={styles.authorInfo}>
-          <strong>{post.author.name}</strong>
-          <span>{post.author.role}</span>
+  return (
+    <article className={styles.post}>
+      <header>
+        {/* Renderiza as informações do autor do post */}
+        <div className={styles.author}>
+          <Avatar src={post.author.avatarUrl} /> {/* Componente Avatar com a URL do avatar */}
+          <div className={styles.authorInfo}>
+            <strong>{post.author.name}</strong> {/* Nome do autor */}
+            <span>{post.author.role}</span> {/* Cargo ou função do autor */}
+          </div>
         </div>
+
+        {/* Renderiza a data de publicação formatada */}
+        <time title={publishedDateFormatted} dateTime={post.publishedAt.toISOString()}>
+          {publishedDateRelativeToNow}
+        </time>
+      </header>
+
+      <div className={styles.content}>
+        {/* Renderiza o conteúdo do post, diferenciando entre parágrafos e links */}
+        {post.content.map(line => {
+          if (line.type === 'paragraph') {
+            return <p key={line.content}>{line.content}</p>;
+          } else if (line.type === 'link') {
+            return <p key={line.content}><a href="#">{line.content}</a></p>;
+          }
+        })}
       </div>
 
-      {/* Seção de data de publicação do post */}
-      <time title={publishedDateFormatted} dateTime={post.publishedAt.toISOString()}>
-        {publishedDateRelativeToNow}
-      </time>
-    </header>
+      {/* Formulário para adicionar comentários */}
+      <form onSubmit={handleCrateNewComment} className={styles.commentForm}>
+        <strong>Deixe seu feedback</strong>
+        <textarea
+          name="comment"
+          placeholder="Deixe um comentário"
+          value={newCommentText}
+          onChange={handleNewCommentChange}
+          onInvalid={handleNewCommentInvalid}
+          required
+        />
+        <footer>
+          <button type="submit" disabled={isNewCommentEmpty}>
+            Publicar
+          </button>
+        </footer>
+      </form>
 
-    <div className={styles.content}>
-      {/* Renderiza o conteúdo do post, incluindo parágrafos e links */}
-      {post.content.map(line => {
-        if (line.type === 'paragraph') {
-          return <p key={line.content}>{line.content}</p>;
-        } else if (line.type === 'link') {
-          return <p key={line.content}><a href="#">{line.content}</a></p>
-        }
-      })}
-    </div>
-
-    {/* Formulário para adicionar um novo comentário */}
-    <form onSubmit={handleCrateNewComment} className={styles.commentForm}>
-      <strong>Deixe seu feedback</strong>
-
-      <textarea
-        name="comment"
-        placeholder="Deixe um comentário"
-        value={newCommentText}
-        onChange={handleNewCommentChange}
-        onInvalid={handleNewCommentInvalid}
-        required
-      />
-
-      <footer>
-        <button type="submit" disabled={isNewCommentEmpty}>
-          Publicar
-        </button>
-      </footer>
-    </form>
-
-    {/* Lista de comentários */}
-    <div className={styles.commentList}>
-      {comments.map(comment => {
-        return (
+      {/* Renderiza a lista de comentários */}
+      <div className={styles.commentList}>
+        {comments.map(comment => (
           <Comment
             key={comment}
             content={comment}
-            onDeleteComment={deleteComment}
+            onDeleteComment={deleteComment} // Passa a função de exclusão como prop.
           />
-        )
-      })}
-    </div>
-  </article>
-)
+        ))}
+      </div>
+    </article>
+  );
 }
