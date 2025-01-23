@@ -1,6 +1,9 @@
+import { Header } from './components/Header';
+
 // Importação do componente Post do arquivo './Post'.
 // Este componente será utilizado dentro do componente App para exibir informações sobre posts.
 import { Post } from './Post';
+
 
 // Importa o arquivo de estilos globais chamado "global.css".
 // Este arquivo contém estilos CSS que serão aplicados globalmente à aplicação,
@@ -13,6 +16,9 @@ export function App() {
   // O componente App retorna um elemento JSX que representa a estrutura da interface.
   return (
     <div>
+
+      <Header />
+
       {/* Instância do componente Post com duas propriedades (props): 
           - author: Representa o nome do autor do post.
           - content: Representa o conteúdo textual do post.
