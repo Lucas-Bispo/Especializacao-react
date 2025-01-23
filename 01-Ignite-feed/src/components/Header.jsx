@@ -1,18 +1,16 @@
-// Importa os estilos definidos no arquivo CSS específico para o componente Header.
-// O arquivo "Header.module.css" contém classes CSS que são associadas diretamente ao componente Header.
-// Isso garante isolamento de estilo, evitando conflitos com outros componentes.
+// Importa o módulo CSS do componente Header
 import styles from './Header.module.css';
 
-// Define e exporta a função Header, que é um componente funcional React.
-// Este componente representa a seção de cabeçalho da aplicação.
+// Importa a imagem do logo do Ignite
+import igniteLogo from '../assets/ignite-logo.svg';
+
+// Cria o componente Header
 export function Header() {
   return (
-    // O elemento <header> recebe a classe "header" definida no arquivo CSS modular.
-    // O uso de `styles.header` garante que a classe seja única, mesmo se houver outras classes
-    // com o mesmo nome em diferentes módulos CSS.
+    // Renderiza o elemento header com a classe definida no módulo CSS
     <header className={styles.header}>
-      {/* Exibe o texto "Ignite Feed" dentro de um elemento <strong>, que geralmente é usado para destacar o texto */}
-      <strong>Ignite Feed</strong>
+      {/* Renderiza a imagem do logo do Ignite com um texto alternativo*/}
+      <img src={igniteLogo} alt="Logotipo do Ignite" />
     </header>
   );
 }
