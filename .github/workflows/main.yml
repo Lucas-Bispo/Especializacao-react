@@ -16,6 +16,10 @@ jobs:
 
       - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@master  # Ação para sincronizar com o S3
+
+        with: 
+          args: acl public-read-follow-symlinks -delete-exclude .git*/*
+
         env:
           args: --acl public-read --follow-symlinks --delete  # Opções para permitir leitura pública, seguir symlinks e deletar arquivos antigos      
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}  # Nome do bucket configurado no GitHub Secrets
