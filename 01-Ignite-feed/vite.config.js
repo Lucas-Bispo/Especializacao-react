@@ -12,4 +12,7 @@ export default defineConfig({
       '@': resolve(__dirname, './src'), // Define '@' como atalho para 'src'
     },
   },
+  build: {
+    outDir: 'build', // Define o diretório de saída como "build"
+  },
 });
