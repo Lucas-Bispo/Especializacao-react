@@ -25,4 +25,5 @@ jobs:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}  # Nome do bucket configurado no GitHub Secrets
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}  # Chave de acesso configurada nos Secrets
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  # Chave secreta configurada nos Secrets
-       
+          AWS_REGION: 'us-west-1'  # Região do bucket (substitua conforme sua configuração)
+          SOURCE_DIR: '01-Ignite-feed
