@@ -6,7 +6,6 @@ on:
       - "01-Ignite-feed"  # Mudei para 'producao' para garantir que o deploy seja feito a partir da sua branch de produção
     paths:
       - "01-Ignite-feed/**"  # Apenas alterações na pasta '01-Ignite-feed' irão acionar o workflow
-
 jobs:
   deploy:
     runs-on: ubuntu-latest  # Executa o job em uma máquina Ubuntu
