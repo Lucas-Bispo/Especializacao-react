@@ -16,10 +16,9 @@ jobs:
 
       - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@master  # Ação para sincronizar com o S3
-        with:
+        env:
           args: --acl public-read --follow-symlinks --delete  # Opções para permitir leitura pública, seguir symlinks e deletar arquivos antigos      
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}  # Nome do bucket configurado no GitHub Secrets
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}  # Chave de acesso configurada nos Secrets
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  # Chave secreta configurada nos Secrets
-          AWS_REGION: 'us-west-1'  # Região do bucket (substitua conforme sua configuração)
-          SOURCE_DIR: '01-Ignite-feed'  # Diretório que será enviado para o S3, no seu caso, '01-Ignite-feed'
+       
