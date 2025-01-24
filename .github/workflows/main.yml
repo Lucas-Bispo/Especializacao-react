@@ -23,6 +23,6 @@ jobs:
       
       - name: upload files S3
         run: |
-          aws s3 sync ./01-Ignite-feed s3://${{ env.AWS_S3_BUCKET }} --delete
+          aws s3 sync ./01-Ignite-feed s3://$AWS_S3_BUCKET --delete
   
         
