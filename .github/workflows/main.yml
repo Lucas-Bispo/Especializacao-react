@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - "01-Ignite-feed"  # Mudei para 'producao' para garantir que o deploy seja feito a partir da sua branch de produção
-    paths:
-      - "01-Ignite-feed/**"  # Apenas alterações na pasta '01-Ignite-feed' irão acionar o workflow
+    #paths:
+      #- "01-Ignite-feed/**"  # Apenas alterações na pasta '01-Ignite-feed' irão acionar o workflow
 jobs:
   deploy:
     runs-on: ubuntu-latest  # Executa o job em uma máquina Ubuntu
@@ -14,15 +14,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3  # Usando a versão estável mais recente do GitHub Actions para o checkout do código
 
-      - name: Deploy to S3
-        uses: jakejarvis/s3-sync-action@master  # Ação para sincronizar com o S3
-
-        with: 
-          args: acl public-read-follow-symlinks -delete-exclude .git*/*
-
-        env:
-          args: --acl public-read --follow-symlinks --delete  # Opções para permitir leitura pública, seguir symlinks e deletar arquivos antigos      
-          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}  # Nome do bucket configurado no GitHub Secrets
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}  # Chave de acesso configurada nos Secrets
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  # Chave secreta configurada nos Secrets
-          AWS_REGION: 'us-west-1'  # Região do bucket (substitua conforme sua configuração)
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      
+      - name: upload files S3
+        run: |
+          aws s3 sync ./01-Ignite-feed s3://${{ secrets.AWS_S3_BUCKET }} --delete
+  
+        
