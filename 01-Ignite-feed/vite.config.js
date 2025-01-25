@@ -15,4 +15,5 @@ export default defineConfig({
   build: {
     outDir: 'build', // Define o diretório de saída como "build"
   },
+  base: '/', // O site está na raiz do domínio, então a base é "/"
 });
