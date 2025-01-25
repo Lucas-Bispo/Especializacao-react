@@ -36,7 +36,9 @@ jobs:
       # Etapa 4: Fazer o upload dos arquivos para o S3
       - name: Upload files to S3
         run: |
+          echo "Iniciando o upload para o S3..."
           aws s3 sync ./01-Ignite-feed s3://${{ vars.AWS_S3_BUCKET }} --delete
+          echo "Upload finalizado"
 
           - name: Invalidate CloudFront cache
           run: |
