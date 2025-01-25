@@ -40,19 +40,7 @@ jobs:
 
      # Etapa 5: Invalidar cache do CloudFront
       - name: Invalidate CloudFront cache
-        run: |
-          aws cloudfront create-invalidation \
-          --distribution-id "${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}" \
-          --invalidation-batch '{
-          "Paths": {
-            "Quantity": 1,
-            "Items": ["/*"]
-          },
-          "CallerReference": "'$(date +%s)'"
-          }'--invalidation-batch '{
-          "Paths": {
-          "Quantity": 1,
-          "Items": ["/*"]
-          },
-          "CallerReference": "'$(date +%s)'"
-          }'
+      run: |
+        aws cloudfront create-invalidation \
+        --distribution-id "${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}" \
+        --invalidation-batch "{\"Paths\": {\"Quantity\": 1, \"Items\": [\"/*\"]}, \"CallerReference\": \"$(date +%s)\"}"
