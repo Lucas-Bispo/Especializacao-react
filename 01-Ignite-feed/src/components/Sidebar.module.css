@@ -1,45 +1,65 @@
-/* Define o estilo principal da sidebar */
+
 .sidebar {
-    background: var(--gray-800); /* Define o fundo da sidebar usando uma variável de cor */
-    border-radius: 8px; /* Aplica cantos arredondados */
-    overflow: hidden; /* Garante que o conteúdo que ultrapasse os limites seja ocultado */
-  }
-  
-  /* Estiliza a imagem de capa dentro da sidebar */
-  .cover {
-    width: 100%; /* A largura da imagem ocupa todo o espaço horizontal disponível */
-    height: 72px; /* Define uma altura fixa para a imagem */
-    object-fit: cover; /* Garante que a imagem seja redimensionada para cobrir todo o espaço sem distorção */
-  }
-  
-  /* Define o estilo do contêiner do perfil */
-  .profile {
-    display: flex; /* Utiliza o layout flexbox */
-    flex-direction: column; /* Alinha os itens no eixo vertical (coluna) */
-    align-items: center; /* Centraliza os itens horizontalmente */
-  }
-  
-  /* Define o estilo do rodapé da sidebar */
-  .sidebar footer {
-    border-top: 1px solid var(--gray-600); /* Adiciona uma borda superior com uma cor definida por variável */
-    margin-top: 1.5rem; /* Adiciona um espaçamento superior ao rodapé */
-    padding: 1.5rem 2rem 2rem; /* Adiciona espaçamento interno (topo, laterais e base) */
-  }
-  
-  /* Estiliza os links dentro do rodapé da sidebar */
-  .sidebar footer a {
-    width: 100%; /* Faz o link ocupar toda a largura do contêiner */
-    background: transparent; /* Remove o fundo padrão do link */
-    color: var(--brand-500); /* Define a cor do texto do link */
-    border: 1px solid var(--brand-500); /* Adiciona uma borda com a cor definida pela variável */
-    border-radius: 8px; /* Aplica cantos arredondados ao botão/link */
-    height: 50px; /* Define uma altura fixa */
-    padding: 0 1.5rem; /* Adiciona espaçamento interno apenas nas laterais */
-    font-weight: bold; /* Torna o texto em negrito */
-    display: block; /* Faz o link se comportar como um bloco, ocupando toda a largura */
-    text-decoration: none; /* Remove o sublinhado do link */
-    display: flex; /* Utiliza flexbox para alinhar o conteúdo interno */
-    align-items: center; /* Alinha os itens no centro verticalmente */
-    justify-content: center; /* Alinha os itens no centro horizontalmente */
-  }
-  
+  background: var(--gray-800);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.cover {
+  width: 100%;
+  height: 72px;
+  object-fit: cover;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: calc(0px - 1.5rem - 6px);
+}
+.avatar {
+  width: calc(3rem + 12px);
+  height: calc(3rem + 12px);
+  border-radius: 8px;
+  border: 4px solid var(--gray-800);
+  outline: 2px solid var(--green-500);
+}
+.profile strong {
+  margin-top: 1rem;
+  color: var(--gray-100);
+  line-height: 1.6;
+}
+.profile span {
+  font-size: 0.875rem;
+  color: var(--gray-400);
+  line-height: 1.6;
+}
+
+.sidebar footer {
+  border-top: 1px solid var(--gray-600);
+  margin-top: 1.5rem;
+  padding: 1.5rem 2rem 2rem;
+}
+
+.sidebar footer a {
+  width: 100%;
+  background: transparent;
+  color: var(--green-500);
+  border: 1px solid var(--green-500);
+  border-radius: 8px;
+  height: 50px;
+  padding: 0 1.5rem;
+  font-weight: bold;
+  display: block;
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: color 0.1s, background-color 0.1s;
+}
+.sidebar footer a:hover {
+  background: var(--green-500);
+  color: var(--white);
+}
