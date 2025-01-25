@@ -37,7 +37,7 @@ jobs:
       - name: Upload files to S3
         run: |
           echo "Iniciando o upload para o S3..."
-          aws s3 cp s3://bispo-cicd/01-Ignite-feed/ --recursive --exclude "*" --include "*.js" --content-type "application/javascript" --metadata-directive REPLACE
+          aws s3 sync ./01-Ignite-feed s3://${{ vars.AWS_S3_BUCKET }} --delete
           echo "Upload finalizado"
 
       - name: Invalidate CloudFront cache
