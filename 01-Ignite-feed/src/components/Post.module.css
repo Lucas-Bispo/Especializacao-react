@@ -1,0 +1,80 @@
+/* Estilização principal do componente Post */
+.post {
+    background: var(--gray-800); /* Define a cor de fundo usando uma variável CSS */
+    border-radius: 8px; /* Adiciona cantos arredondados ao post */
+    padding: 2.5rem; /* Adiciona espaçamento interno ao redor do conteúdo */
+  }
+  
+  /* Aplica espaçamento entre múltiplos posts */
+  .post + .post {
+    margin-top: 2rem; /* Adiciona um espaçamento superior entre posts */
+  }
+  
+  /* Estilo geral para o conteúdo do post */
+  .content {
+    line-height: 1.6; /* Define o espaçamento entre linhas para melhorar a leitura */
+    color: var(--gray-300); /* Define a cor do texto do conteúdo */
+    margin-top: 1.5rem; /* Adiciona espaçamento superior em relação ao cabeçalho */
+  }
+  
+  /* Estilo para parágrafos dentro do conteúdo */
+  .content p {
+    margin-top: 1rem; /* Adiciona espaçamento entre parágrafos */
+  }
+  
+  /* Estilo para links dentro do conteúdo */
+  .content a {
+    font-weight: bold; /* Deixa o texto do link em negrito */
+    color: var(--green-500); /* Define a cor do link */
+    text-decoration: none; /* Remove o sublinhado dos links */
+  }
+  
+  /* Efeito ao passar o mouse sobre os links */
+  .content a:hover {
+    color: var(--green-300); /* Altera a cor do link ao passar o mouse */
+  }
+  
+  /* Estilo do cabeçalho do post */
+  .post > header {
+    display: flex; /* Define um layout flexível para alinhar elementos */
+    align-items: center; /* Alinha os itens ao centro verticalmente */
+    justify-content: space-between; /* Distribui os elementos com espaço entre eles */
+  }
+  
+  /* Estilo do elemento time dentro do cabeçalho */
+  .post > header time {
+    font-size: 0.875rem; /* Define o tamanho do texto menor */
+    color: var(--gray-400); /* Define a cor do texto */
+  }
+  
+  /* Estilo para o container das informações do autor */
+  .author {
+    display: flex; /* Define um layout flexível para alinhar o avatar e o texto */
+    align-items: center; /* Alinha verticalmente ao centro */
+    gap: 1rem; /* Define o espaço entre o avatar e as informações */
+  }
+  
+  /* Estilo da imagem do avatar do autor */
+  .author img {
+    width: calc(3rem + 12px); /* Define a largura do avatar */
+    height: calc(3rem + 12px); /* Define a altura do avatar */
+    border-radius: 8px; /* Adiciona cantos arredondados */
+    border: 4px solid var(--gray-800); /* Adiciona uma borda com a mesma cor do fundo */
+    outline: 2px solid var(--green-500); /* Adiciona um contorno de destaque ao avatar */
+  }
+  
+  /* Estilo para o nome do autor */
+  .authorInfo strong {
+    display: block; /* Faz com que cada nome ocupe uma linha completa */
+    color: var(--gray-100); /* Define a cor do texto */
+    line-height: 1.6; /* Define o espaçamento entre linhas */
+  }
+  
+  /* Estilo para a descrição ou profissão do autor */
+  .authorInfo span {
+    display: block; /* Garante que o texto ocupe sua própria linha */
+    font-size: 0.875rem; /* Define o tamanho do texto menor */
+    color: var(--gray-400); /* Define a cor do texto */
+    line-height: 1.6; /* Define o espaçamento entre linhas */
+  }
+  
