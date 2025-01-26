@@ -135,4 +135,9 @@
   .commentForm button[type="submit"]:hover {
     background: var(--green-300); /* Altera a cor de fundo para um verde mais claro quando o mouse está sobre o botão */
   }
+  .commentList {
+    /* Define uma margem superior de 2rem para a lista de comentários, 
+       separando ela do conteúdo acima. */
+    margin-top: 2rem;
+  }
   
