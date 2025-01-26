@@ -78,3 +78,61 @@
     line-height: 1.6; /* Define o espaçamento entre linhas */
   }
   
+/* Estilo para o formulário de comentários */
+.commentForm {
+    width: 100%; /* O formulário ocupa toda a largura disponível */
+    margin-top: 1.5rem; /* Espaçamento superior para separar do conteúdo acima */
+    padding-top: 1.5rem; /* Padding superior, para distanciar o conteúdo interno do topo */
+    border-top: 1px solid var(--gray-600); /* Borda superior com uma cor cinza */
+  }
+  
+  /* Estilo para o título dentro do formulário */
+  .commentForm > strong {
+    line-height: 1.6; /* Aumenta o espaçamento entre as linhas do título */
+    color: var(--gray-100); /* Define a cor do título como cinza claro */
+  }
+  
+  /* Estilo para a área de texto onde o usuário digita o comentário */
+  .commentForm textarea {
+    width: 100%; /* A área de texto ocupa toda a largura disponível */
+    background: var(--gray-900); /* Fundo escuro para a área de texto */
+    border: 0; /* Remove qualquer borda padrão */
+    resize: none; /* Desativa a opção de redimensionar a área de texto */
+    height: 6rem; /* Define a altura da área de texto */
+    padding: 1rem; /* Adiciona padding interno para afastar o texto das bordas */
+    border-radius: 0.25rem; /* Bordas arredondadas para um estilo mais suave */
+    color: var(--gray-100); /* Cor do texto dentro da área de texto */
+    line-height: 1.4; /* Aumenta o espaçamento entre as linhas de texto */
+    margin-top: 1rem; /* Espaço superior para separar da parte de cima do formulário */
+  }
+  
+  /* Estilo para o rodapé dentro do formulário, onde fica o botão de enviar */
+  .commentForm footer {
+    visibility: hidden; /* Inicialmente, o rodapé (e o botão) estão invisíveis */
+    max-height: 0; /* O rodapé não tem altura quando invisível */
+  }
+  
+  /* Quando o formulário ou algum elemento dentro dele estiver em foco, torna o rodapé visível */
+  .commentForm:focus-within footer {
+    visibility: visible; /* Torna o rodapé visível */
+    max-height: none; /* Remove qualquer restrição de altura */
+  }
+  
+  /* Estilo para o botão de envio (Publicar) */
+  .commentForm button[type="submit"] {
+    padding: 1rem 1.5rem; /* Define o padding do botão (espaçamento interno) */
+    margin-top: 1rem; /* Espaço superior para separar do conteúdo acima */
+    border-radius: 8px; /* Bordas arredondadas para o botão */
+    border: 0; /* Remove a borda padrão */
+    background: var(--green-500); /* Cor de fundo verde para o botão */
+    color: var(--white); /* Cor do texto no botão (branco) */
+    font-weight: bold; /* Deixa o texto em negrito */
+    cursor: pointer; /* Define o cursor como ponteiro para indicar que é clicável */
+    transition: background-color 0.1s; /* Transição suave para a cor de fundo quando o botão for clicado */
+  }
+  
+  /* Estilo para o botão quando o usuário passar o mouse sobre ele */
+  .commentForm button[type="submit"]:hover {
+    background: var(--green-300); /* Altera a cor de fundo para um verde mais claro quando o mouse está sobre o botão */
+  }
+  

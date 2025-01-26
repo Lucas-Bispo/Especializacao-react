@@ -49,6 +49,24 @@ export function Post() {
           <a href="">#novoprojeto #nlw #rocketseat</a> {/* Hashtags relacionadas ao post */}
         </p>
       </div>
+
+
+   <form className={styles.commentForm}> 
+        {/* Título que indica o que o usuário deve fazer, ou seja, deixar um feedback */}
+        <strong>Deixe seu feedback</strong> 
+  
+        {/* Campo de texto para o usuário digitar o comentário */}
+        <textarea
+        placeholder="Deixe um comentário" // Texto exibido quando o campo está vazio, incentivando o usuário a escrever um comentário
+    />
+  
+    {/* Rodapé do formulário, utilizado para colocar o botão de envio */}
+    <footer>
+        {/* Botão que envia o comentário quando clicado. O tipo "submit" envia os dados do formulário */}
+        <button type="submit">Publicar</button>
+    </footer>
+    </form>
+
     </article>
   );
 }
