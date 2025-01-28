@@ -1,0 +1,99 @@
+/* Define a margem superior e a disposição dos itens no componente de comentário */
+.comment {
+    margin-top: 1.5rem;  /* Espaçamento superior de 1.5rem para separar os comentários */
+    display: flex;       /* Exibe os itens em linha (flexbox) */
+    gap: 1rem;           /* Adiciona um espaço de 1rem entre os elementos dentro do comentário */
+  }
+  
+  /* Estilo para a imagem do autor do comentário */
+  .comment > img {
+    width: 3rem;         /* Define o tamanho da imagem para 3rem */
+    height: 3rem;        /* Altura igual à largura para manter a imagem quadrada */
+    border-radius: 8px;  /* Bordas arredondadas de 8px */
+  }
+  
+  /* A caixa de texto onde o conteúdo do comentário ficará */
+  .commentBox {
+    flex: 1;             /* Faz a caixa de comentário ocupar o restante do espaço disponível */
+  }
+  
+  /* Estilo para o conteúdo do comentário */
+  .commentContent {
+    background: var(--gray-700);  /* Cor de fundo usando variável de cor definida no arquivo global */
+    border-radius: 8px;           /* Bordas arredondadas */
+    padding: 1rem;                /* Espaçamento interno de 1rem */
+  }
+  
+  /* Estilo para o cabeçalho do comentário (onde está o autor e o tempo) */
+  .commentContent header {
+    display: flex;       /* Organiza o conteúdo do cabeçalho em linha */
+    align-items: flex-start; /* Alinha os itens ao topo */
+    justify-content: space-between; /* Coloca o autor e o tempo em cada extremidade */
+  }
+  
+  /* Estilo para o nome do autor e o tempo do comentário */
+  .authorAndTime strong {
+    display: block;          /* Faz com que o nome do autor ocupe uma linha inteira */
+    font-size: 0.875rem;     /* Define o tamanho da fonte */
+    line-height: 1.6;        /* Define a altura da linha para um bom espaçamento */
+  }
+  
+  .authorAndTime time {
+    display: block;          /* Faz o tempo ocupar uma linha inteira */
+    font-size: 0.75rem;      /* Tamanho da fonte do tempo */
+    line-height: 1.6;        /* Altura da linha do tempo */
+    color: var(--gray-400);  /* Cor do texto usando uma variável de cor */
+  }
+  
+  /* Estilo para o botão no cabeçalho (geralmente usado para ações como excluir ou editar) */
+  .commentContent header button {
+    background: transparent;  /* Fundo transparente */
+    border: 0;                 /* Sem borda */
+    color: var(--gray-400);    /* Cor do botão */
+    cursor: pointer;          /* Indica que é clicável */
+    line-height: 0;            /* Remove o espaçamento extra */
+    border-radius: 2px;        /* Bordas arredondadas de 2px */
+  }
+  
+  /* Estilo para o botão quando o usuário passa o mouse sobre ele */
+  .commentContent header button:hover {
+    color: var(--red-500);    /* Muda a cor para vermelho quando o mouse passa por cima */
+  }
+  
+  /* Estilo para o texto dentro do comentário */
+  .commentContent p {
+    margin-top: 1rem;         /* Espaçamento superior de 1rem para separar o texto do cabeçalho */
+    color: var(--gray-300);   /* Cor do texto usando variável definida */
+  }
+  
+  /* Estilo para o rodapé da caixa de comentário (onde ficam as reações ou interações) */
+  .commentBox footer {
+    margin-top: 1rem;         /* Espaçamento superior de 1rem para separar do conteúdo principal */
+  }
+  
+  /* Estilo para os botões de interação no rodapé (curtir, responder, etc.) */
+  .commentBox footer button {
+    background: transparent;  /* Fundo transparente */
+    border: 0;                 /* Sem borda */
+    color: var(--gray-400);    /* Cor do botão */
+    cursor: pointer;          /* Indica que é clicável */
+    display: flex;             /* Organiza os itens dentro do botão em linha */
+    align-items: center;      /* Alinha os itens no centro */
+    border-radius: 2px;        /* Bordas arredondadas */
+  }
+  
+  /* Estilo para o botão de interação no rodapé quando o mouse passa por cima */
+  .commentBox footer button:hover {
+    color: var(--green-300);  /* Muda a cor para verde quando o mouse passa por cima */
+  }
+  
+  /* Estilo para o ícone dentro do botão de interação */
+  .commentBox footer button svg {
+    margin-right: 0.5rem;     /* Espaçamento entre o ícone e o texto */
+  }
+  
+  /* Adiciona um ponto antes do texto para indicar que é um item de interação */
+  .commentBox footer button span::before {
+    content: "\2022";         /* Símbolo de ponto (•) */
+    padding: 0 0.25rem;       /* Espaçamento ao redor do ponto */
+  }
