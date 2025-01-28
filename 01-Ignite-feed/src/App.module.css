@@ -9,11 +9,15 @@
     align-items: flex-start;/*Alinhado para o top */
 }
 
+/* Define estilos específicos para dispositivos com largura máxima de 768px */
 @media (max-width: 768px) {
-    html {
-      font-size: 87.5%;
-    }
-    .wrapper {
-      grid-template-columns: 1fr;
-    }
+  /* Reduz o tamanho base da fonte em relação ao padrão, facilitando a adaptação do layout para telas menores */
+  html {
+      font-size: 87.5%; /* Aproximadamente 14px, considerando que 100% é 16px */
   }
+
+  /* Ajusta a exibição do grid dentro do elemento com a classe 'wrapper' */
+  .wrapper {
+      grid-template-columns: 1fr; /* Define apenas uma coluna no grid, ideal para layouts responsivos */
+  }
+}

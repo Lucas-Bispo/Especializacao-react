@@ -1,12 +1,25 @@
+/* Classe para o estilo padrão do avatar */
 .avatar {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 8px;
-  }
-  .avatarWithBorder {
-    width: calc(3rem + 12px);
-    height: calc(3rem + 12px);
-    border-radius: 8px;
-    border: 4px solid var(--gray-800);
-    outline: 2px solid var(--green-500);
-  }
+  /* Define a largura e altura fixas do avatar */
+  width: 3rem;
+  height: 3rem;
+
+  /* Aplica cantos arredondados com um raio de 8px */
+  border-radius: 8px;
+}
+
+/* Classe para o avatar com borda */
+.avatarWithBorder {
+  /* Aumenta a largura e altura do avatar em 12px (6px para cada lado) */
+  width: calc(3rem + 12px);
+  height: calc(3rem + 12px);
+
+  /* Aplica o mesmo arredondamento para manter a borda consistente */
+  border-radius: 8px;
+
+  /* Adiciona uma borda sólida de 4px com a cor cinza escura */
+  border: 4px solid var(--gray-800);
+
+  /* Adiciona um contorno externo de 2px com a cor verde */
+  outline: 2px solid var(--green-500);
+}
