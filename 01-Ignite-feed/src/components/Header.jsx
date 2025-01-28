@@ -2,7 +2,7 @@
 import styles from './Header.module.css';
 
 // Importa a imagem do logo do Ignite
-import igniteLogo from '../assets/Ignite-logo.svg';
+import igniteLogo from '../assets/ignite-logo.svg';
 
 // Cria o componente Header
 export function Header() {

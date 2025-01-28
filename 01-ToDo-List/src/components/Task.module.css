@@ -1,0 +1,95 @@
+.task {
+  background: var(--gray-500); /* Define a cor de fundo da tarefa */
+  border: 1px solid var(--gray-400); /* Define a borda da tarefa */
+  border-radius: 8px; /* Define o raio das bordas da tarefa */
+  padding: 1rem; /* Define o espaçamento interno (padding) da tarefa */
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.06); /* Define uma sombra para a tarefa */
+  display: flex; /* Define a exibição da tarefa como flexível */
+  justify-content: space-between; /* Define o alinhamento horizontal dos itens da tarefa, neste caso, com espaço entre eles */
+  align-items: flex-start; /* Define o alinhamento vertical dos itens da tarefa, neste caso, no início */
+  gap: 12px; /* Define o espaço entre os itens da tarefa */
+}
+
+label {
+  cursor: pointer; /* Define o ponteiro do mouse como um dedo para indicar que o elemento pode ser clicado */
+}
+
+.checkbox {
+  display: flex; /* Define a exibição do elemento como flexível */
+  flex-direction: row; /* Define a direção dos elementos filho como linha */
+  align-items: flex-start; /* Define o alinhamento vertical dos itens filho no início */
+  gap: 12px; /* Define o espaço entre os itens filho */
+}
+
+.checkbox > input[type="checkbox"] {
+  display: none; /* Define que a caixa de seleção não deve ser exibida */
+  order: 2; /* Define a ordem do elemento filho */
+}
+
+.checkbox > .checked {
+  background-color: var(--dark-purple); /* Define a cor de fundo do elemento com a caixa de seleção marcada */
+  width: 1.05rem; /* Define a largura do elemento com a caixa de seleção marcada */
+  height: 1.05rem; /* Define a altura do elemento com a caixa de seleção marcada */
+  border-radius: 20px; /* Define o raio das bordas do elemento com a caixa de seleção marcada */
+  display: flex; /* Define a exibição do elemento como flexível */
+  justify-content: center; /* Define o alinhamento horizontal do elemento filho como centralizado */
+  align-items: center; /* Define o alinhamento vertical do elemento filho como centralizado */
+  order: 1; /* Define a ordem do elemento filho */
+}
+
+.checked, .check, span {
+  transition: background 0.1s; /* Define o tempo de transição quando a cor de fundo é alterada */
+}
+
+.checkbox > span:hover + .checked, .checked:hover {
+  background-color: var(--purple); /* Define a cor de fundo do elemento com a caixa de seleção marcada quando o mouse está sobre o elemento pai */
+}
+
+/* Define as propriedades do checkbox estilo 'check' */
+.checkbox > .check {
+  width: 1.05rem; /* Define a largura do checkbox */
+  height: 1.05rem; /* Define a altura do checkbox */
+  border: 2px solid var(--blue); /* Define uma borda de 2 pixels sólidos na cor definida na variável CSS '--blue' */
+  border-radius: 20px; /* Define um raio de borda de 20 pixels para tornar o checkbox arredondado */
+  display: flex; /* Define um display 'flex' para o elemento, para que os elementos internos possam ser alinhados com flexbox */
+  justify-content: center; /* Define o alinhamento horizontal dos elementos internos ao centro */
+  align-items: center; /* Define o alinhamento vertical dos elementos internos ao centro */
+  order: 1; /* Define a ordem do elemento em relação aos outros elementos com base na propriedade 'order' do CSS */
+}
+
+/* Define a animação da cor de fundo quando o usuário passa o mouse sobre o span ou o 'check' */
+.checkbox > span:hover + .check, 
+.check:hover {
+  background-color: var(--dark-blue02); /* Define a cor de fundo quando o usuário passa o mouse sobre o span ou o 'check', com base na variável CSS '--dark-blue02' */
+}
+
+/* Define a cor do texto e o tamanho da fonte para o span do checkbox */
+.checkbox > input[type="checkbox"] + span{
+  color: var(--gray-100); /* Define a cor do texto para a cor definida na variável CSS '--gray-100' */
+  font-size: 0.865rem; /* Define o tamanho da fonte como 0,865 rem */
+  line-height: 20px; /* Define a altura da linha como 20 pixels */
+}
+
+/* Define a cor do texto e a linha de decoração para o span do checkbox quando o checkbox estiver marcado */
+.checkbox > input[type="checkbox"]:checked + span{
+  color: var(--gray-300); /* Define a cor do texto para a cor definida na variável CSS '--gray-300' quando o checkbox estiver marcado */
+  text-decoration-line: line-through; /* Define uma linha através do texto quando o checkbox estiver marcado */
+}
+
+/* Define a ordem do span do checkbox em relação aos outros elementos com base na propriedade 'order' do CSS */
+.checkbox > span {
+  order: 3; /* Define a ordem do span como 3, o que o coloca depois do 'check' e do input[type="checkbox"] */
+}
+
+/* Define as propriedades do ícone de lixeira */
+.trashIcon {
+  color: var(--gray-300); /* Define a cor do ícone como a cor definida na variável CSS '--gray-300' */
+  cursor: pointer; /* Define o cursor do mouse como ponteiro, indicando que o elemento é clicável */
+
+  transition: color 0.2s; /* Define a transição de cor para que a mudança de cor seja suave */
+}
+
+/* Define a animação da cor do ícone de lixeira quando o usuário passa o mouse sobre ele */
+.trashIcon:hover {
+  color: var(--danger); /* Define a cor do ícone quando o usuário passa o mouse sobre ele como a cor definida na variável CSS '--danger' */
+}

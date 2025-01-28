@@ -1,0 +1,84 @@
+.newTask {
+  /* Define a largura de 100% e estilos de layout flexbox */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px; /* Define o espaçamento entre elementos filhos */
+}
+
+.newTask > input {
+  /* Define o estilo do input que fica dentro do form */
+  box-sizing: border-box; /* Define o tamanho total como a largura definida acima */
+  padding: 16px; /* Define o preenchimento interno */
+  background: var(--gray-500); /* Define a cor de fundo */
+  border: 1px solid var(--gray-700); /* Define uma borda de 1px sólida com a cor cinza-700 */
+  border-radius: 8px; /* Define um raio de borda de 8px */
+  flex-grow: 1; /* Permite que o elemento cresça para preencher o espaço disponível restante */
+}
+
+.newTask > button {
+  /* Define o estilo do botão que fica dentro do form */
+  background: var(--dark-blue); /* Define a cor de fundo */
+  border: 0; /* Remove a borda */
+  border-radius: 8px; /* Define um raio de borda de 8px */
+  padding: 16px; /* Define o preenchimento interno */
+  cursor: pointer; /* Muda o cursor para a mãozinha quando passa por cima */
+  display: flex; /* Define o estilo de layout flexbox */
+  flex-direction: row; /* Define o eixo horizontal para o layout flexbox */
+  justify-content: center; /* Alinha o conteúdo no centro horizontalmente */
+  align-items: center; /* Alinha o conteúdo no centro verticalmente */
+  gap: 8px; /* Define o espaçamento entre elementos filhos */
+  font-size: 0.875rem; /* Define o tamanho da fonte */
+  line-height: 20px; /* Define a altura da linha */
+  font-weight: 700; /* Define a espessura da fonte */
+  transition: background 0.1s; /* Adiciona uma transição suave de 0.1 segundos para a cor de fundo */
+}
+
+.newTask > button:not(:disabled):hover {
+  /* Define o estilo do botão quando ele está desabilitado ou o cursor passa por cima */
+  background: var(--blue); /* Define a cor de fundo */
+}
+
+.newTask > button:disabled {
+  /* Define o estilo do botão quando ele está desabilitado */
+  opacity: 0.7; /* Define a opacidade do botão como 0.7 */
+  cursor: not-allowed; /* Muda o cursor para a seta quando está desabilitado */
+}
+
+.containerCount {
+  /* Define o estilo do container de contagem de tarefas */
+  margin: 4rem 0 1.5rem; /* Define as margens superior e inferior e zero na esquerda e direita */
+  display: flex; /* Define o estilo de layout flexbox */
+  justify-content: space-between; /* Alinha os elementos no espaço restante */
+}
+.containerCount > p {
+  display: flex; /* Define o tipo de exibição como flex */
+  gap: 8px; /* Define o espaçamento entre elementos filhos dentro do container */
+  font-weight: 700; /* Define a espessura da fonte como "bold" */
+}
+
+.containerCount > p:first-child {
+  color: var(--blue); /* Define a cor do texto do primeiro elemento filho como "var(--blue)" */
+}
+
+.containerCount > p:nth-child(n+2) {
+  color: var(--purple); /* Define a cor do texto dos demais elementos filhos (a partir do segundo) como "var(--purple)" */
+}
+
+.containerCount > p > span {
+  display: flex; /* Define o tipo de exibição como flex */
+  padding: 2px 8px; /* Define o preenchimento interno do elemento */
+  background: var(--gray-400); /* Define a cor de fundo como "var(--gray-400)" */
+  border-radius: 999px; /* Define o raio do arredondamento da borda como um valor muito grande, criando um efeito de círculo */
+  color: var(--gray-200); /* Define a cor do texto como "var(--gray-200)" */
+  font-size: 0.75rem; /* Define o tamanho da fonte */
+  font-weight: 700; /* Define a espessura da fonte como "bold" */
+  line-height: 15px; /* Define a altura da linha */
+}
+
+.taskList {
+  display: flex; /* Define o tipo de exibição como flex */
+  flex-direction: column; /* Define a direção da linha principal como coluna */
+  row-gap: 1rem; /* Define o espaçamento vertical entre elementos filhos */
+}
