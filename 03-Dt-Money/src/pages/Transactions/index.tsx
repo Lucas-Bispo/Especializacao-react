@@ -3,6 +3,7 @@ import { Header } from "../../components/Header";
 import { Summary } from "../../components/Summary";
 
 import { PriceHighlight, TransactionsContainer, TransactionsTable } from "./styles";
+import { SearchForm } from "./components/SearchForm";
 
 // Define e exporta o componente funcional Transactions
 export function Transactions() {
@@ -15,6 +16,9 @@ export function Transactions() {
       <Summary/>
 
       <TransactionsContainer>
+
+      <SearchForm />
+
         <TransactionsTable>
           <tbody>
             <tr>
