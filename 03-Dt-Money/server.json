@@ -63,6 +63,14 @@
       "category": "Devpos",
       "type": "outcome",
       "createdAt": "2025-02-03T21:40:01.294Z"
+    },
+    {
+      "id": "7eec",
+      "description": "Dev",
+      "price": 14527,
+      "category": "Devpos",
+      "type": "outcome",
+      "createdAt": "2025-02-03T22:03:14.781Z"
     }
   ]
 }
