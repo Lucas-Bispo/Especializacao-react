@@ -1,42 +1,52 @@
+/* Define o estilo para o elemento raiz (#root) da aplicação */
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  max-width: 1280px; /* Define a largura máxima do contêiner principal */
+  margin: 0 auto; /* Centraliza o contêiner horizontalmente na página */
+  padding: 2rem; /* Adiciona espaçamento interno ao redor do conteúdo */
+  text-align: center; /* Centraliza o texto e outros elementos dentro do contêiner */
 }
 
+/* Define o estilo para o logo */
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  height: 6em; /* Define a altura do logo */
+  padding: 1.5em; /* Adiciona espaçamento interno ao redor do logo */
+  will-change: filter; /* Informa ao navegador que o filtro será alterado, otimizando a animação */
+  transition: filter 300ms; /* Adiciona uma transição suave ao filtro com duração de 300ms */
 }
 
+/* Aplica um efeito de sombra ao passar o mouse sobre o logo */
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa); /* Adiciona uma sombra azul ao logo */
+}
+
+/* Aplica um efeito de sombra específico para logos com a classe "react" ao passar o mouse */
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa); /* Adiciona uma sombra verde (React) ao logo */
+}
+
+/* Define uma animação de rotação para o logo */
 @keyframes logo-spin {
   from {
-    transform: rotate(0deg);
+    transform: rotate(0deg); /* Inicia a rotação em 0 graus */
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(360deg); /* Termina a rotação em 360 graus */
   }
 }
 
+/* Aplica a animação de rotação apenas se o usuário não preferir reduzir movimentos */
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+    animation: logo-spin infinite 20s linear; /* Rotação infinita com duração de 20 segundos */
   }
 }
 
+/* Define o estilo para cards */
 .card {
-  padding: 2em;
+  padding: 2em; /* Adiciona espaçamento interno ao card */
 }
 
+/* Define o estilo para links ou textos com a classe "read-the-docs" */
 .read-the-docs {
-  color: #888;
+  color: #888; /* Define a cor do texto como cinza claro */
 }

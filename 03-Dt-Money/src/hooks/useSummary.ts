@@ -1,32 +1,41 @@
-import { useMemo } from 'react'
-import { useContextSelector } from 'use-context-selector'
-import { TransactionsContext } from '../contexts/TransactionsContext'
+// Importa o hook `useMemo` do React para memoizar valores computados.
+import { useMemo } from 'react';
+// Importa o hook `useContextSelector` do pacote `use-context-selector` para selecionar partes específicas de um contexto.
+import { useContextSelector } from 'use-context-selector';
+// Importa o contexto `TransactionsContext`, que contém as transações e métodos relacionados.
+import { TransactionsContext } from '../contexts/TransactionsContext';
 
+// Define o hook personalizado `useSummary`, que calcula um resumo das transações (entradas, saídas e saldo total).
 export function useSummary() {
+  // Usa o `useContextSelector` para acessar apenas a lista de transações do contexto `TransactionsContext`.
   const transactions = useContextSelector(TransactionsContext, (context) => {
-    return context.transactions
-  })
+    return context.transactions; // Retorna apenas a propriedade `transactions` do contexto.
+  });
 
+  // Usa o `useMemo` para calcular e memoizar o resumo das transações.
   const summary = useMemo(() => {
+    // Usa o método `reduce` para iterar sobre as transações e calcular o resumo.
     return transactions.reduce(
       (acc, transaction) => {
         if (transaction.type === 'income') {
-          acc.income += transaction.price
-          acc.total += transaction.price
+          // Se o tipo da transação for "income" (entrada), adiciona o valor ao total de entradas e ao saldo total.
+          acc.income += transaction.price;
+          acc.total += transaction.price;
         } else {
-          acc.outcome += transaction.price
-          acc.total -= transaction.price
+          // Se o tipo da transação for "outcome" (saída), adiciona o valor ao total de saídas e subtrai do saldo total.
+          acc.outcome += transaction.price;
+          acc.total -= transaction.price;
         }
-
-        return acc
+        return acc; // Retorna o acumulador atualizado.
       },
       {
-        income: 0,
-        outcome: 0,
-        total: 0,
+        income: 0, // Inicializa o total de entradas como 0.
+        outcome: 0, // Inicializa o total de saídas como 0.
+        total: 0, // Inicializa o saldo total como 0.
       },
-    )
-  }, [transactions])
+    );
+  }, [transactions]); // Memoiza o cálculo apenas quando a lista de transações mudar.
 
-  return summary
+  // Retorna o resumo calculado.
+  return summary;
 }
