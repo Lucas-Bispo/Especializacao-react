@@ -71,6 +71,22 @@
       "category": "Devpos",
       "type": "outcome",
       "createdAt": "2025-02-03T22:03:14.781Z"
+    },
+    {
+      "id": "5fc7",
+      "description": "sdad",
+      "price": 34233456,
+      "category": "Devpos",
+      "type": "income",
+      "createdAt": "2025-02-04T17:37:37.557Z"
+    },
+    {
+      "id": "d14e",
+      "description": "Dev",
+      "price": 3452353,
+      "category": "Devpos",
+      "type": "outcome",
+      "createdAt": "2025-02-04T17:57:18.411Z"
     }
   ]
 }
