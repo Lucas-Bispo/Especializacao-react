@@ -1,44 +1,60 @@
-// Importa o componente Header do arquivo './components/Header'
 import { Header } from './components/Header';
-
-// Importa o componente Post do arquivo './Post'
-import { Post } from './components/Post';
-
-// Importa os estilos específicos do módulo CSS para o componente App
-import styles from './App.module.css';
-
-// Importa os estilos globais aplicados à aplicação
-import './global.css';
-
-// Importa o componente Sidebar do arquivo './components/Sidebar'
+import { Post } from './components/Post'
 import { Sidebar } from './components/Sidebar';
 
-// Define e exporta o componente principal da aplicação
+import styles from './App.module.css';
+
+import './global.css';
+
+const posts = [
+  {
+    id: 1,
+    author: {
+      avatarUrl: 'https://github.com/diego3g.png',
+      name: 'Diego Fernandes',
+      role: 'CTO @Rocketseat'
+    },
+    content: [
+      { type: 'paragraph', content: 'Fala galera 👋' },
+      { type: 'paragraph', content: 'Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀' },
+      { type: 'link', content: 'jane.design/doctorcare' },
+    ],
+    publishedAt: new Date('2022-05-03 20:00:00'),
+  },
+  {
+    id: 2,
+    author: {
+      avatarUrl: 'https://github.com/maykbrito.png',
+      name: 'Mayk Brito',
+      role: 'Educator @Rocketseat'
+    },
+    content: [
+      { type: 'paragraph', content: 'Fala galera 👋' },
+      { type: 'paragraph', content: 'Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀' },
+      { type: 'link', content: 'jane.design/doctorcare' },
+    ],
+    publishedAt: new Date('2022-05-10 20:00:00'),
+  },
+];
 export function App() {
   return (
     <div>
-      {/* Renderiza o componente Header no topo da aplicação */}
       <Header />
 
-      {/* Cria uma estrutura com dois componentes principais: Sidebar e Post */}
       <div className={styles.wrapper}>
-        {/* Renderiza o componente Sidebar, que geralmente contém navegação ou informações complementares */}
         <Sidebar />
-
-        {/* Define a área principal da aplicação, onde os posts serão exibidos */}
         <main>
-          {/* Renderiza um componente Post com as propriedades de autor e conteúdo */}
-          <Post
-            author="Lucas Bispo"
-            content="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maxime itaque quas corporis beatae veritatis, reprehenderit asperiores vitae quod possimus qui dignissimos unde deleniti consequatur quae, repellat debitis sunt, est rerum!"
-          />
-          {/* Renderiza outro componente Post com um autor e conteúdo diferentes */}
-          <Post
-            author="Gabriel Buzzi"
-            content="Um novo post muito legal"
-          />
+          {posts.map(post => {
+            return (
+              <Post
+                author={post.author}
+                content={post.content}
+                publishedAt={post.publishedAt}
+              />
+            )
+          })}
         </main>
       </div>
     </div>
-  );
+  )
 }
