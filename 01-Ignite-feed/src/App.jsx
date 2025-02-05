@@ -12,12 +12,12 @@ const posts = [
     author: {
       avatarUrl: 'https://github.com/diego3g.png',
       name: 'Diego Fernandes',
-      role: 'CTO @Rocketseat'
+      role: 'CTO @rockets'
     },
     content: [
       { type: 'paragraph', content: 'Fala galera 👋' },
-      { type: 'paragraph', content: 'Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀' },
-      { type: 'link', content: 'jane.design/doctorcare' },
+      { type: 'paragraph', content: 'Acabei de subir mais um projeto no meu Portia. É um projeto que fiz no NLW Return, evento da rocketers. O nome do projeto é DoctorCare 🚀' },
+      { type: 'link', content: 'jane.design/doctora' },
     ],
     publishedAt: new Date('2022-05-03 20:00:00'),
   },
@@ -25,13 +25,13 @@ const posts = [
     id: 2,
     author: {
       avatarUrl: 'https://github.com/maykbrito.png',
-      name: 'Mayk Brito',
-      role: 'Educator @Rocketseat'
+      name: 'mark Brito',
+      role: 'Educator @rockets'
     },
     content: [
       { type: 'paragraph', content: 'Fala galera 👋' },
-      { type: 'paragraph', content: 'Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀' },
-      { type: 'link', content: 'jane.design/doctorcare' },
+      { type: 'paragraph', content: 'Acabei de subir mais um projeto no meu poria. É um projeto que fiz no NLW Return, evento da rocketeer. O nome do projeto é DoctorCare 🚀' },
+      { type: 'link', content: 'jane.design/doctora' },
     ],
     publishedAt: new Date('2022-05-10 20:00:00'),
   },
