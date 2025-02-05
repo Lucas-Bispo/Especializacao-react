@@ -1,134 +1,119 @@
-/* Estilo base para o componente Post */
 .post {
-  background: var(--gray-800); /* Define o fundo com uma cor específica (cinza escuro) */
-  border-radius: 8px; /* Adiciona bordas arredondadas */
-  padding: 2.5rem; /* Adiciona espaçamento interno */
+  background: var(--gray-800);
+  border-radius: 8px;
+  padding: 2.5rem;
 }
 
-/* Adiciona margem superior entre posts consecutivos */
 .post + .post {
   margin-top: 2rem;
 }
 
-/* Estilo para o conteúdo do post */
 .content {
-  line-height: 1.6; /* Define a altura da linha para melhor legibilidade */
-  color: var(--gray-300); /* Define a cor do texto (cinza claro) */
-  margin-top: 1.5rem; /* Adiciona margem superior */
+  line-height: 1.6;
+  color: var(--gray-300);
+  margin-top: 1.5rem;
 }
 
-/* Adiciona margem superior entre parágrafos dentro do conteúdo */
 .content p {
   margin-top: 1rem;
 }
 
-/* Estilo para links dentro do conteúdo */
 .content a {
-  font-weight: bold; /* Define o texto em negrito */
-  color: var(--green-500); /* Define a cor do link (verde) */
-  text-decoration: none; /* Remove o sublinhado padrão dos links */
+  font-weight: bold;
+  color: var(--green-500);
+  text-decoration: none;
 }
 
-/* Efeito ao passar o mouse sobre os links */
 .content a:hover {
-  color: var(--green-300); /* Muda a cor do link para um verde mais claro */
+  color: var(--green-300);
 }
 
-/* Estilo para o cabeçalho do post */
 .post > header {
-  display: flex; /* Usa flexbox para alinhar os itens */
-  align-items: center; /* Centraliza os itens verticalmente */
-  justify-content: space-between; /* Distribui o espaço entre os itens */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-/* Estilo para a data no cabeçalho */
 .post > header time {
-  font-size: 0.875rem; /* Define o tamanho da fonte */
-  color: var(--gray-400); /* Define a cor do texto (cinza médio) */
+  font-size: 0.875rem;
+  color: var(--gray-400);
 }
 
-/* Estilo para o contêiner do autor */
 .author {
-  display: flex; /* Usa flexbox para alinhar os itens */
-  align-items: center; /* Centraliza os itens verticalmente */
-  gap: 1rem; /* Adiciona espaçamento entre os itens */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-/* Estilo para o nome do autor */
 .authorInfo strong {
-  display: block; /* Faz o elemento ocupar a linha inteira */
-  color: var(--gray-100); /* Define a cor do texto (cinza claro) */
-  line-height: 1.6; /* Define a altura da linha */
+  display: block;
+  color: var(--gray-100);
+  line-height: 1.6;
 }
 
-/* Estilo para o cargo/função do autor */
 .authorInfo span {
-  display: block; /* Faz o elemento ocupar a linha inteira */
-  font-size: 0.875rem; /* Define o tamanho da fonte */
-  color: var(--gray-400); /* Define a cor do texto (cinza médio) */
-  line-height: 1.6; /* Define a altura da linha */
+  display: block;
+  font-size: 0.875rem;
+  color: var(--gray-400);
+  line-height: 1.6;
 }
 
-/* Estilo para o formulário de comentários */
 .commentForm {
-  width: 100%; /* Ocupa toda a largura disponível */
-  margin-top: 1.5rem; /* Adiciona margem superior */
-  padding-top: 1.5rem; /* Adiciona espaçamento interno no topo */
-  border-top: 1px solid var(--gray-600); /* Adiciona uma borda no topo */
+  width: 100%;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--gray-600);
 }
 
-/* Estilo para o título do formulário de comentários */
 .commentForm > strong {
-  line-height: 1.6; /* Define a altura da linha */
-  color: var(--gray-100); /* Define a cor do texto (cinza claro) */
+  line-height: 1.6;
+  color: var(--gray-100);
 }
 
-/* Estilo para a área de texto do formulário de comentários */
 .commentForm textarea {
-  width: 100%; /* Ocupa toda a largura disponível */
-  background: var(--gray-900); /* Define o fundo (cinza muito escuro) */
-  border: 0; /* Remove a borda */
-  resize: none; /* Impede o redimensionamento da área de texto */
-  height: 6rem; /* Define a altura da área de texto */
-  padding: 1rem; /* Adiciona espaçamento interno */
-  border-radius: 0.25rem; /* Adiciona bordas arredondadas */
-  color: var(--gray-100); /* Define a cor do texto (cinza claro) */
-  line-height: 1.4; /* Define a altura da linha */
-  margin-top: 1rem; /* Adiciona margem superior */
+  width: 100%;
+  background: var(--gray-900);
+  border: 0;
+  resize: none;
+  height: 6rem;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  color: var(--gray-100);
+  line-height: 1.4;
+  margin-top: 1rem;
 }
 
-/* Esconde o rodapé do formulário por padrão */
 .commentForm footer {
-  visibility: hidden; /* Torna o rodapé invisível */
-  max-height: 0; /* Define a altura máxima como 0 */
+  visibility: hidden;
+  max-height: 0;
 }
 
-/* Mostra o rodapé do formulário quando o textarea está em foco */
 .commentForm:focus-within footer {
-  visibility: visible; /* Torna o rodapé visível */
-  max-height: none; /* Remove a restrição de altura */
+  visibility: visible;
+  max-height: none;
 }
 
-/* Estilo para o botão de enviar comentário */
 .commentForm button[type="submit"] {
-  padding: 1rem 1.5rem; /* Adiciona espaçamento interno */
-  margin-top: 1rem; /* Adiciona margem superior */
-  border-radius: 8px; /* Adiciona bordas arredondadas */
-  border: 0; /* Remove a borda */
-  background: var(--green-500); /* Define o fundo (verde) */
-  color: var(--white); /* Define a cor do texto (branco) */
-  font-weight: bold; /* Define o texto em negrito */
-  cursor: pointer; /* Muda o cursor para pointer ao passar o mouse */
+  padding: 1rem 1.5rem;
+  margin-top: 1rem;
+  border-radius: 8px;
+  border: 0;
+  background: var(--green-500);
+  color: var(--white);
+  font-weight: bold;
+  cursor: pointer;
 
-  transition: background-color 0.1s; /* Adiciona transição suave para a cor de fundo */
+  transition: background-color 0.1s;
 }
 
-/* Efeito ao passar o mouse sobre o botão de enviar */
-.commentForm button[type="submit"]:hover {
-  background: var(--green-300); /* Muda a cor de fundo para um verde mais claro */
+.commentForm button[type="submit"]:not(:disabled):hover {
+  background: var(--green-300);
 }
 
-/* Estilo para a lista de comentários */
+.commentForm button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
 .commentList {
-  margin-top: 2rem; /* Adiciona margem superior */
+  margin-top: 2rem;
 }
