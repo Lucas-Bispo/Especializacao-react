@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Importa o React, ReactDOM e o componente App
 import React from "react";
 // Importa o ReactDOM, que é uma biblioteca JavaScript para renderizar componentes React no DOM.
@@ -13,3 +14,14 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     {/*// Renderiza o componente App na página.*/}
   </React.StrictMode>,
 );
+=======
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { App } from './App'
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+)
+>>>>>>> 03-Dt-Money
