@@ -1,33 +1,43 @@
+/* Definição de Cores */
 :root {
-    --white: #fff;
-    --gray-100: #e1e1e6;
-    --gray-300: #c4c4cc;
-    --gray-400: #8d8d99;
-    --gray-600: #323238;
-    --gray-700: #29292e;
-    --gray-800: #202024;
-    --gray-900: #121214;
+  --white: #fff; /* Cor branca */
+  --gray-100: #e1e1e6; /* Um tom de cinza claro */
+  --gray-300: #c4c4cc; /* Um tom de cinza um pouco mais forte */
+  --gray-400: #8d8d99; /* Cinza com um tom mais escuro */
+  --gray-600: #323238; /* Cinza escuro */
+  --gray-700: #29292e; /* Um cinza mais escuro ainda */
+  --gray-800: #202024; /* Um cinza quase preto */
+  --gray-900: #121214; /* Preto (quase total) */
   
-    --green-300: #00B37E;
-    --green-500: #00875f;
+  --green-300: #00B37E; /* Verde claro */
+  --green-500: #00875f; /* Verde mais escuro */
   
-    --red-500: #F75A68;
-  }
+  --red-500: #F75A68; /* Vermelho */
+}
 
+/* Estilo de foco em elementos */
+:focus {
+  outline: transparent; /* Remove o contorno padrão de elementos ao focar */
+  box-shadow: 0 0 0 2px var(--green-500); /* Adiciona um sombreado de 2px em torno do elemento com a cor verde */
+}
+
+/* Reseta as margens, o preenchimento e define box-sizing para todos os elementos */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0; /* Remove a margem padrão */
+  padding: 0; /* Remove o preenchimento padrão */
+  box-sizing: border-box; /* Faz com que o preenchimento e borda sejam incluídos no tamanho do elemento */
 }
 
+/* Estilos globais do corpo */
 body {
-    background: var(--gray-900);
-    color: var(--gray-300);
-    -webkit-font-smoothing: antialiased;
+  background: var(--gray-900); /* Define o fundo do corpo como um cinza bem escuro (quase preto) */
+  color: var(--gray-300); /* Define a cor do texto como cinza claro */
+  -webkit-font-smoothing: antialiased; /* Melhora a renderização das fontes em alguns navegadores (como o Chrome) */
 }
 
+/* Estilos globais para fontes em todo o site */
 body, input, textarea, button {
-    font-family: "Roboto", sans-serif;
-    font-weight: 400;
-    font-size: 1rem;
-  }
+  font-family: "Roboto", sans-serif; /* Define a fonte do corpo e dos elementos como Roboto (uma fonte popular e legível) */
+  font-weight: 400; /* Define o peso da fonte como normal (não negrito) */
+  font-size: 1rem; /* Define o tamanho da fonte como 1rem (tamanho base) */
+}
