@@ -1,8 +1,17 @@
 // Importa os estilos do arquivo CSS específico para o componente Avatar
 import styles from './Avatar.module.css';
 
+
+interface AvatarProps {
+  hasBorder?: boolean;
+  src: string;
+  alt?: string;
+}
+
+
+
 // Define o componente Avatar como uma função que aceita as propriedades `hasBorder` e `src`
-export function Avatar({ hasBorder = true, src }) {
+export function Avatar({ hasBorder = true, src, alt }: AvatarProps) {
   return (
     <img
       /* Define a classe CSS da imagem com base no valor de `hasBorder`:
@@ -12,6 +21,7 @@ export function Avatar({ hasBorder = true, src }) {
       
       /* Define o caminho da imagem usando a propriedade `src`, passada como argumento. */
       src={src}
+      alt={alt}
     />
   );
 }
