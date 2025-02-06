@@ -1,15 +1,14 @@
-import styles from './Button.module.css';
+import styles from './Button.module.css'
 
-interface ButtonProps {
-    onClick: () => void;
+type Props = React.DetailedHTMLProps<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>
+
+export function Button({ children, ...rest }: Props) {
+  return (
+    <button className={styles.container} {...rest}>
+      {children}
+    </button>
+  )
 }
-
-const Button = ({ onClick }: ButtonProps) => {
-    return (
-        <button className={styles.button} onClick={onClick}>
-            Adicionar
-        </button>
-    );
-};
-
-export default Button;
