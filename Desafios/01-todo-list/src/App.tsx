@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.tsx
+import React, { useState } from 'react';
+import TaskList from './components/List/TaskList';
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+interface Task {
+  id: number;
+  title: string;
+  completed: boolean;
 }
 
-export default App
+function App() {
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [newTaskTitle, setNewTaskTitle] = useState('');
+
+  const handleAddTask = () => {
+    if (newTaskTitle.trim() === '') return;
+
+    const newTask: Task = {
+      id: Date.now(),
+      title: newTaskTitle,
+      completed: false,
+    };
+    setTasks([...tasks, newTask]);
+    setNewTaskTitle('');
+  };
+
+  return (
+    <div>
+      <form onSubmit={(e) => {
+        e.preventDefault();
+        handleAddTask();
+      }}>
+        <input
+          type="text"
+          value={newTaskTitle}
+          onChange={(e) => setNewTaskTitle(e.target.value)}
+          placeholder="Adicione uma nova tarefa"
+        />
+        <button type="submit">Adicionar</button>
+      </form>
+      <TaskList tasks={tasks} />
+    </div>
+  );
+}
+
+export default App;
