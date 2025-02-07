@@ -1,0 +1,62 @@
+/* src/components/Header.module.css */
+
+.header {
+    width: 100%;
+    max-width: 540px;
+    background-color: var(--gray-600);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+    margin: 0 auto; /* Centraliza o header horizontalmente */
+  }
+  
+  .header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem; /* Adiciona espaço abaixo dos logos */
+  }
+  
+  .rocket-logo {
+    width: 50px; /* Ajuste o tamanho conforme necessário */
+  }
+  
+  .todo-logo {
+    width: 100px;
+  }
+  
+  .input-group {
+    display: flex;
+    gap: 0.75rem;
+  }
+  
+  .input-group input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 0;
+    border-radius: 6px;
+    background-color: var(--gray-500);
+    color: #fff;
+    font-size: 1rem;
+  }
+  
+  .input-group button {
+    padding: 0.75rem 1rem;
+    border: 0;
+    border-radius: 6px;
+    background-color: var(--blue);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .input-group button:hover {
+    background-color: var(--blue-dark);
+  }
