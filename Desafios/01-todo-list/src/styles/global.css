@@ -1,34 +1,52 @@
 :root {
   /* Definição de variáveis CSS */
+  /* Cor de fundo branco */
   --gray-100: #f2f2f2;
+  /* Cor de fundo cinza claro */
   --gray-200: #d9d9d9;
+  /* Cor de texto cinza */
   --gray-300: #808080;
+  /* Cor de fundo cinza escuro */
   --gray-400: #333333;
+  /* Cor de fundo preto */
   --gray-500: #262626;
+  /* Cor de fundo preto mais escuro */
   --gray-600: #1a1a1a;
+  /* Cor de fundo preto mais escuro ainda */
   --gray-700: #0d0d0d;
 
+  /* Cor do botão de editar */
   --purple: #8284fa;
+  /* Cor do botão de editar quando hover */
   --purple-dark: #5e60ce;
 
+  /* Cor do botão de deletar */
   --blue: #4ea8d3;
+  /* Cor do botão de deletar quando hover */
   --blue-dark: #1e6f9f;
 
+  /* Cor do botão de deletar quando erro */
   --danger: #e25858;
 }
 
 * {
+  /* Remove margem e padding de todos os elementos */
   margin: 0;
   padding: 0;
+  /* Define o box-sizing como border-box para que os elementos tenham o tamanho correto */
   box-sizing: border-box;
 }
 
 body {
+  /* Define o fundo da página como cinza escuro */
   background: var(--gray-600);
+  /* Define a cor do texto como branco */
   color: var(--gray-100);
+  /* Define a renderização de fonte como antialiased */
   -webkit-font-smoothing: antialiased;
 }
 
 button {
+  /* Define o cursor como pointer para que o botão seja clicável */
   cursor: pointer;
 }

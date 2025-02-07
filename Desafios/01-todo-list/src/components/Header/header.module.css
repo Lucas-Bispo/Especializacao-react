@@ -1,0 +1,97 @@
+/* 
+  Define o estilo para o header da página
+  - background: define a cor de fundo como cinza escuro
+  - display: define o tipo de display como flex
+  - align-items: define a alignação vertical como centralizada
+  - justify-content: define a alignação horizontal como centralizada
+  - height: define a altura como 12.5rem
+  - position: define a posição como relativa
+*/
+.header {
+    background: var(--gray-700);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 12.5rem;
+    position: relative;
+  }
+  
+  /* 
+    Define o estilo para o formulário de criação de tarefa
+    - position: define a posição como absoluta
+    - height: define a altura como 3.375rem
+    - bottom: define a distância do botton como metade da altura do formulário
+    - width: define a largura como 100%
+    - max-width: define a largura máxima como 46rem
+    - display: define o tipo de display como flex
+    - gap: define a distância entre os elementos como 0.5rem
+    - padding: define a distância entre o conteúdo e a borda como 0 1rem
+  */
+  .newTaskForm {
+    position: absolute;
+    height: 3.375rem;
+    bottom: calc(-3.375rem / 2);
+    width: 100%;
+    max-width: 46rem;
+    display: flex;
+    gap: 0.5rem;
+    padding: 0 1rem;
+  }
+  
+  /* 
+    Define o estilo para o input do formulário de criação de tarefa
+    - height: define a altura como 100%
+    - flex: define a flexibilidade como 1
+    - color: define a cor do texto como branco
+    - background: define a cor de fundo como cinza escuro
+    - border: define a borda como 1px solid cinza escuro
+    - border-radius: define a borda como arredondada com 0.5rem
+    - padding: define a distância entre o conteúdo e a borda como 0 1rem
+    - font-size: define o tamanho da fonte como 1rem
+  */
+  .newTaskForm input {
+    height: 100%;
+    flex: 1;
+    color: var(--gray-100);
+    background: var(--gray-500);
+    border: 1px solid var(--gray-700);
+    border-radius: 0.5rem;
+    padding: 0 1rem;
+    font-size: 1rem;
+  }
+  
+  /* 
+    Define o estilo para o placeholder do input do formulário de criação de tarefa
+    - color: define a cor do texto como cinza
+  */
+  .newTaskForm input::placeholder {
+    color: var(--gray-300);
+  }
+  
+  /* 
+    Define o estilo para o botão do formulário de criação de tarefa
+    - height: define a altura como 100%
+    - padding: define a distância entre o conteúdo e a borda como 0 1rem
+    - background: define a cor de fundo como azul escuro
+    - color: define a cor do texto como branco
+    - border: define a borda como none
+    - border-radius: define a borda como arredondada com 0.5rem
+    - display: define o tipo de display como flex
+    - align-items: define a alignação vertical como centralizada
+    - gap: define a distância entre os elementos como 0.375rem
+    - font-weight: define o peso da fonte como 700
+    - font-size: define o tamanho da fonte como 0.875rem
+  */
+  .newTaskForm button {
+    height: 100%;
+    padding: 0 1rem;
+    background: var(--blue-dark);
+    color: var(--gray-100);
+    border: none;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-weight: 700;
+    font-size: 0.875rem;
+  }
