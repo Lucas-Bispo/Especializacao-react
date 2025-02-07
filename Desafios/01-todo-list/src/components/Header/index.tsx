@@ -1,4 +1,6 @@
 import todoLogo from "../../assets/todoLogo.svg"; // importa a logo do ToDo
+import { AiOutlinePlusCircle } from "react-icons/ai";
+
 
 import styles from "./header.module.css"; // importa os estilos do header
 
@@ -11,8 +13,15 @@ export function Header() { // define a funcao Header
                 e tem um atributo alt para acessibilidade
             */}
             <img src={todoLogo} alt="ToDo Logo" />
-            {/* Link para a página inicial */}
-            <a href="#">Início</a>
+            
+
+            <form className={styles.newTaskForm}>
+                <input placeholder="Adicionar nova tarefa" />
+                <button>
+                    Criar
+                    <AiOutlinePlusCircle size={20}/>
+                </button>
+            </form>
         </header>
     );
 }
