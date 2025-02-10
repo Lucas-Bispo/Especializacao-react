@@ -1,4 +1,3 @@
-/*************  ✨ Codeium Command 🌟  *************/
 // importa a biblioteca axios que permite fazer requisi es HTTP
 import axios from 'axios'
 
@@ -14,4 +13,3 @@ export const api = axios.create({
 // para o backend, pois o frontend n o tem como saber qual a URL do backend
 // sem essa configura o, o frontend n o poderia fazer requisi es para o backend
 
-/******  c43158c8-8326-459e-8526-22f12c8d4fe6  *******/
