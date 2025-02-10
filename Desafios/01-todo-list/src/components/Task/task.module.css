@@ -1,49 +1,78 @@
 .task {
-    width: 100%;
-    background: var(--gray-500);
-    border: 1px solid var(--gray-400);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-  }
-  
-  .task p {
-    font-size: 0.875rem;
-    line-height: 1.18rem;
-    color: var(--gray-100);
-    margin-right: auto;
-  }
-  
-  p.textCompleted {
-    color: var(--gray-300);
-    text-decoration: line-through;
-  }
-  
-  .checkContainer {
-    width: 1.125rem;
-    height: 1.125rem;
-    background: none;
-    border: none;
-  }
-  
-  .checkContainer div {
-    width: 100%;
-    height: 100%;
-    border-radius: 999px;
-    border: 2px solid var(--blue);
-  }
-  
-  .checkContainer svg {
-    width: 100%;
-    height: 100%;
-    color: var(--purple);
-  }
-  
-  .deleteButton {
-    background: none;
-    border: none;
-    color: var(--gray-300);
-  }
+  /* Define a largura completa do elemento */
+  width: 100%;
+  /* Define a cor de fundo usando uma variável CSS */
+  background: var(--gray-500);
+  /* Define a borda com 1px de espessura e cor cinza */
+  border: 1px solid var(--gray-400);
+  /* Define o preenchimento interno do elemento */
+  padding: 1rem;
+  /* Define bordas arredondadas */
+  border-radius: 0.5rem;
+  /* Define o display como flex para alinhar itens em linha */
+  display: flex;
+  /* Alinha itens verticalmente ao centro */
+  align-items: center;
+  /* Distribui espaço entre os itens */
+  justify-content: space-between;
+  /* Define o espaço entre os itens flexíveis */
+  gap: 0.75rem;
+}
+
+.task p {
+  /* Define o tamanho da fonte do parágrafo */
+  font-size: 0.875rem;
+  /* Define a altura da linha */
+  line-height: 1.18rem;
+  /* Define a cor do texto usando uma variável CSS */
+  color: var(--gray-100);
+  /* Define a margem à direita automática para empurrar outros elementos */
+  margin-right: auto;
+}
+
+p.textCompleted {
+  /* Define a cor do texto para quando a tarefa estiver concluída */
+  color: var(--gray-300);
+  /* Aplica o efeito de texto riscado */
+  text-decoration: line-through;
+}
+
+.checkContainer {
+  /* Define a largura do container de verificação */
+  width: 1.125rem;
+  /* Define a altura do container de verificação */
+  height: 1.125rem;
+  /* Define o fundo como transparente */
+  background: none;
+  /* Remove a borda padrão */
+  border: none;
+}
+
+.checkContainer div {
+  /* Define a largura do elemento interno */
+  width: 100%;
+  /* Define a altura do elemento interno */
+  height: 100%;
+  /* Define bordas completamente arredondadas */
+  border-radius: 999px;
+  /* Define a borda com 2px de espessura e cor azul */
+  border: 2px solid var(--blue);
+}
+
+.checkContainer svg {
+  /* Define a largura do ícone SVG */
+  width: 100%;
+  /* Define a altura do ícone SVG */
+  height: 100%;
+  /* Define a cor do ícone SVG */
+  color: var(--purple);
+}
+
+.deleteButton {
+  /* Define o fundo como transparente */
+  background: none;
+  /* Remove a borda padrão */
+  border: none;
+  /* Define a cor do botão usando uma variável CSS */
+  color: var(--gray-300);
+}

@@ -1,21 +1,32 @@
-import { TbTrash } from 'react-icons/tb'; // Importa o ícone de lixeira
-import styles from './task.module.css'; // Importa os estilos CSS específicos para o componente Task
+import { TbTrash } from "react-icons/tb";
+import { BsFillCheckCircleFill } from "react-icons/bs";
 
-// Define o componente funcional Task
-export function Task() {
-    return (
-        <div className={styles.task}> {/* Container principal da tarefa com estilos aplicados */}
-            <button className={styles.checkContainer}> {/* Botão para marcar a tarefa como concluída */}
-                <div></div> {/* Indicador visual dentro do botão */}
-            </button>
+import styles from "./task.module.css";
+import { ITask } from "../../App";
 
-            <p> {/* Texto da tarefa */}
-                Integrar 
-            </p>
+interface Props {
+  task: ITask;
+  onComplete: (taskId: string) => void;
+  onDelete: (taskId: string) => void;
+}
 
-            <button className={styles.deleteButton}> {/* Botão para deletar a tarefa */}
-                <TbTrash size={20} /> {/* Ícone de lixeira com tamanho de 20px */}
-            </button>
-        </div>
-    );
+export function Task({ task, onComplete, onDelete }: Props) {
+  return (
+    <div className={styles.task}>
+      <button
+        className={styles.checkContainer}
+        onClick={() => onComplete(task.id)}
+      >
+        {task.isCompleted ? <BsFillCheckCircleFill /> : <div />}
+      </button>
+
+      <p className={task.isCompleted ? styles.textCompleted : ""}>
+        {task.title}
+      </p>
+
+      <button className={styles.deleteButton} onClick={() => onDelete(task.id)}>
+        <TbTrash size={20} />
+      </button>
+    </div>
+  );
 }

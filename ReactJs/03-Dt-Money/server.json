@@ -47,6 +47,54 @@
       "type": "outcome",
       "createdAt": "2022-07-30T13:38:57.560Z",
       "id": 6
+    },
+    {
+      "description": "Dev",
+      "price": 3463434,
+      "category": "Devpos",
+      "type": "income",
+      "createdAt": "2025-02-09T19:05:48.143Z",
+      "id": 7
+    },
+    {
+      "description": "Dev",
+      "price": 3532434,
+      "category": "Devpos",
+      "type": "income",
+      "createdAt": "2025-02-10T13:11:28.825Z",
+      "id": 8
+    },
+    {
+      "description": "67456",
+      "price": 4645,
+      "category": "hgfh",
+      "type": "outcome",
+      "createdAt": "2025-02-10T13:11:37.864Z",
+      "id": 9
+    },
+    {
+      "description": "Dev",
+      "price": 4356345,
+      "category": "hgfh",
+      "type": "income",
+      "createdAt": "2025-02-10T13:12:12.675Z",
+      "id": 10
+    },
+    {
+      "description": "342",
+      "price": 54664,
+      "category": "3453455",
+      "type": "outcome",
+      "createdAt": "2025-02-10T13:12:25.541Z",
+      "id": 11
+    },
+    {
+      "description": "43534",
+      "price": 45343,
+      "category": "34534",
+      "type": "income",
+      "createdAt": "2025-02-10T13:13:27.991Z",
+      "id": 12
     }
   ]
 }
