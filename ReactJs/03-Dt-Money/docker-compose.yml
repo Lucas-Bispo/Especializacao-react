@@ -9,7 +9,8 @@ services:
   frontend:
     build:
       context: .  # Usa a raiz do projeto como contexto
-      dockerfile: Dockerfile.front  # Arquivo Docker do frontend
+      dockerfile: Dockerfile.front 
+       # Arquivo Docker do frontend
     ports:
       - "80:80"
     depends_on:
