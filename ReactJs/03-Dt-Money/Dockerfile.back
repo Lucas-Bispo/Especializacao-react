@@ -1,0 +1,19 @@
+# Usa a imagem oficial do Node.js
+FROM node:20-alpine
+
+# Define o diretório de trabalho
+WORKDIR /app
+
+# Copia os arquivos do JSON Server para dentro do container
+COPY package.json package-lock.json ./
+RUN npm install
+
+# Copia o restante dos arquivos
+COPY . .
+
+# Expõe a porta do JSON Server
+EXPOSE 3333
+
+# Comando para rodar o servidor JSON
+CMD ["npx", "json-server", "--watch", "server.json", "--port", "3333"]
+
