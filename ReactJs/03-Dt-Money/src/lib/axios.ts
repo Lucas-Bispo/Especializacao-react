@@ -3,8 +3,11 @@ import axios from 'axios'
 
 // cria uma inst ncia da classe axios com a base URL do backend
 export const api = axios.create({
-  // define a base URL do backend
-  baseURL: 'http://backend:3333',
+  // define a base URL do backend ,baseURL: 'http://backend:3333', //baseURL: 'http://03-dt-money-backend-1:3333',
+  baseURL: 'http://localhost:3333',
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+  },
 })
 
 // a base URL do backend  a URL do servidor que vai processar as requisi es
@@ -12,4 +15,3 @@ export const api = axios.create({
 // essa configura o  necess ria para que o frontend possa fazer requisi es
 // para o backend, pois o frontend n o tem como saber qual a URL do backend
 // sem essa configura o, o frontend n o poderia fazer requisi es para o backend
-
