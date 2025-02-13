@@ -52,3 +52,60 @@ export const Separator = styled.div`
   display: flex;
   justify-content: center;
 `
+
+const BaseInput = styled.input`
+  background: transparent;
+  height: 2.5rem;
+  border: 0;
+  border-bottom: 2px solid ${(props) => props.theme['gray-500']};
+  font-weight: bold;
+  font-size: 1.125rem;
+  padding: 0 0.5rem;
+  color: ${(props) => props.theme['gray-100']};
+
+  &::placeholder {
+    color: ${(props) => props.theme['gray-500']};
+  }
+  &:focus {
+    border-color: ${(props) => props.theme['green-500']};
+  }
+`
+
+
+export const TaskInput = styled(BaseInput)`
+
+
+
+`
+
+export const MinutesAmountInput = styled(BaseInput)`
+
+`
+
+
+export const StarCountdownButton = styled.button`
+   width: 100%;
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  justify-content: center;
+  gap: 8px; // Distância entre ícone e texto
+  font-weight: bold;
+  cursor: pointer;
+  background: ${props => props.theme['green-500']};
+  color: ${props => props.theme['gray-100']};
+
+  &:hover {
+    background: ${props => props.theme['green-700']};
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+
+    &:hover {
+      background: ${props => props.theme['green-500']}; // Remove hover quando desabilitado
+    }
+  }
+`
