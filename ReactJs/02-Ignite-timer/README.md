@@ -1,50 +1,42 @@
-# React + TypeScript + Vite
+/*************  ✨ Codeium Command 🌟  *************/
+# Ignite Timer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+O seu timer para treinar!
 
-Currently, two official plugins are available:
+Este projeto faz parte do treinamento Ignite da Rocketseat e tem como objetivo criar um timer utilizando React, TypeScript e Vite.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tecnologias utilizadas
 
-## Expanding the ESLint configuration
+- React
+- TypeScript
+- Vite
+- ESLint
+- Prettier
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Funcionalidades
 
-- Configure the top-level `parserOptions` property like this:
+- Contador regressivo
+- Botão para iniciar e pausar o contador
+- Exibe o tempo em minutos e segundos
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Como executar
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+1. Clone o repositório
+2. Execute `npm install` para instalar as dependências
+3. Execute `npm run dev` para iniciar o servidor de desenvolvimento
+4. Acesse `http://localhost:3000` no seu navegador
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Como contribuir
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. Clone o repositório
+2. Crie uma branch com o nome da sua feature (ex: `feature/novo-botao`)
+3. Faça suas alterações e commit com uma mensagem clara
+4. Envie um pull request para a branch `main`
+
+## Licença
+
+Este projeto esta sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+**_Seja bem-vindo!_**
+
+/******  7ea8b137-a4e3-42c8-a7a5-f74cdc5d2741  *******/
