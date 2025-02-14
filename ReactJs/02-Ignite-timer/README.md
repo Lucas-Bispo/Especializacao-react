@@ -1,7 +1,4 @@
-/*************  ✨ Codeium Command 🌟  *************/
 # Ignite Timer
-
-O seu timer para treinar!
 
 Este projeto faz parte do treinamento Ignite da Rocketseat e tem como objetivo criar um timer utilizando React, TypeScript e Vite.
 
@@ -37,6 +34,4 @@ Este projeto faz parte do treinamento Ignite da Rocketseat e tem como objetivo c
 
 Este projeto esta sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-**_Seja bem-vindo!_**
 
-/******  7ea8b137-a4e3-42c8-a7a5-f74cdc5d2741  *******/
