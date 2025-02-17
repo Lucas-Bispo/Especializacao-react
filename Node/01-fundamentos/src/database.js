@@ -1,37 +1,55 @@
-import fs from 'node:fs/promises' // importa o modulo de leitura de arquivos do node
-const databasePath = new URL('../db.json', import.meta.url) // define o caminho do arquivo de banco de dados
+import fs from 'node:fs/promises'
 
-export class Database { // define a classe Database
-  #database = {} // define a propriedade privada database como um objeto vazio
+const databasePath = new URL('../db.json', import.meta.url)
 
-  constructor() { // define o construtor da classe
-    fs.readFile(databasePath, 'utf8') // lê o arquivo de banco de dados
-      .then(data => { // se a leitura for bem sucedida
-        this.#database = JSON.parse(data) // converte o conteúdo do arquivo para um objeto
+export class Database {
+  #database = {}
+
+  constructor() {
+    fs.readFile(databasePath, 'utf8')
+      .then(data => {
+        this.#database = JSON.parse(data)
       })
-      .catch(() => { // se a leitura falhar
-        this.#persist() // chama o método persist para criar o arquivo de banco de dados
+      .catch(() => {
+        this.#persist()
       })
   }
 
-  #persist() { // define o método persist como privado
-    fs.writeFile(databasePath, JSON.stringify(this.#database)) // escreve o conteúdo da propriedade database no arquivo de banco de dados
+  #persist() {
+    fs.writeFile(databasePath, JSON.stringify(this.#database))
   }
 
-  select(table) { // define o método select
-    const data = this.#database[table] ?? [] // retorna o conteúdo da tabela especificada, se existir, ou um array vazio se não existir
+  select(table) {
+    const data = this.#database[table] ?? []
 
-    return data // retorna o resultado
+    return data
   }
 
-  insert(table, data) { // define o método insert
-    if (Array.isArray(this.#database[table])) { // verifica se a tabela especificada existe e é um array
-      this.#database[table].push(data) // adiciona o dado na tabela
+  insert(table, data) {
+    if (Array.isArray(this.#database[table])) {
+      this.#database[table].push(data)
     } else {
-      this.#database[table] = [data] // cria a tabela com o dado
+      this.#database[table] = [data]
     }
 
-    this.#persist() // chama o método persist para atualizar o arquivo de banco de dados
-    return data // retorna o dado inserido
+    this.#persist()
+
+    return data
+  }
+
+  update(table, id, data) {
+    const rowIndex = this.#database[table].findIndex(row => row.id === id)
+    if (rowIndex > -1) {
+      this.#database[table][rowIndex] = { id, ...data }
+      this.#persist()
+    }
+  }
+  delete(table, id) {
+    const rowIndex = this.#database[table].findIndex(row => row.id === id)
+
+    if (rowIndex > -1) {
+      this.#database[table].splice(rowIndex, 1)
+      this.#persist()
+    }
   }
 }
