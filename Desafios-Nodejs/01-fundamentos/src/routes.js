@@ -4,7 +4,6 @@ import multer from 'multer';
 import { parseCSV } from './utils/csvParser.js';
 
 const upload = multer({ dest: 'uploads/' });
-
 const routes = Router();
 
 // Criação de uma task
@@ -29,7 +28,6 @@ routes.post('/tasks/import', upload.single('file'), async (req, res) => {
     if (!file) {
       return res.status(400).json({ error: 'No file uploaded' });
     }
-
     await parseCSV(file.path);
     return res.status(201).json({ message: 'Tasks imported successfully' });
   } catch (error) {
@@ -38,4 +36,4 @@ routes.post('/tasks/import', upload.single('file'), async (req, res) => {
   }
 });
 
-export default { routes };
+export default routes; // Exporta diretamente o Router
