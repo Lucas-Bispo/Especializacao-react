@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import * as TaskController from '../controllers/TaskController.js';
+import * as TaskController from './controllers/TaskController.js';
 import multer from 'multer';
 import { parseCSV } from './utils/csvParser.js';
 
@@ -38,4 +38,4 @@ routes.post('/tasks/import', upload.single('file'), async (req, res) => {
   }
 });
 
-export { routes };
+export default { routes };
