@@ -1,0 +1,95 @@
+# **Desafio: Implementação de Práticas DevOps em um Ambiente Empresarial Fictício**
+
+## **1. Introdução**
+Este documento apresenta um plano detalhado para a implementação de práticas DevOps em um ambiente empresarial fictício. O objetivo é utilizar os conceitos de **CALMS** e as **Três Maneiras do DevOps** para identificar oportunidades de aprimoramento, melhorar a eficiência dos processos e fortalecer a cultura de colaboração, automação e aprendizado contínuo.
+
+---
+
+## **2. Definição do Ambiente Empresarial Fictício**
+Para contextualizar a implementação do DevOps, vamos considerar a seguinte empresa fictícia:
+
+- **Nome da Empresa**: TechFlow Solutions
+- **Setor**: Tecnologia (Desenvolvimento de Software para o Setor Financeiro)
+- **Desafios Atuais**:
+  - Lentos ciclos de desenvolvimento e entrega.
+  - Falta de comunicação entre as equipes de desenvolvimento e operações.
+  - Pouca automação nos processos de deploy.
+  - Monitoramento deficiente, causando dificuldades na resolução de problemas em produção.
+- **Meta**: Reduzir o tempo de entrega de novas funcionalidades de 4 semanas para 1 semana, aumentar a confiabilidade dos sistemas e melhorar a colaboração entre as equipes.
+
+---
+
+## **3. Aplicação do Modelo CALMS**
+
+### **3.1 Cultura (Culture)**
+- Promover colaboração entre Dev e Ops através de reuniões conjuntas.
+- Adotar um modelo de "You Build It, You Run It".
+- Implementar revisões pós-mortem para aprendizados constantes.
+
+### **3.2 Automação (Automation)**
+- Configurar pipelines **CI/CD** (GitHub Actions, GitLab CI, Jenkins).
+- Utilizar infraestrutura como código (**Terraform, AWS CloudFormation**).
+- Automatisar provisionamento e gerenciamento de servidores (**Ansible, Chef, Puppet**).
+
+### **3.3 Lean (Fluxo de Trabalho Eficiente)**
+- Mapear o fluxo de valor do desenvolvimento à produção.
+- Reduzir desperdícios com revisão de processos.
+- Implementar metodologia **Kanban** para gestão visual do trabalho.
+
+### **3.4 Medição (Measurement)**
+- Definir KPIs: **Tempo de deploy, taxa de falhas em produção, tempo médio para recuperação (MTTR)**.
+- Monitorar logs e métricas usando **Prometheus, Grafana, ELK Stack**.
+
+### **3.5 Compartilhamento (Sharing)**
+- Criar documentação acessível para toda a equipe.
+- Realizar workshops e treinamentos internos.
+- Utilizar chatOps para facilitar a comunicação.
+
+---
+
+## **4. Aplicação das Três Maneiras do DevOps**
+
+### **4.1 Primeira Maneira - Fluxo Rápido**
+- Implementação de **CI/CD** para entregas mais rápidas.
+- Uso de **feature flags** para liberação controlada de novas funcionalidades.
+- Infraestrutura escalável na **nuvem** (AWS, Azure, GCP).
+
+### **4.2 Segunda Maneira - Amplificação do Feedback**
+- Implementação de **testes automatizados**.
+- Monitoramento proativo de aplicações.
+- Feedback contínuo com dashboards e alertas.
+
+### **4.3 Terceira Maneira - Aprendizado Contínuo**
+- Realização de retrospectivas de sprint.
+- Incentivo à experimentação e inovação.
+- Criação de uma cultura de aprendizado e melhoria contínua.
+
+---
+
+## **5. Plano de Implementação**
+
+### **Fase 1: Planejamento (Semanas 1-2)**
+- Diagnóstico da cultura DevOps atual.
+- Definição de KPIs.
+- Escolha das ferramentas de automação.
+
+### **Fase 2: Implementação Inicial (Semanas 3-6)**
+- Configuração do pipeline de CI/CD.
+- Configuração de infraestrutura como código.
+- Monitoramento básico das aplicações.
+
+### **Fase 3: Otimização e Escala (Semanas 7-10)**
+- Melhoria dos processos automatizados.
+- Implementação de feedback contínuo.
+- Treinamento da equipe.
+
+### **Fase 4: Cultura de Aprendizado (Contínuo)**
+- Retrospectivas para melhoria contínua.
+- Revisão periódica dos processos.
+- Adoção de novas práticas conforme necessidade.
+
+---
+
+## **6. Conclusão**
+A implementação das práticas DevOps na empresa fictícia **TechFlow Solutions** trará diversos benefícios, como ciclos de entrega mais rápidos, maior confiabilidade dos sistemas e melhor integração entre equipes. Com um plano estruturado baseado no modelo **CALMS** e nas **Três Maneiras do DevOps**, a empresa conseguirá melhorar continuamente seus processos e consolidar uma cultura de colaboração e inovação.
+
