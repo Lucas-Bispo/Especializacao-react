@@ -1,9 +1,12 @@
-db.json
+#db.json
 node_modules
-tmp
-db
-.env
-db/app.db
-db/test.db
-.env
-.env.test
+#tmp
+#db
+#.env
+#db/*.db
+#db/test.db
+#.env
+#.env.test
+
+Todas esses arquivos devem ignorados, porem a nivel de educacao coloquei eles no git hub por ser o primeiro projeto
+algo que nao sera mais feito
