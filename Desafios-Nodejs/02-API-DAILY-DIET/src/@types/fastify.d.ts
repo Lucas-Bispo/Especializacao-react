@@ -1,12 +1,15 @@
-import { FastifyRequest } from 'fastify';
+// FastifyRequestContext
+import 'fastify';
 
-// Estende a interface FastifyRequest para incluir a propriedade 'user'
 declare module 'fastify' {
-  interface FastifyRequest {
+  export interface FastifyRequest {
     user?: {
-      id: string;
-      name: string;
-      email: string;
+      id: string; // Identificador único do usuário
+      session_id: string; // ID da sessão do usuário
+      name: string; // Nome do usuário
+      email: string; // Email do usuário
+      created_at: string; // Data de criação do usuário (formato ISO string)
+      updated_at: string; // Data de atualização do usuário (formato ISO string)
     };
   }
 }

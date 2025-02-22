@@ -1,60 +1,41 @@
-import { FastifyInstance } from 'fastify';
-import { z } from 'zod';
-import { knex } from '../database';
+import { FastifyInstance } from 'fastify'
+import { z } from 'zod'
+import { knex } from '../database'
+import { randomUUID } from 'node:crypto'
 
-export async function userRoutes(app: FastifyInstance) {
-  // Criar usuário
+export async function usersRoutes(app: FastifyInstance) {
   app.post('/', async (request, reply) => {
-    const createUserSchema = z.object({
+    const createUserBodySchema = z.object({
       name: z.string(),
       email: z.string().email(),
-      password: z.string().min(6),
-    });
+    })
 
-    const { name, email, password } = createUserSchema.parse(request.body);
+    let sessionId = request.cookies.sessionId
+
+    if (!sessionId) {
+      sessionId = randomUUID()
+
+      reply.setCookie('sessionId', sessionId, {
+        path: '/',
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+      })
+    }
+
+    const { name, email } = createUserBodySchema.parse(request.body)
+
+    const userByEmail = await knex('users').where({ email }).first()
+
+    if (userByEmail) {
+      return reply.status(400).send({ message: 'User already exists' })
+    }
 
     await knex('users').insert({
-      id: crypto.randomUUID(),
+      id: randomUUID(),
       name,
       email,
-      password,
-    });
+      session_id: sessionId,
+    })
 
-    return reply.status(201).send({ message: 'User created successfully' });
-  });
-
-  // Listar usuários
-  app.get('/', async () => {
-    const users = await knex('users').select('*');
-    return { users };
-  });
-
-  // Atualizar usuário
-  app.put('/:id', async (request, reply) => {
-    const updateUserSchema = z.object({
-      id: z.string().uuid(),
-      name: z.string(),
-      email: z.string().email(),
-      password: z.string().min(6),
-    });
-
-    const { id, name, email, password } = updateUserSchema.parse(request.body);
-
-    await knex('users').where({ id }).update({ name, email, password });
-
-    return reply.status(200).send({ message: 'User updated successfully' });
-  });
-
-  // Deletar usuário
-  app.delete('/:id', async (request, reply) => {
-    const deleteUserSchema = z.object({
-      id: z.string().uuid(),
-    });
-
-    const { id } = deleteUserSchema.parse(request.params);
-
-    await knex('users').where({ id }).del();
-
-    return reply.status(200).send({ message: 'User deleted successfully' });
-  });
+    return reply.status(201).send()
+  })
 }
