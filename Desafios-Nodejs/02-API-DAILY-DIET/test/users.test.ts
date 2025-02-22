@@ -1,5 +1,6 @@
 import { expect, test } from 'vitest';
-import { app } from '../src/server';
+import { app } from '../src/app';
+
 
 test('should create a new user', async () => {
   const response = await app.inject({
