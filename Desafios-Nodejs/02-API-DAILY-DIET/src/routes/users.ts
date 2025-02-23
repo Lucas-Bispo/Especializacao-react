@@ -4,9 +4,14 @@ import { db } from '../database';
 import { checkSessionIdExists } from '../middlewares/check-session-id-exists';
 
 export async function userRoutes(app: FastifyInstance) {
-  // Middleware global para verificar se o sessionId existe
-  app.addHook('preHandler', checkSessionIdExists);
-
+  // Middleware global para verificar se o sessionId existe, exceto para POST /
+app.addHook('preHandler', async (request, reply) => {
+  // Ignora o middleware para a rota de criação de usuário (POST /)
+  if (request.method === 'POST' && request.url === '/') {
+    return;
+  }
+  await checkSessionIdExists(request, reply);
+});
   // Rota para criar um novo usuário
   app.post('/', async (request, reply) => {
     const createUserSchema = z.object({

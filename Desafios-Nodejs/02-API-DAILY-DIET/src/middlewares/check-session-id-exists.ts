@@ -1,16 +1,13 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
+import { v4 as uuidv4 } from 'uuid';
 
 export async function checkSessionIdExists(
   request: FastifyRequest,
   reply: FastifyReply
-) {
-  // Verifica se o cabeçalho `session-id` está presente
+): Promise<void> {
   const sessionId = request.headers['session-id'];
-
-  if (!sessionId) {
-    return reply.status(401).send({ error: 'Session ID is required' });
+  if (!sessionId || typeof sessionId !== 'string' || sessionId.trim() === '') {
+    const newSessionId = uuidv4();
+    request.headers['session-id'] = newSessionId;
   }
-
-  // Se o cabeçalho estiver presente, continua para a próxima função
-  return;
 }
