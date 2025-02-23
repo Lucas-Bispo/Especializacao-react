@@ -10,14 +10,14 @@ const app = fastify({
 
 // Middleware global para capturar erros
 app.setErrorHandler((error, request, reply) => {
-  console.error(error); // Log do erro no console
+  console.error('Error:', error); // Log do erro no console
   reply.status(500).send({ error: 'Internal Server Error' });
 });
 
-// Registra as rotas de usuários
+// Registra as rotas de usuários com o prefixo /api
 app.register(userRoutes, { prefix: '/api/users' });
 
-// Registra as rotas de refeições
+// Registra as rotas de refeições com o prefixo /api
 app.register(mealRoutes, { prefix: '/api/meals' });
 
 // Exporta a aplicação para ser usada no server.ts

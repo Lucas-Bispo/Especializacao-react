@@ -9,8 +9,8 @@ export async function mealRoutes(app: FastifyInstance) {
       user_id: z.string().uuid(),
       name: z.string(),
       description: z.string(),
-      date: z.string().datetime(), // Validado como string
-      is_on_diet: z.boolean(), // Corrigido de isDiet para is_on_diet
+      date: z.string().datetime(),
+      is_on_diet: z.boolean(),
     });
 
     const { user_id, name, description, date, is_on_diet } = createMealSchema.parse(request.body);
@@ -21,13 +21,14 @@ export async function mealRoutes(app: FastifyInstance) {
           user_id,
           name,
           description,
-          date: new Date(date), // Convertendo string para Date
-          is_on_diet, // Corrigido de isDiet para is_on_diet
+          date: new Date(date),
+          is_on_diet,
         })
         .returning('*');
 
-      return reply.status(201).send(meal);
+      return reply.status(201).send({ message: 'Meal created successfully', meal });
     } catch (error) {
+      console.error(error);
       return reply.status(400).send({ error: 'Error creating meal' });
     }
   });
@@ -44,6 +45,7 @@ export async function mealRoutes(app: FastifyInstance) {
       const meals = await db('meals').where({ user_id });
       return reply.send(meals);
     } catch (error) {
+      console.error(error);
       return reply.status(500).send({ error: 'Internal server error' });
     }
   });
@@ -63,6 +65,7 @@ export async function mealRoutes(app: FastifyInstance) {
       }
       return reply.send(meal);
     } catch (error) {
+      console.error(error);
       return reply.status(500).send({ error: 'Internal server error' });
     }
   });
@@ -77,7 +80,7 @@ export async function mealRoutes(app: FastifyInstance) {
       name: z.string().optional(),
       description: z.string().optional(),
       date: z.string().datetime().optional(),
-      is_on_diet: z.boolean().optional(), // Corrigido de isDiet para is_on_diet
+      is_on_diet: z.boolean().optional(),
     });
 
     const { id } = paramsSchema.parse(request.params);
@@ -90,15 +93,16 @@ export async function mealRoutes(app: FastifyInstance) {
           name,
           description,
           date: date ? new Date(date) : undefined,
-          is_on_diet, // Corrigido de isDiet para is_on_diet
+          is_on_diet,
         })
         .returning('*');
 
       if (!updatedMeal) {
         return reply.status(404).send({ error: 'Meal not found' });
       }
-      return reply.send(updatedMeal);
+      return reply.send({ message: 'Meal updated successfully', meal: updatedMeal });
     } catch (error) {
+      console.error(error);
       return reply.status(500).send({ error: 'Internal server error' });
     }
   });
@@ -115,6 +119,7 @@ export async function mealRoutes(app: FastifyInstance) {
       await db('meals').where({ id }).del();
       return reply.status(204).send();
     } catch (error) {
+      console.error(error);
       return reply.status(500).send({ error: 'Internal server error' });
     }
   });

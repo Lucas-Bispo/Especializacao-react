@@ -1,9 +1,11 @@
-// src/server.ts
-import fastify from 'fastify';
+import app from './app';
 import { env } from './env';
 
-const app = fastify();
-
-app.listen({ port: env.PORT }, () => {
-  console.log(`🚀 Server running on port ${env.PORT}`);
+// Inicia o servidor
+app.listen({ port: env.PORT }, (err, address) => {
+  if (err) {
+    console.error('Failed to start server:', err);
+    process.exit(1); // Encerra o processo em caso de falha
+  }
+  console.log(`🚀 Server running on ${address}`);
 });
