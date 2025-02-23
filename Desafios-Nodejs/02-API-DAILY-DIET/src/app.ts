@@ -1,12 +1,24 @@
-import fastify from 'fastify'
-import cookie from '@fastify/cookie'
+import fastify from 'fastify';
+import { env } from './env'; // Importando variáveis de ambiente validadas
+import { userRoutes } from './routes/users'; // Importando rotas de usuários
+import { mealRoutes } from './routes/meals'; // Importando rotas de refeições
 
-import { mealsRoutes } from './routes/meals'
-import { usersRoutes } from './routes/users'
+// Criação da instância do Fastify
+const app = fastify({
+  logger: true, // Habilita logs para facilitar o debug
+});
 
-export const app = fastify()
+// Middleware global para capturar erros
+app.setErrorHandler((error, request, reply) => {
+  console.error(error); // Log do erro no console
+  reply.status(500).send({ error: 'Internal Server Error' });
+});
 
-app.register(cookie)
+// Registra as rotas de usuários
+app.register(userRoutes, { prefix: '/api/users' });
 
-app.register(usersRoutes, { prefix: 'users' })
-app.register(mealsRoutes, { prefix: 'meals' })
+// Registra as rotas de refeições
+app.register(mealRoutes, { prefix: '/api/meals' });
+
+// Exporta a aplicação para ser usada no server.ts
+export default app;

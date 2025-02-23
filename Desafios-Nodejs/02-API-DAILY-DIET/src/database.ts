@@ -1,17 +1,14 @@
-import { Knex, knex as setupKnex } from 'knex'
-import { env } from './env'
+import knex from 'knex';
+import { env } from './env'; // Importa as variáveis de ambiente validadas
 
-export const config: Knex.Config = {
-  client: env.DATABASE_CLIENT,
-  connection:
-    env.DATABASE_CLIENT === 'sqlite'
-      ? { filename: env.DATABASE_URL }
-      : env.DATABASE_URL,
-  useNullAsDefault: true,
-  migrations: {
-    extension: 'ts',
-    directory: './db/migrations',
+// Configuração do Knex
+const db = knex({
+  client: 'sqlite3', // Altere para o cliente do seu banco de dados (e.g., 'pg' para PostgreSQL)
+  connection: {
+    filename: env.DATABASE_URL || './db.sqlite', // Caminho para o arquivo SQLite ou URL do banco
   },
-}
+  useNullAsDefault: true, // Necessário para SQLite
+});
 
-export const knex = setupKnex(config)
+// Exporta o objeto `db` para ser usado em outros arquivos
+export { db };

@@ -1,169 +1,121 @@
-import { FastifyInstance } from 'fastify'
-import { z } from 'zod'
-import { checkSessionIdExists } from '../middlewares/check-session-id-exists'
-import { randomUUID } from 'node:crypto'
-import { knex } from '../database'
+import { FastifyInstance } from 'fastify';
+import { z } from 'zod';
+import { db } from '../database';
 
-export async function mealsRoutes(app: FastifyInstance) {
-  // Prefixo para evitar conflitos de rotas
-  const MEALS_PREFIX = '/meals'
-
+export async function mealRoutes(app: FastifyInstance) {
   // Rota para criar uma nova refeição
-  app.post(
-    `${MEALS_PREFIX}`,
-    { preHandler: [checkSessionIdExists] },
-    async (request, reply) => {
-      const createMealBodySchema = z.object({
-        name: z.string(),
-        description: z.string(),
-        isOnDiet: z.boolean(),
-        date: z.coerce.date(),
-      })
+  app.post('/meals', async (request, reply) => {
+    const createMealSchema = z.object({
+      user_id: z.string().uuid(),
+      name: z.string(),
+      description: z.string(),
+      date: z.string().datetime(), // Validado como string
+      is_on_diet: z.boolean(), // Corrigido de isDiet para is_on_diet
+    });
 
-      const { name, description, isOnDiet, date } = createMealBodySchema.parse(
-        request.body,
-      )
+    const { user_id, name, description, date, is_on_diet } = createMealSchema.parse(request.body);
 
-      await knex('meals').insert({
-        id: randomUUID(),
-        name,
-        description,
-        is_on_diet: isOnDiet,
-        date: date.getTime(),
-        user_id: request.user?.id,
-      })
+    try {
+      const [meal] = await db('meals')
+        .insert({
+          user_id,
+          name,
+          description,
+          date: new Date(date), // Convertendo string para Date
+          is_on_diet, // Corrigido de isDiet para is_on_diet
+        })
+        .returning('*');
 
-      return reply.status(201).send({ message: 'Meal created successfully' })
-    },
-  )
+      return reply.status(201).send(meal);
+    } catch (error) {
+      return reply.status(400).send({ error: 'Error creating meal' });
+    }
+  });
 
-  // Rota para listar todas as refeições do usuário
-  app.get(
-    `${MEALS_PREFIX}`,
-    { preHandler: [checkSessionIdExists] },
-    async (request, reply) => {
-      const meals = await knex('meals')
-        .where({ user_id: request.user?.id })
-        .orderBy('date', 'desc')
+  // Rota para listar todas as refeições de um usuário
+  app.get('/meals', async (request, reply) => {
+    const querySchema = z.object({
+      user_id: z.string().uuid(),
+    });
 
-      return reply.send({ meals })
-    },
-  )
+    const { user_id } = querySchema.parse(request.query);
 
-  // Rota para obter detalhes de uma refeição específica
-  app.get(
-    `${MEALS_PREFIX}/:mealId`,
-    { preHandler: [checkSessionIdExists] },
-    async (request, reply) => {
-      const paramsSchema = z.object({ mealId: z.string().uuid() })
-      const { mealId } = paramsSchema.parse(request.params)
+    try {
+      const meals = await db('meals').where({ user_id });
+      return reply.send(meals);
+    } catch (error) {
+      return reply.status(500).send({ error: 'Internal server error' });
+    }
+  });
 
-      const meal = await knex('meals').where({ id: mealId }).first()
+  // Rota para obter uma refeição pelo ID
+  app.get('/meals/:id', async (request, reply) => {
+    const paramsSchema = z.object({
+      id: z.string().uuid(),
+    });
 
+    const { id } = paramsSchema.parse(request.params);
+
+    try {
+      const meal = await db('meals').where({ id }).first();
       if (!meal) {
-        return reply.status(404).send({ error: 'Meal not found' })
+        return reply.status(404).send({ error: 'Meal not found' });
       }
+      return reply.send(meal);
+    } catch (error) {
+      return reply.status(500).send({ error: 'Internal server error' });
+    }
+  });
 
-      return reply.send({ meal })
-    },
-  )
+  // Rota para atualizar uma refeição
+  app.put('/meals/:id', async (request, reply) => {
+    const paramsSchema = z.object({
+      id: z.string().uuid(),
+    });
 
-  // Rota para atualizar uma refeição existente
-  app.put(
-    `${MEALS_PREFIX}/:mealId`,
-    { preHandler: [checkSessionIdExists] },
-    async (request, reply) => {
-      const paramsSchema = z.object({ mealId: z.string().uuid() })
-      const { mealId } = paramsSchema.parse(request.params)
+    const bodySchema = z.object({
+      name: z.string().optional(),
+      description: z.string().optional(),
+      date: z.string().datetime().optional(),
+      is_on_diet: z.boolean().optional(), // Corrigido de isDiet para is_on_diet
+    });
 
-      const updateMealBodySchema = z.object({
-        name: z.string(),
-        description: z.string(),
-        isOnDiet: z.boolean(),
-        date: z.coerce.date(),
-      })
+    const { id } = paramsSchema.parse(request.params);
+    const { name, description, date, is_on_diet } = bodySchema.parse(request.body);
 
-      const { name, description, isOnDiet, date } = updateMealBodySchema.parse(
-        request.body,
-      )
+    try {
+      const [updatedMeal] = await db('meals')
+        .where({ id })
+        .update({
+          name,
+          description,
+          date: date ? new Date(date) : undefined,
+          is_on_diet, // Corrigido de isDiet para is_on_diet
+        })
+        .returning('*');
 
-      const meal = await knex('meals').where({ id: mealId }).first()
-
-      if (!meal) {
-        return reply.status(404).send({ error: 'Meal not found' })
+      if (!updatedMeal) {
+        return reply.status(404).send({ error: 'Meal not found' });
       }
+      return reply.send(updatedMeal);
+    } catch (error) {
+      return reply.status(500).send({ error: 'Internal server error' });
+    }
+  });
 
-      await knex('meals').where({ id: mealId }).update({
-        name,
-        description,
-        is_on_diet: isOnDiet,
-        date: date.getTime(),
-      })
+  // Rota para deletar uma refeição
+  app.delete('/meals/:id', async (request, reply) => {
+    const paramsSchema = z.object({
+      id: z.string().uuid(),
+    });
 
-      return reply.status(204).send()
-    },
-  )
+    const { id } = paramsSchema.parse(request.params);
 
-  // Rota para excluir uma refeição
-  app.delete(
-    `${MEALS_PREFIX}/:mealId`,
-    { preHandler: [checkSessionIdExists] },
-    async (request, reply) => {
-      const paramsSchema = z.object({ mealId: z.string().uuid() })
-      const { mealId } = paramsSchema.parse(request.params)
-
-      const meal = await knex('meals').where({ id: mealId }).first()
-
-      if (!meal) {
-        return reply.status(404).send({ error: 'Meal not found' })
-      }
-
-      await knex('meals').where({ id: mealId }).delete()
-
-      return reply.status(204).send()
-    },
-  )
-
-  // Rota para obter métricas das refeições do usuário
-  app.get(
-    `${MEALS_PREFIX}/metrics`,
-    { preHandler: [checkSessionIdExists] },
-    async (request, reply) => {
-      const totalMealsOnDiet = await knex('meals')
-        .where({ user_id: request.user?.id, is_on_diet: true })
-        .count('id', { as: 'total' })
-        .first()
-
-      const totalMealsOffDiet = await knex('meals')
-        .where({ user_id: request.user?.id, is_on_diet: false })
-        .count('id', { as: 'total' })
-        .first()
-
-      const totalMeals = await knex('meals')
-        .where({ user_id: request.user?.id })
-        .orderBy('date', 'desc')
-
-      const bestOnDietSequence = totalMeals.reduce(
-        (acc, meal) => {
-          if (meal.is_on_diet) {
-            acc.currentSequence += 1
-          } else {
-            acc.currentSequence = 0
-          }
-          if (acc.currentSequence > acc.bestOnDietSequence) {
-            acc.bestOnDietSequence = acc.currentSequence
-          }
-          return acc
-        },
-        { bestOnDietSequence: 0, currentSequence: 0 },
-      ).bestOnDietSequence
-
-      return reply.send({
-        totalMeals: totalMeals.length,
-        totalMealsOnDiet: totalMealsOnDiet?.total ?? 0,
-        totalMealsOffDiet: totalMealsOffDiet?.total ?? 0,
-        bestOnDietSequence,
-      })
-    },
-  )
+    try {
+      await db('meals').where({ id }).del();
+      return reply.status(204).send();
+    } catch (error) {
+      return reply.status(500).send({ error: 'Internal server error' });
+    }
+  });
 }

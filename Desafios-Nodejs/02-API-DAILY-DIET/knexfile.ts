@@ -1,5 +1,16 @@
-// Importa a função 'config' do módulo './src/database'
-import { config } from './src/database';
+import type { Knex } from 'knex';
 
-// Exporta a função 'config' como padrão para que possa ser utilizada em outros módulos
+const config: { [key: string]: Knex.Config } = {
+  development: {
+    client: 'sqlite3', // Altere para o cliente do seu banco de dados (ex.: postgres, mysql, etc.)
+    connection: {
+      filename: './db/db.sqlite', // Caminho para o arquivo SQLite dentro da pasta `db`
+    },
+    useNullAsDefault: true, // Necessário para SQLite
+    migrations: {
+      directory: './db/migrations', // Diretório das migrations
+    },
+  },
+};
+
 export default config;
