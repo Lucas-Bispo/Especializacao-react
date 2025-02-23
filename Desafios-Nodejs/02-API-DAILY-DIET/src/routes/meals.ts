@@ -5,8 +5,12 @@ import { randomUUID } from 'node:crypto'
 import { knex } from '../database'
 
 export async function mealsRoutes(app: FastifyInstance) {
+  // Prefixo para evitar conflitos de rotas
+  const MEALS_PREFIX = '/meals'
+
+  // Rota para criar uma nova refeição
   app.post(
-    '/',
+    `${MEALS_PREFIX}`,
     { preHandler: [checkSessionIdExists] },
     async (request, reply) => {
       const createMealBodySchema = z.object({
@@ -29,12 +33,13 @@ export async function mealsRoutes(app: FastifyInstance) {
         user_id: request.user?.id,
       })
 
-      return reply.status(201).send()
+      return reply.status(201).send({ message: 'Meal created successfully' })
     },
   )
 
+  // Rota para listar todas as refeições do usuário
   app.get(
-    '/',
+    `${MEALS_PREFIX}`,
     { preHandler: [checkSessionIdExists] },
     async (request, reply) => {
       const meals = await knex('meals')
@@ -45,12 +50,12 @@ export async function mealsRoutes(app: FastifyInstance) {
     },
   )
 
+  // Rota para obter detalhes de uma refeição específica
   app.get(
-    '/:mealId',
+    `${MEALS_PREFIX}/:mealId`,
     { preHandler: [checkSessionIdExists] },
     async (request, reply) => {
       const paramsSchema = z.object({ mealId: z.string().uuid() })
-
       const { mealId } = paramsSchema.parse(request.params)
 
       const meal = await knex('meals').where({ id: mealId }).first()
@@ -63,12 +68,12 @@ export async function mealsRoutes(app: FastifyInstance) {
     },
   )
 
+  // Rota para atualizar uma refeição existente
   app.put(
-    '/:mealId',
+    `${MEALS_PREFIX}/:mealId`,
     { preHandler: [checkSessionIdExists] },
     async (request, reply) => {
       const paramsSchema = z.object({ mealId: z.string().uuid() })
-
       const { mealId } = paramsSchema.parse(request.params)
 
       const updateMealBodySchema = z.object({
@@ -99,12 +104,12 @@ export async function mealsRoutes(app: FastifyInstance) {
     },
   )
 
+  // Rota para excluir uma refeição
   app.delete(
-    '/:mealId',
+    `${MEALS_PREFIX}/:mealId`,
     { preHandler: [checkSessionIdExists] },
     async (request, reply) => {
       const paramsSchema = z.object({ mealId: z.string().uuid() })
-
       const { mealId } = paramsSchema.parse(request.params)
 
       const meal = await knex('meals').where({ id: mealId }).first()
@@ -119,8 +124,9 @@ export async function mealsRoutes(app: FastifyInstance) {
     },
   )
 
+  // Rota para obter métricas das refeições do usuário
   app.get(
-    '/metrics',
+    `${MEALS_PREFIX}/metrics`,
     { preHandler: [checkSessionIdExists] },
     async (request, reply) => {
       const totalMealsOnDiet = await knex('meals')
@@ -137,27 +143,25 @@ export async function mealsRoutes(app: FastifyInstance) {
         .where({ user_id: request.user?.id })
         .orderBy('date', 'desc')
 
-      const { bestOnDietSequence } = totalMeals.reduce(
+      const bestOnDietSequence = totalMeals.reduce(
         (acc, meal) => {
           if (meal.is_on_diet) {
             acc.currentSequence += 1
           } else {
             acc.currentSequence = 0
           }
-
           if (acc.currentSequence > acc.bestOnDietSequence) {
             acc.bestOnDietSequence = acc.currentSequence
           }
-
           return acc
         },
         { bestOnDietSequence: 0, currentSequence: 0 },
-      )
+      ).bestOnDietSequence
 
       return reply.send({
         totalMeals: totalMeals.length,
-        totalMealsOnDiet: totalMealsOnDiet?.total,
-        totalMealsOffDiet: totalMealsOffDiet?.total,
+        totalMealsOnDiet: totalMealsOnDiet?.total ?? 0,
+        totalMealsOffDiet: totalMealsOffDiet?.total ?? 0,
         bestOnDietSequence,
       })
     },
