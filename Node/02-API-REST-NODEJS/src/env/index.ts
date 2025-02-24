@@ -1,3 +1,23 @@
+/**
+ * Carrega as variáveis de ambiente do arquivo .env
+ * e verifica se elas estão corretas com o schema de validação
+ * definido pela biblioteca Zod.
+ *
+ * Se o ambiente for 'test', carrega o arquivo .env.test
+ * caso contrário, carrega o arquivo .env padrão.
+ *
+ * O schema de validação verifica se as variáveis de ambiente
+ * possuem os valores esperados:
+ * - NODE_ENV: development, test ou production (padrão: production)
+ * - DATABASE_CLIENT: sqlite ou pg (padrão: sqlite)
+ * - DATABASE_URL: string (obrigatório)
+ * - PORT: número (padrão: 3333)
+ *
+ * Se alguma variável de ambiente estiver incorreta, imprime um erro
+ * no console e lança uma exceção.
+ *
+ * Exporta as variáveis de ambiente validadas.
+ */
 import { config } from 'dotenv'
 import { z } from 'zod'
 
