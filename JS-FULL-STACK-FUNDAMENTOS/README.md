@@ -1,4 +1,4 @@
-```markdown
+
 # 🚀 Nova Formação Full-Stack Explorer | [![Formação](https://img.shields.io/badge/Status-Em_Produção-%2342A5F5)](https://your-link.com)  
 **Conteúdo atualizado, projetos práticos e certificado ao concluir!**  
 <div align="center">
@@ -40,18 +40,17 @@ A **Formação Full-Stack Explorer** foi regravada do zero para oferecer o que h
 ---
 
 ### 🏆 **Micro-Certificados**  
-- `Git e GitHub` | `HTML/CSS` | `JavaScript` | `Node.js`  
-*Conquiste badges ao concluir cada nível!*
+- Git e GitHub | HTML/CSS | JavaScrpt  | Node.js 
+*Conquste badges ao concluir cada nível!*
 
 ---
 
 ### 🔥 **Desafios Práticos**  
-```markdown
+
 - [x] **Local Turístico** (HTML/CSS)  
 - [ ] **Sorteador de Números** (JavaScript)  
 - [ ] **Gerenciador de Tarefas** (Node.js)  
 - [ ] **Animações CSS** (Landing Page)  
-```
 
 ---
 
