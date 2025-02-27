@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+    ports:
+      - "5173:5173"  # Porta padrão do Vite
+    volumes:
+      - .:/app       # Sincroniza o código local com o container
+      - /app/node_modules  # Evita sobrescrever as dependências instaladas no container
+    environment:
+       - NODE_ENV=${NODE_ENV}
+       - VITE_API_URL=${VITE_API_URL}
+    networks:
+      - app-network
+
+networks:
+  app-network:
