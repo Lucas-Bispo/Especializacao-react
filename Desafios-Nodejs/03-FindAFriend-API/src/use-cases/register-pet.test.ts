@@ -6,6 +6,7 @@ import { PrismaClient } from '@prisma/client';
 describe('RegisterPetUseCase', () => {
   let prisma: PrismaClient;
   let petRepository: PrismaPetRepository;
+  let orgId: string;
 
   beforeAll(async () => {
     prisma = new PrismaClient();
@@ -13,15 +14,16 @@ describe('RegisterPetUseCase', () => {
     await prisma.pet.deleteMany();
     await prisma.org.deleteMany();
 
-    await prisma.org.create({
+    const org = await prisma.org.create({
       data: {
         name: 'Org Test',
-        email: 'test@org.com',
+        email: `test-${Date.now()}@org.com`, // Email único
         password: 'hashedpassword',
         address: 'Rua Teste, 123',
         whatsapp: '123456789',
       },
     });
+    orgId = org.id; // Armazena o ID da ORG
   });
 
   afterAll(async () => {
@@ -31,9 +33,6 @@ describe('RegisterPetUseCase', () => {
   it('should register a pet successfully', async () => {
     const registerPet = new RegisterPetUseCase(petRepository);
 
-    const org = await prisma.org.findFirst();
-    if (!org) throw new Error('Org not found');
-
     const pet = await registerPet.execute({
       name: 'Rex',
       description: 'Cão amigável',
@@ -41,7 +40,7 @@ describe('RegisterPetUseCase', () => {
       size: 'Médio',
       energy: 'Alto',
       city: 'São Paulo',
-      orgId: org.id,
+      orgId, // Usa o orgId criado
     });
 
     expect(pet.id).toBeDefined();

@@ -14,23 +14,23 @@ datasource db {
 }
 
 model Org {
-  id        String   @id @default(uuid())
-  name      String
-  email     String   @unique
-  password  String
-  address   String
-  whatsapp  String
-  pets      Pet[]
+  id       String @id @default(uuid())
+  name     String
+  email    String @unique
+  password String
+  address  String
+  whatsapp String
+  pets     Pet[]
 }
 
 model Pet {
-  id          String   @id @default(uuid())
+  id          String  @id @default(uuid())
   name        String
   description String?
   age         Int
   size        String
   energy      String
   city        String
-  orgId       String
-  org         Org      @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  org_id      String
+  org         Org     @relation(fields: [org_id], references: [id])
 }

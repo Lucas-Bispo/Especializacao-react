@@ -6,6 +6,7 @@ import { PrismaClient } from '@prisma/client';
 describe('ListPetsByCityUseCase', () => {
   let prisma: PrismaClient;
   let petRepository: PrismaPetRepository;
+  let orgId: string;
 
   beforeAll(async () => {
     prisma = new PrismaClient();
@@ -16,18 +17,19 @@ describe('ListPetsByCityUseCase', () => {
     const org = await prisma.org.create({
       data: {
         name: 'Org Test',
-        email: 'test@org.com',
+        email: `test-${Date.now()}@org.com`, // Email único
         password: 'hashedpassword',
         address: 'Rua Teste, 123',
         whatsapp: '123456789',
       },
     });
+    orgId = org.id;
 
     await prisma.pet.createMany({
       data: [
-        { name: 'Rex', age: 2, size: 'Médio', energy: 'Alto', city: 'São Paulo', org_id: org.id },
-        { name: 'Miau', age: 1, size: 'Pequeno', energy: 'Baixo', city: 'São Paulo', org_id: org.id },
-        { name: 'Bolt', age: 3, size: 'Grande', energy: 'Alto', city: 'Rio', org_id: org.id },
+        { name: 'Rex', age: 2, size: 'Médio', energy: 'Alto', city: 'São Paulo', org_id: orgId },
+        { name: 'Miau', age: 1, size: 'Pequeno', energy: 'Baixo', city: 'São Paulo', org_id: orgId },
+        { name: 'Bolt', age: 3, size: 'Grande', energy: 'Alto', city: 'Rio', org_id: orgId },
       ],
     });
   });

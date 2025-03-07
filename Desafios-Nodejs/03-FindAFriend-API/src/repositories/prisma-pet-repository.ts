@@ -14,7 +14,7 @@ export class PrismaPetRepository implements PetRepository {
         size: data.size,
         energy: data.energy,
         city: data.city,
-        org_id: data.orgId, // Usa org_id para o Prisma
+        org: { connect: { id: data.orgId } },
       },
     });
     return new Pet(pet.id, pet.name, pet.description, pet.age, pet.size, pet.energy, pet.city, pet.org_id);

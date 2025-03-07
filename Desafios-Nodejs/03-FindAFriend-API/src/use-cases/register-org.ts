@@ -1,21 +1,27 @@
-import { PetRepository } from '../repositories/pet-repository.ts';
-import { Pet } from '../entities/pet.ts';
+import { OrgRepository } from '../repositories/org-repository.ts';
+import { Org } from '../entities/org.ts';
+import { hash } from 'bcryptjs';
 
-interface RegisterPetRequest {
+interface RegisterOrgRequest {
   name: string;
-  description?: string;
-  age: number;
-  size: string;
-  energy: string;
-  city: string;
-  orgId: string;
+  email: string;
+  password: string;
+  address: string;
+  whatsapp: string;
 }
 
-export class RegisterPetUseCase {
-  constructor(private petRepository: PetRepository) {}
+export class RegisterOrgUseCase {
+  constructor(private orgRepository: OrgRepository) {}
 
-  async execute(data: RegisterPetRequest): Promise<Pet> {
-    const pet = await this.petRepository.create(data);
-    return pet;
+  async execute({ name, email, password, address, whatsapp }: RegisterOrgRequest): Promise<Org> {
+    const hashedPassword = await hash(password, 6);
+    const org = await this.orgRepository.create({
+      name,
+      email,
+      password: hashedPassword,
+      address,
+      whatsapp,
+    });
+    return org;
   }
 }

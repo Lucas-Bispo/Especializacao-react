@@ -1,5 +1,3 @@
-import { Pet } from './pet.ts';
-
 export class Org {
   constructor(
     public id: string,
@@ -7,12 +5,6 @@ export class Org {
     public email: string,
     public password: string,
     public address: string,
-    public whatsapp: string,
-    public pets: Pet[] = []
+    public whatsapp: string
   ) {}
-
-  // Método corrigido
-  hasPets(): boolean {
-    return this.pets.length > 0;
-  }
 }
