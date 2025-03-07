@@ -15,14 +15,13 @@ export function authenticate(req: Request, res: Response, next: NextFunction) {
     if (!secret) throw new Error('JWT_SECRET not defined');
 
     const decoded = jwt.verify(token, secret) as { sub: string };
-    req.orgId = decoded.sub; // Adiciona o orgId ao req
+    req.orgId = decoded.sub;
     next();
   } catch (error) {
     return res.status(401).json({ error: 'Invalid or expired token' });
   }
 }
 
-// Extender a interface Request do Express
 declare module 'express' {
   interface Request {
     orgId?: string;
