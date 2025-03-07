@@ -14,16 +14,16 @@ export class PrismaPetRepository implements PetRepository {
         size: data.size,
         energy: data.energy,
         city: data.city,
-        org: { connect: { id: data.orgId } },
+        org: { connect: { id: data.orgId } }, // Correto para Prisma
       },
     });
-    return new Pet(pet.id, pet.name, pet.description, pet.age, pet.size, pet.energy, pet.city, pet.org_id);
+    return new Pet(pet.id, pet.name, pet.description, pet.age, pet.size, pet.energy, pet.city, pet.org_id as string); // Mapeia org_id para orgId
   }
 
   async findById(id: string): Promise<Pet | null> {
     const pet = await this.prisma.pet.findUnique({ where: { id } });
     if (!pet) return null;
-    return new Pet(pet.id, pet.name, pet.description, pet.age, pet.size, pet.energy, pet.city, pet.org_id);
+    return new Pet(pet.id, pet.name, pet.description, pet.age, pet.size, pet.energy, pet.city, pet.org_id as string); // Mapeia org_id para orgId
   }
 
   async findManyByCity(city: string, filters?: { age?: number; size?: string; energy?: string }): Promise<Pet[]> {
@@ -35,6 +35,6 @@ export class PrismaPetRepository implements PetRepository {
         ...(filters?.energy && { energy: filters.energy }),
       },
     });
-    return pets.map(pet => new Pet(pet.id, pet.name, pet.description, pet.age, pet.size, pet.energy, pet.city, pet.org_id));
+    return pets.map(pet => new Pet(pet.id, pet.name, pet.description, pet.age, pet.size, pet.energy, pet.city, pet.org_id as string)); // Mapeia org_id para orgId
   }
 }

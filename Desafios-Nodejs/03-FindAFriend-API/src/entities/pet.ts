@@ -7,6 +7,6 @@ export class Pet {
     public size: string,
     public energy: string,
     public city: string,
-    public orgId: string // Deve ser orgId aqui
+    public orgId: string // Note que aqui é orgId
   ) {}
 }
