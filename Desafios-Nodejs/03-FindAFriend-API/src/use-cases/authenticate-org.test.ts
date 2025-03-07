@@ -7,11 +7,14 @@ import { hash } from 'bcryptjs';
 describe('AuthenticateOrgUseCase', () => {
   let prisma: PrismaClient;
   let orgRepository: PrismaOrgRepository;
+  let authenticateOrg: AuthenticateOrgUseCase;
 
   beforeAll(async () => {
     prisma = new PrismaClient();
     orgRepository = new PrismaOrgRepository();
-    await prisma.org.deleteMany();
+    authenticateOrg = new AuthenticateOrgUseCase(orgRepository);
+    await prisma.pet.deleteMany(); // Primeiro exclui os Pets (dependentes)
+    await prisma.org.deleteMany(); // Depois exclui as ORGs
 
     await prisma.org.create({
       data: {
@@ -29,8 +32,6 @@ describe('AuthenticateOrgUseCase', () => {
   });
 
   it('should authenticate an org with valid credentials', async () => {
-    const authenticateOrg = new AuthenticateOrgUseCase(orgRepository);
-
     const { org, token } = await authenticateOrg.execute({
       email: 'test@org.com',
       password: '123456',
@@ -42,8 +43,6 @@ describe('AuthenticateOrgUseCase', () => {
   });
 
   it('should throw an error with invalid credentials', async () => {
-    const authenticateOrg = new AuthenticateOrgUseCase(orgRepository);
-
     await expect(
       authenticateOrg.execute({
         email: 'test@org.com',
