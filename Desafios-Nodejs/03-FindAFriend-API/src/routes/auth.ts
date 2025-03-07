@@ -1,6 +1,5 @@
 import { Router } from 'express';
-import { authenticateOrgController } from '../controllers/authenticate-org-controller.js';
-
+import { authenticateOrgController } from '../controllers/authenticate-org-controller.ts';
 
 const authRoutes = Router();
 
