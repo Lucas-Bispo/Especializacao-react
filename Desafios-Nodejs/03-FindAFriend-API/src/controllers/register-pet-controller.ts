@@ -4,7 +4,7 @@ import { PrismaPetRepository } from '../repositories/prisma-pet-repository.ts';
 
 export async function registerPetController(req: Request, res: Response) {
   const { name, description, age, size, energy, city } = req.body;
-  const orgId = req.orgId; // Vem do middleware authenticate
+  const orgId = req.orgId;
 
   if (!orgId) {
     return res.status(401).json({ error: 'Unauthorized' });

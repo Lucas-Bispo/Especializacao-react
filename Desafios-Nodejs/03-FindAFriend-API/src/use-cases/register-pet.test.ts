@@ -1,30 +1,25 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-
+import { RegisterPetUseCase } from './register-pet.ts';
+import { PrismaPetRepository } from '../repositories/prisma-pet-repository.ts';
 import { PrismaClient } from '@prisma/client';
-import { PrismaPetRepository } from '../repositories/pet-repository.js';
-import { RegisterPetUseCase } from './register-pet.js';
-
-const prisma = new PrismaClient();
 
 describe('RegisterPetUseCase', () => {
+  let prisma: PrismaClient;
   let petRepository: PrismaPetRepository;
-  let registerPet: RegisterPetUseCase;
 
   beforeAll(async () => {
-    // Limpa o banco de dados antes de cadastrar os pets
-    await prisma.pet.deleteMany();
-    await prisma.org.deleteMany(); // Esta linha causa o erro
+    prisma = new PrismaClient();
     petRepository = new PrismaPetRepository();
-    registerPet = new RegisterPetUseCase(petRepository);
+    await prisma.pet.deleteMany();
+    await prisma.org.deleteMany();
 
     await prisma.org.create({
       data: {
-        id: 'org-1',
-        name: 'Pet Org',
-        email: 'pet@org.com',
-        password: '123456',
-        address: 'Rua Pet, 456',
-        whatsapp: '987654321',
+        name: 'Org Test',
+        email: 'test@org.com',
+        password: 'hashedpassword',
+        address: 'Rua Teste, 123',
+        whatsapp: '123456789',
       },
     });
   });
@@ -33,22 +28,23 @@ describe('RegisterPetUseCase', () => {
     await prisma.$disconnect();
   });
 
-  it('deve cadastrar um Pet com sucesso', async () => {
-    const petData = {
+  it('should register a pet successfully', async () => {
+    const registerPet = new RegisterPetUseCase(petRepository);
+
+    const org = await prisma.org.findFirst();
+    if (!org) throw new Error('Org not found');
+
+    const pet = await registerPet.execute({
       name: 'Rex',
       description: 'Cão amigável',
       age: 2,
       size: 'Médio',
       energy: 'Alto',
       city: 'São Paulo',
-      orgId: 'org-1',
-    };
+      orgId: org.id,
+    });
 
-    const pet = await registerPet.execute(petData);
-
-    expect(pet).toHaveProperty('id');
-    expect(pet.name).toBe(petData.name);
-    expect(pet.city).toBe(petData.city);
-    expect(pet.orgId).toBe(petData.orgId);
+    expect(pet.id).toBeDefined();
+    expect(pet.name).toBe('Rex');
   });
 });

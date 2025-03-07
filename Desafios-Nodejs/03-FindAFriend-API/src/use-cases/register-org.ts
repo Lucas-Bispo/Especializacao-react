@@ -1,33 +1,21 @@
-import { hash } from 'bcrypt';
-import { OrgRepository } from '../repositories/org-repository.js';
+import { PetRepository } from '../repositories/pet-repository.ts';
+import { Pet } from '../entities/pet.ts';
 
-export class RegisterOrgUseCase {
-  constructor(private orgRepository: OrgRepository) {}
+interface RegisterPetRequest {
+  name: string;
+  description?: string;
+  age: number;
+  size: string;
+  energy: string;
+  city: string;
+  orgId: string;
+}
 
-  async execute({
-    name,
-    email,
-    password,
-    address,
-    whatsapp,
-  }: {
-    name: string;
-    email: string;
-    password: string;
-    address: string;
-    whatsapp: string;
-  }) {
-    const existingOrg = await this.orgRepository.findByEmail(email);
-    if (existingOrg) throw new Error('Email already exists');
+export class RegisterPetUseCase {
+  constructor(private petRepository: PetRepository) {}
 
-    const hashedPassword = await hash(password, 10);
-    const org = await this.orgRepository.create({
-      name,
-      email,
-      password: hashedPassword,
-      address,
-      whatsapp,
-    });
-    return org;
+  async execute(data: RegisterPetRequest): Promise<Pet> {
+    const pet = await this.petRepository.create(data);
+    return pet;
   }
 }

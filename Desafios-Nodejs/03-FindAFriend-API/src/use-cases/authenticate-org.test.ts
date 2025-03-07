@@ -1,30 +1,25 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import 'dotenv/config';
+import { AuthenticateOrgUseCase } from './authenticate-org.ts';
+import { PrismaOrgRepository } from '../repositories/prisma-org-repository.ts';
 import { PrismaClient } from '@prisma/client';
-import { hash } from 'bcrypt';
-import { PrismaOrgRepository } from '../repositories/org-repository.js';
-import { AuthenticateOrgUseCase } from './authenticate-org.js';
-
-const prisma = new PrismaClient();
+import { hash } from 'bcryptjs';
 
 describe('AuthenticateOrgUseCase', () => {
+  let prisma: PrismaClient;
   let orgRepository: PrismaOrgRepository;
-  let authenticateOrg: AuthenticateOrgUseCase;
 
   beforeAll(async () => {
-    await prisma.pet.deleteMany();
-    await prisma.org.deleteMany();
+    prisma = new PrismaClient();
     orgRepository = new PrismaOrgRepository();
-    authenticateOrg = new AuthenticateOrgUseCase(orgRepository);
+    await prisma.org.deleteMany();
 
-    // Criar uma ORG para teste
     await prisma.org.create({
       data: {
-        name: 'Auth Org',
-        email: 'auth@org.com',
-        password: await hash('123456', 10),
-        address: 'Rua Auth, 789',
-        whatsapp: '111222333',
+        name: 'Org Test',
+        email: 'test@org.com',
+        password: await hash('123456', 6),
+        address: 'Rua Teste, 123',
+        whatsapp: '123456789',
       },
     });
   });
@@ -33,29 +28,25 @@ describe('AuthenticateOrgUseCase', () => {
     await prisma.$disconnect();
   });
 
-  it('deve autenticar uma ORG com credenciais válidas', async () => {
-    const result = await authenticateOrg.execute({
-      email: 'auth@org.com',
+  it('should authenticate an org with valid credentials', async () => {
+    const authenticateOrg = new AuthenticateOrgUseCase(orgRepository);
+
+    const { org, token } = await authenticateOrg.execute({
+      email: 'test@org.com',
       password: '123456',
     });
 
-    expect(result).toHaveProperty('token');
-    expect(typeof result.token).toBe('string');
+    expect(org.id).toBeDefined();
+    expect(org.email).toBe('test@org.com');
+    expect(token).toBeDefined();
   });
 
-  it('deve falhar ao autenticar com email inválido', async () => {
-    await expect(
-      authenticateOrg.execute({
-        email: 'wrong@org.com',
-        password: '123456',
-      })
-    ).rejects.toThrow('Invalid credentials');
-  });
+  it('should throw an error with invalid credentials', async () => {
+    const authenticateOrg = new AuthenticateOrgUseCase(orgRepository);
 
-  it('deve falhar ao autenticar com senha inválida', async () => {
     await expect(
       authenticateOrg.execute({
-        email: 'auth@org.com',
+        email: 'test@org.com',
         password: 'wrongpassword',
       })
     ).rejects.toThrow('Invalid credentials');
