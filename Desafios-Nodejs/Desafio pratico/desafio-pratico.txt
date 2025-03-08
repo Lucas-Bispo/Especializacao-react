@@ -1,0 +1,17 @@
+### Entidades de Domínio
+1. **Produto**: ID único, nome, tamanho, cor, quantidade, quantidade mínima.
+2. **Estoque**: Produto, quantidade, histórico de movimentação.
+3. **Venda**: ID, produto, quantidade vendida, data, lucro.
+4. **Ordem de Compra**: ID, produto, quantidade, fornecedor, status, data de entrega.
+5. **Fornecedor**: ID, nome, contato.
+6. **Alerta**: ID, produto, mensagem, método de entrega, data.
+
+### Casos de Uso
+1. Rastrear Produto Individualmente.
+2. Definir Quantidade Mínima de Estoque.
+3. Enviar Alerta de Estoque Baixo.
+4. Visualizar Histórico de Vendas.
+5. Visualizar Histórico de Estoque.
+6. Criar Ordem de Compra Automaticamente.
+7. Gerenciar Ordem de Compra.
+8. Integrar com Fornecedores.
