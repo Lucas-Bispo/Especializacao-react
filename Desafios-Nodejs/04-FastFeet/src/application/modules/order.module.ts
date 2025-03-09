@@ -38,5 +38,8 @@ import { PrismaNotificationRepository } from '../../infrastructure/prisma/notifi
     { provide: RecipientRepository, useClass: PrismaRecipientRepository },
     { provide: NotificationRepository, useClass: PrismaNotificationRepository },
   ],
+  exports: [
+    { provide: NotificationRepository, useClass: PrismaNotificationRepository },
+  ],
 })
 export class OrderModule {}

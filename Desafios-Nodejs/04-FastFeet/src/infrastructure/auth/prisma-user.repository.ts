@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { UserRepository } from '../../domain/user/repositories/user.repository';
 import { User } from '../../domain/user/entities/user.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class PrismaUserRepository implements UserRepository {
@@ -9,37 +10,60 @@ export class PrismaUserRepository implements UserRepository {
 
   async findByCpf(cpf: string): Promise<User | null> {
     const user = await this.prisma.user.findUnique({ where: { cpf } });
-    if (!user) return null;
-    return new User(user.id, user.cpf, user.password, user.role as 'admin' | 'deliveryman', user.name, user.latitude ?? undefined, user.longitude ?? undefined);
+    if (user) {
+      return new User(user.id, user.cpf, user.password, user.role, user.name, user.latitude, user.longitude);
+    }
+
+    const recipient = await this.prisma.recipient.findUnique({ where: { cpf } });
+    if (recipient) {
+      return new User(recipient.id, recipient.cpf, recipient.password, 'recipient', recipient.name, recipient.latitude, recipient.longitude);
+    }
+
+    return null;
   }
 
   async findById(id: string): Promise<User | null> {
     const user = await this.prisma.user.findUnique({ where: { id } });
-    if (!user) return null;
-    return new User(user.id, user.cpf, user.password, user.role as 'admin' | 'deliveryman', user.name, user.latitude ?? undefined, user.longitude ?? undefined);
-  }
+    if (user) {
+      return new User(user.id, user.cpf, user.password, user.role, user.name, user.latitude, user.longitude);
+    }
 
-  async create(user: User): Promise<void> {
-    await this.prisma.user.create({
-      data: {
-        id: user.id,
-        cpf: user.cpf,
-        password: user.password,
-        role: user.role,
-        name: user.name,
-        latitude: user.latitude,
-        longitude: user.longitude,
-      },
-    });
+    const recipient = await this.prisma.recipient.findUnique({ where: { id } });
+    if (recipient) {
+      return new User(recipient.id, recipient.cpf, recipient.password, 'recipient', recipient.name, recipient.latitude, recipient.longitude);
+    }
+
+    return null;
   }
 
   async findAllDeliverymen(): Promise<User[]> {
-    const users = await this.prisma.user.findMany({ where: { role: 'deliveryman' } });
-    return users.map(user => new User(user.id, user.cpf, user.password, user.role as 'deliveryman', user.name, user.latitude ?? undefined, user.longitude ?? undefined));
+    const deliverymen = await this.prisma.user.findMany({ where: { role: 'deliveryman' } });
+    return deliverymen.map(d => new User(d.id, d.cpf, d.password, d.role, d.name, d.latitude, d.longitude));
   }
 
-  async update(id: string, data: Partial<User>): Promise<User> {
-    const updated = await this.prisma.user.update({
+  async create(data: {
+    cpf: string;
+    password: string;
+    name: string;
+    latitude?: number;
+    longitude?: number;
+  }): Promise<User> {
+    const hashedPassword = await bcrypt.hash(data.password, 10);
+    const user = await this.prisma.user.create({
+      data: {
+        cpf: data.cpf,
+        password: hashedPassword,
+        role: 'deliveryman',
+        name: data.name,
+        latitude: data.latitude,
+        longitude: data.longitude,
+      },
+    });
+    return new User(user.id, user.cpf, user.password, user.role, user.name, user.latitude, user.longitude);
+  }
+
+  async update(id: string, data: Partial<User>): Promise<void> {
+    await this.prisma.user.update({
       where: { id },
       data: {
         name: data.name,
@@ -48,7 +72,6 @@ export class PrismaUserRepository implements UserRepository {
         longitude: data.longitude,
       },
     });
-    return new User(updated.id, updated.cpf, updated.password, updated.role as 'admin' | 'deliveryman', updated.name, updated.latitude ?? undefined, updated.longitude ?? undefined);
   }
 
   async delete(id: string): Promise<void> {

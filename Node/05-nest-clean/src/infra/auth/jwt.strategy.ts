@@ -1,28 +1,27 @@
-import { Injectable } from '@nestjs/common'
-import { PassportStrategy } from '@nestjs/passport'
-import { ExtractJwt, Strategy } from 'passport-jwt'
-import { z } from 'zod'
-import { EnvService } from '../env/env.service'
-
-const tokenPayloadSchema = z.object({
-  sub: z.string().uuid(),
-})
-
-export type UserPayload = z.infer<typeof tokenPayloadSchema>
+import { Injectable } from '@nestjs/common';
+import { PassportStrategy } from '@nestjs/passport';
+import { ExtractJwt, Strategy } from 'passport-jwt';
+import { ConfigService } from '@nestjs/config';
+import { UserRepository } from '../../domain/user/repositories/user.repository';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(config: EnvService) {
-    const publicKey = config.get('JWT_PUBLIC_KEY')
-
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly userRepository: UserRepository,
+  ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: Buffer.from(publicKey, 'base64'),
-      algorithms: ['RS256'],
-    })
+      ignoreExpiration: false,
+      secretOrKey: configService.get<string>('JWT_SECRET'),
+    });
   }
 
-  async validate(payload: UserPayload) {
-    return tokenPayloadSchema.parse(payload)
+  async validate(payload: { sub: string; cpf: string; role: string }) {
+    const user = await this.userRepository.findById(payload.sub);
+    if (!user || (user.role !== 'admin' && user.role !== 'deliveryman' && user.role !== 'recipient')) {
+      return null;
+    }
+    return { id: payload.sub, cpf: payload.cpf, role: payload.role };
   }
 }

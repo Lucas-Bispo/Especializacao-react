@@ -29,13 +29,11 @@ export class PickupOrderUseCase {
       order.returnedAt,
     );
 
-    // Correção TS2554: Usar um único objeto data
     await this.orderRepository.update(orderId, {
       status: updatedOrder.status,
       pickedUpAt: updatedOrder.pickedUpAt,
     });
 
-    // Correção TS2345: Garantir instanciação correta do Notification
     const notification = new Notification(
       crypto.randomUUID(),
       order.recipientId,

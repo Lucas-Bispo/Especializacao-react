@@ -14,7 +14,6 @@ import { JwtAuthGuard } from '../../../infrastructure/auth/auth.guard';
 import { RolesGuard } from '../../../infrastructure/auth/roles.guard';
 import { Roles } from '../../../infrastructure/auth/roles.decorator';
 
-// Tipo para o req.user injetado pelo JwtAuthGuard
 interface JwtRequest extends Request {
   user: { id: string; role: string };
 }

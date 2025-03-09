@@ -2,7 +2,7 @@ import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/commo
 import { OrderRepository } from '../repositories/order.repository';
 import { Order } from '../entities/order.entity';
 import { NotificationRepository } from '../../notification/repositories/notification.repository';
-import { Notification } from '../../notification/entities/notification.entity'; // Import correto
+import { Notification } from '../../notification/entities/notification.entity';
 
 @Injectable()
 export class DeliverOrderUseCase {
@@ -29,14 +29,12 @@ export class DeliverOrderUseCase {
       order.returnedAt,
     );
 
-    // Correção 1: Passar apenas id e um objeto com as propriedades atualizadas
     await this.orderRepository.update(orderId, {
       status: updatedOrder.status,
       photoUrl: updatedOrder.photoUrl,
       deliveredAt: updatedOrder.deliveredAt,
     });
 
-    // Correção 2: Garantir que Notification seja instanciada corretamente
     const notification = new Notification(
       crypto.randomUUID(),
       order.recipientId,

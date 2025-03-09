@@ -48,8 +48,8 @@ model Order {
 model Recipient {
   id            String        @id @default(uuid())
   name          String
-  cpf           String        @unique // Adicionado para autenticação
-  password      String        // Adicionado para autenticação
+  cpf           String        @unique
+  password      String
   address       String
   latitude      Float
   longitude     Float

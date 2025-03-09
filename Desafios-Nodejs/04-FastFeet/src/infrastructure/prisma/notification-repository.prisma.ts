@@ -18,4 +18,12 @@ export class PrismaNotificationRepository implements NotificationRepository {
       },
     });
   }
+
+  async findByRecipientId(recipientId: string): Promise<Notification[]> {
+    const notifications = await this.prisma.notification.findMany({
+      where: { recipientId },
+      orderBy: { sentAt: 'desc' },
+    });
+    return notifications.map(n => new Notification(n.id, n.recipientId, n.orderId, n.message, n.sentAt));
+  }
 }
