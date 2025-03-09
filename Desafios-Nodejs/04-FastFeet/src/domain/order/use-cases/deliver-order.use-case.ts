@@ -6,18 +6,17 @@ import { Order } from '../entities/order.entity';
 export class DeliverOrderUseCase {
   constructor(private readonly orderRepository: OrderRepository) {}
 
-  async execute(orderId: string, photo: Express.Multer.File): Promise<Order> {
+  async execute(orderId: string, photoUrl: string): Promise<Order> {
     const order = await this.orderRepository.findById(orderId);
     if (!order) throw new NotFoundException('Order not found');
     if (order.status !== 'picked_up') throw new BadRequestException('Order must be picked up before delivery');
 
-    const photoUrl = `/uploads/${photo.filename}`;
     const updatedOrder = new Order(
       order.id,
       order.recipientId,
       order.deliverymanId,
       'delivered',
-      photoUrl,
+      photoUrl, // Usa a string diretamente
       order.createdAt,
       order.pickedUpAt,
       new Date(),
