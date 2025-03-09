@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { OrderController } from '../../infrastructure/http/controllers/order.controller'; // Ajustado pra OrderController
+import { OrderController } from '../../infrastructure/http/controllers/order.controller';
 import { PrismaOrderRepository } from '../../infrastructure/prisma/order-repository.prisma';
 import { OrderRepository } from '../../domain/order/repositories/order.repository';
 import { DeliverOrderUseCase } from '../../domain/order/use-cases/deliver-order.use-case';
+import { PickupOrderUseCase } from '../../domain/order/use-cases/pickup-order.use-case';
 import { MulterModule } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
@@ -24,9 +25,10 @@ import { Request } from 'express';
       }),
     }),
   ],
-  controllers: [OrderController], // Ajustado pra OrderController
+  controllers: [OrderController],
   providers: [
     DeliverOrderUseCase,
+    PickupOrderUseCase,
     {
       provide: OrderRepository,
       useClass: PrismaOrderRepository,
