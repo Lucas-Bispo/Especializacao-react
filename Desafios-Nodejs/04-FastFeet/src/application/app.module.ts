@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
-import { OrderModule } from './modules/order.module'; // Corrigido o caminho
+import { OrderModule } from './modules/order.module';
 import { AuthModule } from '../infrastructure/auth/auth.module';
 import { PrismaService } from '../infrastructure/prisma/prisma.service';
 import { RecipientModule } from './modules/recipient.module';
@@ -13,6 +13,12 @@ import { RecipientModule } from './modules/recipient.module';
     OrderModule,
     AuthModule,
   ],
-  providers: [PrismaService],
+  providers: [
+    {
+      provide: PrismaService,
+      useClass: PrismaService,
+    },
+  ],
+  exports: [PrismaService], // Exporta o PrismaService pra outros módulos
 })
 export class AppModule {}

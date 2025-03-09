@@ -4,6 +4,7 @@ import { PrismaOrderRepository } from '../../infrastructure/prisma/order-reposit
 import { OrderRepository } from '../../domain/order/repositories/order.repository';
 import { DeliverOrderUseCase } from '../../domain/order/use-cases/deliver-order.use-case';
 import { PickupOrderUseCase } from '../../domain/order/use-cases/pickup-order.use-case';
+import { CreateOrderUseCase } from '../../domain/order/use-cases/create-order.use-case';
 import { MulterModule } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
@@ -29,6 +30,7 @@ import { Request } from 'express';
   providers: [
     DeliverOrderUseCase,
     PickupOrderUseCase,
+    CreateOrderUseCase,
     {
       provide: OrderRepository,
       useClass: PrismaOrderRepository,
