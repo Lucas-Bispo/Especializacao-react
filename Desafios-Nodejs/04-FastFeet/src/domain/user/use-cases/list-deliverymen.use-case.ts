@@ -7,6 +7,7 @@ export class ListDeliverymenUseCase {
   constructor(private readonly userRepository: UserRepository) {}
 
   async execute(): Promise<User[]> {
-    return this.userRepository.findAllDeliverymen();
+    const users = await this.userRepository.findAll();
+    return users.filter(user => user.role === 'deliveryman');
   }
 }
