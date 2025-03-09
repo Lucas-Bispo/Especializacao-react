@@ -25,10 +25,10 @@ export class ListNearbyOrdersUseCase {
       if (!recipient?.latitude || !recipient?.longitude) return false;
 
       const distance = this.calculateDistance(
-        deliveryman.latitude,
-        deliveryman.longitude,
-        recipient.latitude,
-        recipient.longitude,
+        deliveryman.latitude as number,  // Asserção após verificação
+        deliveryman.longitude as number, // Asserção após verificação
+        recipient.latitude as number,    // Asserção após verificação
+        recipient.longitude as number,   // Asserção após verificação
       );
       return distance <= maxDistanceKm && order.status === 'awaiting';
     });
