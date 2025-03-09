@@ -11,7 +11,7 @@ import { JwtAuthGuard } from '../../../infrastructure/auth/auth.guard';
 import { RolesGuard } from '../../../infrastructure/auth/roles.guard';
 import { Roles } from 'src/infrastructure/auth/roles.decorator';
 import { ListDeliverymenUseCase } from 'src/domain/user/use-cases/list-deliverymen.use-case';
-
+import { UpdateDeliverymanDto } from '../dtos/update-deliveryman.dto';
 
 @Controller()
 export class UserController {
