@@ -3,25 +3,25 @@ import { IsString, IsNumber, IsNotEmpty } from 'class-validator';
 export class CreateRecipientDto {
   @IsString()
   @IsNotEmpty()
-  name: string;
+  name!: string;
 
   @IsString()
   @IsNotEmpty()
-  cpf: string;
+  cpf!: string;
 
   @IsString()
   @IsNotEmpty()
-  password: string;
+  password!: string;
 
   @IsString()
   @IsNotEmpty()
-  address: string;
+  address!: string;
 
   @IsNumber()
   @IsNotEmpty()
-  latitude: number;
+  latitude!: number;
 
   @IsNumber()
   @IsNotEmpty()
-  longitude: number;
+  longitude!: number;
 }
