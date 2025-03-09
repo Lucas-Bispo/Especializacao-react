@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { UserRepository } from '../repositories/user.repository';
-import { User } from '../entities/user.entity';
+import { UserRepository } from '../repositories/user.repository'; // Ajustado pra pasta user
+import { User } from '../entities/user.entity'; // Ajustado pra pasta user
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcrypt';
 
