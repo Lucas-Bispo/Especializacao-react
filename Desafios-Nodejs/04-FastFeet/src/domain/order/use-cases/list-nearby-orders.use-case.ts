@@ -25,10 +25,10 @@ export class ListNearbyOrdersUseCase {
       if (!recipient?.latitude || !recipient?.longitude) return false;
 
       const distance = this.calculateDistance(
-        deliveryman.latitude as number,  // Asserção após verificação
-        deliveryman.longitude as number, // Asserção após verificação
-        recipient.latitude as number,    // Asserção após verificação
-        recipient.longitude as number,   // Asserção após verificação
+        deliveryman.latitude as number,
+        deliveryman.longitude as number,
+        recipient.latitude as number,
+        recipient.longitude as number,
       );
       return distance <= maxDistanceKm && order.status === 'awaiting';
     });
@@ -37,7 +37,7 @@ export class ListNearbyOrdersUseCase {
   }
 
   private calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
-    const R = 6371; // Raio da Terra em km
+    const R = 6371;
     const dLat = (lat2 - lat1) * Math.PI / 180;
     const dLon = (lon2 - lon1) * Math.PI / 180;
     const a =
@@ -45,6 +45,6 @@ export class ListNearbyOrdersUseCase {
       Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
       Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c; // Distância em km
+    return R * c;
   }
 }

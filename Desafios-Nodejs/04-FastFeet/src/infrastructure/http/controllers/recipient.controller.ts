@@ -1,46 +1,62 @@
-import { Body, Controller, Get, Param, Post, Put, Delete } from '@nestjs/common';
-import { CreateRecipientUseCase } from '../../../domain/recipient/use-cases/create-recipient.use-case';
-import { UpdateRecipientUseCase } from '../../../domain/recipient/use-cases/update-recipient.use-case';
-import { GetRecipientNotificationsUseCase } from '../../../domain/recipient/use-cases/get-recipient-notifications.use-case';
+import { Controller, Post, Get, Put, Delete, Param, Body, UseGuards } from '@nestjs/common';
 import { RecipientRepository } from '../../../domain/recipient/repositories/recipient.repository';
-import { CreateRecipientDto } from '../dtos/create-recipient.dto';
+
+import { RolesGuard } from '../../../infrastructure/auth/roles.guard';
+import { Roles } from '../../../infrastructure/auth/roles.decorator';
+import { Recipient } from '../../../domain/recipient/entities/recipient.entity';
+import { JwtAuthGuard } from 'src/infrastructure/auth/auth.guard';
 
 @Controller('recipients')
 export class RecipientController {
-  constructor(
-    private readonly createRecipientUseCase: CreateRecipientUseCase,
-    private readonly updateRecipientUseCase: UpdateRecipientUseCase,
-    private readonly getRecipientNotificationsUseCase: GetRecipientNotificationsUseCase,
-    private readonly recipientRepository: RecipientRepository,
-  ) {}
+  constructor(private readonly recipientRepository: RecipientRepository) {}
 
   @Post()
-  async create(@Body() dto: CreateRecipientDto) {
-    return this.createRecipientUseCase.execute(dto);
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
+  async create(@Body() data: { name: string; cpf: string; password: string; address: string; latitude?: number; longitude?: number }) {
+    const recipient = new Recipient(
+      Math.random().toString(36).substr(2, 9), // ID temporário, Prisma sobrescreve
+      data.name,
+      data.cpf,
+      data.password,
+      data.address,
+      data.latitude,
+      data.longitude,
+    );
+    return this.recipientRepository.create(recipient);
   }
 
   @Get()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
   async findAll() {
     return this.recipientRepository.findAll();
   }
 
   @Get(':id')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
   async findById(@Param('id') id: string) {
     return this.recipientRepository.findById(id);
   }
 
-  @Get(':id/notifications')
-  async getNotifications(@Param('id') id: string) {
-    return this.getRecipientNotificationsUseCase.execute(id);
-  }
-
   @Put(':id')
-  async update(@Param('id') id: string, @Body() dto: Partial<CreateRecipientDto>) {
-    return this.updateRecipientUseCase.execute(id, dto);
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
+  async update(@Param('id') id: string, @Body() data: Partial<{ name: string; address: string; latitude?: number; longitude?: number }>) {
+    return this.recipientRepository.update(id, data);
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
   async delete(@Param('id') id: string) {
     return this.recipientRepository.delete(id);
+  }
+
+  @Get(':id/notifications')
+  @UseGuards(JwtAuthGuard)
+  async getNotifications(@Param('id') id: string) {
+    return this.recipientRepository.findOrdersByRecipient(id);
   }
 }

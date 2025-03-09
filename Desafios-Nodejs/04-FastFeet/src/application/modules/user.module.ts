@@ -13,10 +13,7 @@ import { PrismaService } from '../../infrastructure/prisma/prisma.service';
     CreateDeliverymanUseCase,
     ListDeliverymenUseCase,
     UpdatePasswordUseCase,
-    {
-      provide: UserRepository,
-      useClass: PrismaUserRepository,
-    },
+    { provide: UserRepository, useClass: PrismaUserRepository },
     PrismaService,
   ],
 })

@@ -17,14 +17,8 @@ import { PrismaService } from '../../../infrastructure/prisma/prisma.service';
     PickupOrderUseCase,
     DeliverOrderUseCase,
     ListNearbyOrdersUseCase,
-    {
-      provide: OrderRepository,
-      useClass: PrismaOrderRepository,
-    },
-    {
-      provide: UserRepository,
-      useClass: PrismaUserRepository,
-    },
+    { provide: OrderRepository, useClass: PrismaOrderRepository },
+    { provide: UserRepository, useClass: PrismaUserRepository },
     PrismaService,
   ],
 })

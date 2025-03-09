@@ -1,33 +1,16 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { OrderRepository } from '../repositories/order.repository';
 import { Order } from '../entities/order.entity';
-import { UserRepository } from '../../user/repositories/user.repository';
-import { RecipientRepository } from '../../recipient/repositories/recipient.repository';
 
 @Injectable()
 export class CreateOrderUseCase {
-  constructor(
-    private readonly orderRepository: OrderRepository,
-    private readonly userRepository: UserRepository,
-    private readonly recipientRepository: RecipientRepository,
-  ) {}
+  constructor(private readonly orderRepository: OrderRepository) {}
 
-  async execute(data: {
-    recipientId: string;
-    deliverymanId?: string;
-  }): Promise<Order> {
-    const recipient = await this.recipientRepository.findById(data.recipientId);
-    if (!recipient) throw new NotFoundException('Recipient not found');
-
-    if (data.deliverymanId) {
-      const deliveryman = await this.userRepository.findById(data.deliverymanId);
-      if (!deliveryman || deliveryman.role !== 'deliveryman') throw new NotFoundException('Deliveryman not found');
-    }
-
+  async execute(data: { recipientId: string; deliverymanId: string }): Promise<Order> {
     const order = new Order(
-      crypto.randomUUID(),
+      Math.random().toString(36).substr(2, 9), // ID temporário
       data.recipientId,
-      data.deliverymanId || null,
+      data.deliverymanId,
       'awaiting',
       null,
       new Date(),

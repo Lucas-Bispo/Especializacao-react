@@ -2,7 +2,6 @@ import { Injectable, NotFoundException, BadRequestException, ForbiddenException 
 import { OrderRepository } from '../repositories/order.repository';
 import { Order } from '../entities/order.entity';
 import { OrderStatusChangedEvent } from '../domain-events/order-status-changed.event';
-//import { OrderStatusChangedEvent } from '../domain-events/order-status-changed.event';
 
 @Injectable()
 export class DeliverOrderUseCase {

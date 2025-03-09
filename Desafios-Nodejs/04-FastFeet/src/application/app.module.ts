@@ -15,6 +15,5 @@ import { PrismaService } from '../infrastructure/prisma/prisma.service';
     UserModule,
   ],
   providers: [PrismaService],
-  exports: [PrismaService],
 })
 export class AppModule {}
