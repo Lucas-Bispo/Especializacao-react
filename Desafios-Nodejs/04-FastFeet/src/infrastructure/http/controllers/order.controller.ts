@@ -1,8 +1,9 @@
-import { Controller, Get, Param, Put, Post, Body, UseInterceptors, UploadedFile, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Put, Post, Body, UseInterceptors, UploadedFile, UseGuards, Req } from '@nestjs/common';
 import { OrderRepository } from '../../../domain/order/repositories/order.repository';
 import { DeliverOrderUseCase } from '../../../domain/order/use-cases/deliver-order.use-case';
 import { PickupOrderUseCase } from '../../../domain/order/use-cases/pickup-order.use-case';
 import { CreateOrderUseCase } from '../../../domain/order/use-cases/create-order.use-case';
+import { ListNearbyOrdersUseCase } from '../../../domain/order/use-cases/list-nearby-orders.use-case';
 import { FileInterceptor } from '@nestjs/platform-express';
 //import { JwtAuthGuard } from '../../../infrastructure/auth/jwt-auth.guard';
 import { RolesGuard } from '../../../infrastructure/auth/roles.guard';
@@ -18,6 +19,7 @@ export class OrderController {
     private readonly deliverOrderUseCase: DeliverOrderUseCase,
     private readonly pickupOrderUseCase: PickupOrderUseCase,
     private readonly createOrderUseCase: CreateOrderUseCase,
+    private readonly listNearbyOrdersUseCase: ListNearbyOrdersUseCase,
   ) {}
 
   @Post()
@@ -41,6 +43,13 @@ export class OrderController {
     return this.orderRepository.findByDeliveryman(deliverymanId);
   }
 
+  @Get(':deliverymanId/nearby')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('deliveryman')
+  async listNearby(@Param('deliverymanId') deliverymanId: string) {
+    return this.listNearbyOrdersUseCase.execute(deliverymanId);
+  }
+
   @Put(':id/pickup')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('deliveryman')
@@ -62,9 +71,14 @@ export class OrderController {
       }),
     }),
   )
-  async deliver(@Param('id') id: string, @UploadedFile() photo: Express.Multer.File) {
+  async deliver(
+    @Param('id') id: string,
+    @UploadedFile() photo: Express.Multer.File,
+    @Req() req: any,
+  ) {
     const photoUrl = `/uploads/${photo.filename}`;
-    return this.deliverOrderUseCase.execute(id, photoUrl);
+    const deliverymanId = req.user.sub;
+    return this.deliverOrderUseCase.execute(id, photoUrl, deliverymanId);
   }
 
   @Put(':id/return')
