@@ -7,6 +7,6 @@ export class AuthController {
 
   @Post()
   async login(@Body() data: { cpf: string; password: string }) {
-    return this.authService.login(data.cpf, data.password);
+    return this.authService.login(data); // Passa o objeto inteiro
   }
 }
