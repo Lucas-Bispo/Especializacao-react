@@ -1,59 +1,31 @@
-import { Controller, Post, Body, Get, Put, Delete, Param, UseGuards } from '@nestjs/common';
-import { LoginUseCase } from '../../../domain/user/use-cases/login.use-case';
+import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
 import { CreateDeliverymanUseCase } from '../../../domain/user/use-cases/create-deliveryman.use-case';
-//import { ListDeliverymenUseCase } from '../../../domain/user/use-cases/list-deliverymen.use-case';
-import { UpdateDeliverymanUseCase } from '../../../domain/user/use-cases/update-deliveryman.use-case';
-import { DeleteDeliverymanUseCase } from '../../../domain/user/use-cases/delete-deliveryman.use-case';
-import { LoginDto } from '../dtos/login.dto';
-import { CreateDeliverymanDto } from '../dtos/create-deliveryman.dto';
-
-import { JwtAuthGuard } from '../../../infrastructure/auth/auth.guard';
+import { ListDeliverymenUseCase } from '../../../domain/user/use-cases/list-deliverymen.use-case';
+//import { JwtAuthGuard } from '../../../infrastructure/auth/jwt-auth.guard';
 import { RolesGuard } from '../../../infrastructure/auth/roles.guard';
-import { Roles } from 'src/infrastructure/auth/roles.decorator';
-import { ListDeliverymenUseCase } from 'src/domain/user/use-cases/list-deliverymen.use-case';
-import { UpdateDeliverymanDto } from '../dtos/update-deliveryman.dto';
+import { Roles } from '../../../infrastructure/auth/roles.decorator';
+import { CreateDeliverymanDto, createDeliverymanSchema } from '../dtos/create-deliveryman.dto';
+import { ZodValidationPipe } from '../pipes/zod-validation.pipe';
+import { JwtAuthGuard } from 'src/infrastructure/auth/auth.guard';
 
-@Controller()
+@Controller('deliverymen')
 export class UserController {
   constructor(
-    private readonly loginUseCase: LoginUseCase,
     private readonly createDeliverymanUseCase: CreateDeliverymanUseCase,
     private readonly listDeliverymenUseCase: ListDeliverymenUseCase,
-    private readonly updateDeliverymanUseCase: UpdateDeliverymanUseCase,
-    private readonly deleteDeliverymanUseCase: DeleteDeliverymanUseCase,
   ) {}
 
-  @Post('sessions')
-  async login(@Body() loginDto: LoginDto) {
-    return this.loginUseCase.execute(loginDto.cpf, loginDto.password);
-  }
-
-  @Post('deliverymen')
+  @Post()
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin')
-  async createDeliveryman(@Body() dto: CreateDeliverymanDto) {
+  async create(@Body(new ZodValidationPipe(createDeliverymanSchema)) dto: CreateDeliverymanDto) {
     return this.createDeliverymanUseCase.execute(dto);
   }
 
-  @Get('deliverymen')
+  @Get()
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin')
-  async listDeliverymen() {
+  async list() {
     return this.listDeliverymenUseCase.execute();
-  }
-
-  @Put('deliverymen/:id')
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin')
-  async updateDeliveryman(@Param('id') id: string, @Body() dto: UpdateDeliverymanDto) {
-    return this.updateDeliverymanUseCase.execute(id, dto);
-  }
-
-  @Delete('deliverymen/:id')
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin')
-  async deleteDeliveryman(@Param('id') id: string) {
-    await this.deleteDeliverymanUseCase.execute(id);
-    return { message: 'Deliveryman deleted' };
   }
 }
