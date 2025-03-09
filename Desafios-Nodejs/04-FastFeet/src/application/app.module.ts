@@ -4,6 +4,10 @@ import { ConfigModule } from '@nestjs/config';
 import { OrderModule } from './modules/order.module';
 import { AuthModule } from '../infrastructure/auth/auth.module';
 import { PrismaService } from '../infrastructure/prisma/prisma.service';
+
+import { CreateDeliverymanUseCase } from '../domain/user/use-cases/create-deliveryman.use-case';
+import { UserRepository } from '../domain/user/repositories/user.repository';
+import { PrismaUserRepository } from '../infrastructure/auth/prisma-user.repository';
 import { RecipientModule } from './modules/recipient.module';
 
 @Module({
@@ -13,12 +17,15 @@ import { RecipientModule } from './modules/recipient.module';
     OrderModule,
     AuthModule,
   ],
+  controllers: [DeliverymanController],
   providers: [
+    PrismaService,
+    CreateDeliverymanUseCase,
     {
-      provide: PrismaService,
-      useClass: PrismaService,
+      provide: UserRepository,
+      useClass: PrismaUserRepository,
     },
   ],
-  exports: [PrismaService], // Exporta o PrismaService pra outros módulos
+  exports: [PrismaService],
 })
 export class AppModule {}

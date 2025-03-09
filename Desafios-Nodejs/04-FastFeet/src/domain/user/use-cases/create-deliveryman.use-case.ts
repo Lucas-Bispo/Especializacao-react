@@ -1,33 +1,24 @@
-import { Injectable, ConflictException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { UserRepository } from '../repositories/user.repository';
 import { User } from '../entities/user.entity';
+import * as crypto from 'crypto';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class CreateDeliverymanUseCase {
   constructor(private readonly userRepository: UserRepository) {}
 
-  async execute(data: {
-    cpf: string;
-    password: string;
-    name: string;
-    latitude?: number;
-    longitude?: number;
-  }): Promise<User> {
-    const existingUser = await this.userRepository.findByCpf(data.cpf);
-    if (existingUser) throw new ConflictException('CPF already exists');
-
+  async execute(data: { cpf: string; password: string; name: string; latitude?: number; longitude?: number }): Promise<User> {
     const hashedPassword = await bcrypt.hash(data.password, 10);
     const user = new User(
-      crypto.randomUUID(), // Gera UUID
+      crypto.randomUUID(),
       data.cpf,
       hashedPassword,
-      'deliveryman', // Role fixa como entregador
+      'deliveryman',
       data.name,
       data.latitude,
       data.longitude,
     );
-
     await this.userRepository.create(user);
     return user;
   }

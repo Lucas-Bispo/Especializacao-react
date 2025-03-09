@@ -1,21 +1,11 @@
-import { IsString, MinLength, IsOptional, IsNumber } from 'class-validator';
+import { z } from 'zod';
 
-export class CreateDeliverymanDto {
-  @IsString()
-  cpf!: string;
+export const createDeliverymanSchema = z.object({
+  cpf: z.string().min(11).max(14),
+  password: z.string().min(6),
+  name: z.string().min(1),
+  latitude: z.number().optional(),
+  longitude: z.number().optional(),
+});
 
-  @IsString()
-  @MinLength(6)
-  password!: string;
-
-  @IsString()
-  name!: string;
-
-  @IsOptional()
-  @IsNumber()
-  latitude?: number;
-
-  @IsOptional()
-  @IsNumber()
-  longitude?: number;
-}
+export type CreateDeliverymanDto = z.infer<typeof createDeliverymanSchema>;
