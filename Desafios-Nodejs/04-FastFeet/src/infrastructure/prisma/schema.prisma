@@ -1,0 +1,54 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id          String    @id @default(uuid())
+  cpf         String    @unique
+  password    String
+  role        String    // "admin" ou "deliveryman"
+  name        String
+  latitude    Float?
+  longitude   Float?
+  orders      Order[]   @relation("DeliverymanOrders")
+}
+
+model Order {
+  id            String      @id @default(uuid())
+  recipientId   String
+  deliverymanId String?
+  status        String      // "awaiting", "picked_up", "delivered", "returned"
+  photoUrl      String?
+  createdAt     DateTime    @default(now())
+  pickedUpAt    DateTime?
+  deliveredAt   DateTime?
+  returnedAt    DateTime?
+  recipient     Recipient   @relation(fields: [recipientId], references: [id])
+  deliveryman   User?       @relation("DeliverymanOrders", fields: [deliverymanId], references: [id])
+  notifications Notification[]
+}
+
+model Recipient {
+  id            String        @id @default(uuid())
+  name          String
+  address       String
+  latitude      Float
+  longitude     Float
+  orders        Order[]       // Relação com Order (já existente)
+  notifications Notification[] // Relação oposta com Notification (adicionada)
+}
+
+model Notification {
+  id          String    @id @default(uuid())
+  recipientId String
+  orderId     String
+  message     String
+  sentAt      DateTime  @default(now())
+  recipient   Recipient @relation(fields: [recipientId], references: [id])
+  order       Order     @relation(fields: [orderId], references: [id])
+}
