@@ -1,15 +1,17 @@
 import { Controller, Post, Body, Get, Put, Delete, Param, UseGuards } from '@nestjs/common';
 import { LoginUseCase } from '../../../domain/user/use-cases/login.use-case';
 import { CreateDeliverymanUseCase } from '../../../domain/user/use-cases/create-deliveryman.use-case';
-import { ListDeliverymenUseCase } from '../../../domain/user/use-cases/list-deliverymen.use-case';
+//import { ListDeliverymenUseCase } from '../../../domain/user/use-cases/list-deliverymen.use-case';
 import { UpdateDeliverymanUseCase } from '../../../domain/user/use-cases/update-deliveryman.use-case';
 import { DeleteDeliverymanUseCase } from '../../../domain/user/use-cases/delete-deliveryman.use-case';
 import { LoginDto } from '../dtos/login.dto';
 import { CreateDeliverymanDto } from '../dtos/create-deliveryman.dto';
-import { UpdateDeliverymanDto } from '../dtos/update-deliveryman.dto';
+
 import { JwtAuthGuard } from '../../../infrastructure/auth/auth.guard';
 import { RolesGuard } from '../../../infrastructure/auth/roles.guard';
-import { Roles } from '../../../infrastructure/auth/roles.decorator';
+import { Roles } from 'src/infrastructure/auth/roles.decorator';
+import { ListDeliverymenUseCase } from 'src/domain/user/use-cases/list-deliverymen.use-case';
+
 
 @Controller()
 export class UserController {
