@@ -7,24 +7,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
-enum UserRole {
-  admin
-  deliveryman
-  recipient
-}
-
-enum OrderStatus {
-  awaiting
-  picked_up
-  delivered
-  returned
-}
-
 model User {
   id          String    @id @default(uuid())
   cpf         String    @unique
   password    String
-  role        UserRole
+  role        String    // Substituído de UserRole
   name        String
   latitude    Float?
   longitude   Float?
@@ -32,17 +19,17 @@ model User {
 }
 
 model Order {
-  id            String      @id @default(uuid())
+  id            String    @id @default(uuid())
   recipientId   String
   deliverymanId String?
-  status        OrderStatus @default(awaiting)
+  status        String    @default("awaiting") // Substituído de OrderStatus
   photoUrl      String?
-  createdAt     DateTime    @default(now())
+  createdAt     DateTime  @default(now())
   pickedUpAt    DateTime?
   deliveredAt   DateTime?
   returnedAt    DateTime?
-  recipient     Recipient   @relation(fields: [recipientId], references: [id])
-  deliveryman   User?       @relation("DeliverymanOrders", fields: [deliverymanId], references: [id])
+  recipient     Recipient @relation(fields: [recipientId], references: [id])
+  deliveryman   User?     @relation("DeliverymanOrders", fields: [deliverymanId], references: [id])
   notifications Notification[]
 }
 

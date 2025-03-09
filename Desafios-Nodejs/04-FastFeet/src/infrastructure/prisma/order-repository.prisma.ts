@@ -41,12 +41,12 @@ export class PrismaOrderRepository implements OrderRepository {
 
   async findAll(): Promise<Order[]> {
     const orders = await this.prisma.order.findMany();
-    return orders.map((o: { id: string; recipientId: string; deliverymanId: string | null; status: 'awaiting' | 'picked_up' | 'delivered' | 'returned'; photoUrl: string | null; createdAt: Date; pickedUpAt: Date | null; deliveredAt: Date | null; returnedAt: Date | null }) =>
+    return orders.map((o) =>
       new Order(
         o.id,
         o.recipientId,
         o.deliverymanId,
-        o.status,
+        o.status as 'awaiting' | 'picked_up' | 'delivered' | 'returned',
         o.photoUrl,
         o.createdAt,
         o.pickedUpAt,
@@ -58,12 +58,12 @@ export class PrismaOrderRepository implements OrderRepository {
 
   async findByDeliverymanId(deliverymanId: string): Promise<Order[]> {
     const orders = await this.prisma.order.findMany({ where: { deliverymanId } });
-    return orders.map((o: { id: string; recipientId: string; deliverymanId: string | null; status: 'awaiting' | 'picked_up' | 'delivered' | 'returned'; photoUrl: string | null; createdAt: Date; pickedUpAt: Date | null; deliveredAt: Date | null; returnedAt: Date | null }) =>
+    return orders.map((o) =>
       new Order(
         o.id,
         o.recipientId,
         o.deliverymanId,
-        o.status,
+        o.status as 'awaiting' | 'picked_up' | 'delivered' | 'returned',
         o.photoUrl,
         o.createdAt,
         o.pickedUpAt,

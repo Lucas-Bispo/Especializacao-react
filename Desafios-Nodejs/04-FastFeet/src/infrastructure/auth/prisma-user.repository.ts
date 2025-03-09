@@ -11,7 +11,7 @@ export class PrismaUserRepository implements UserRepository {
   async findByCpf(cpf: string): Promise<User | null> {
     const user = await this.prisma.user.findUnique({ where: { cpf } });
     if (user) {
-      return new User(user.id, user.cpf, user.password, user.role, user.name, user.latitude, user.longitude);
+      return new User(user.id, user.cpf, user.password, user.role as 'admin' | 'deliveryman' | 'recipient', user.name, user.latitude, user.longitude);
     }
 
     const recipient = await this.prisma.recipient.findUnique({ where: { cpf } });
@@ -25,7 +25,7 @@ export class PrismaUserRepository implements UserRepository {
   async findById(id: string): Promise<User | null> {
     const user = await this.prisma.user.findUnique({ where: { id } });
     if (user) {
-      return new User(user.id, user.cpf, user.password, user.role, user.name, user.latitude, user.longitude);
+      return new User(user.id, user.cpf, user.password, user.role as 'admin' | 'deliveryman' | 'recipient', user.name, user.latitude, user.longitude);
     }
 
     const recipient = await this.prisma.recipient.findUnique({ where: { id } });
@@ -38,8 +38,8 @@ export class PrismaUserRepository implements UserRepository {
 
   async findAllDeliverymen(): Promise<User[]> {
     const deliverymen = await this.prisma.user.findMany({ where: { role: 'deliveryman' } });
-    return deliverymen.map((d: { id: string; cpf: string; password: string; role: 'admin' | 'deliveryman' | 'recipient'; name: string; latitude: number | null; longitude: number | null }) =>
-      new User(d.id, d.cpf, d.password, d.role, d.name, d.latitude, d.longitude)
+    return deliverymen.map((d) =>
+      new User(d.id, d.cpf, d.password, d.role as 'admin' | 'deliveryman' | 'recipient', d.name, d.latitude, d.longitude)
     );
   }
 
@@ -61,7 +61,7 @@ export class PrismaUserRepository implements UserRepository {
         longitude: data.longitude ?? null,
       },
     });
-    return new User(user.id, user.cpf, user.password, user.role, user.name, user.latitude, user.longitude);
+    return new User(user.id, user.cpf, user.password, user.role as 'admin' | 'deliveryman' | 'recipient', user.name, user.latitude, user.longitude);
   }
 
   async update(id: string, data: Partial<User>): Promise<User> {
@@ -74,7 +74,7 @@ export class PrismaUserRepository implements UserRepository {
         longitude: data.longitude ?? null,
       },
     });
-    return new User(updatedUser.id, updatedUser.cpf, updatedUser.password, updatedUser.role, updatedUser.name, updatedUser.latitude, updatedUser.longitude);
+    return new User(updatedUser.id, updatedUser.cpf, updatedUser.password, updatedUser.role as 'admin' | 'deliveryman' | 'recipient', updatedUser.name, updatedUser.latitude, updatedUser.longitude);
   }
 
   async delete(id: string): Promise<void> {
