@@ -7,6 +7,8 @@ import { FileInterceptor } from '@nestjs/platform-express';
 //import { JwtAuthGuard } from '../../../infrastructure/auth/jwt-auth.guard';
 import { RolesGuard } from '../../../infrastructure/auth/roles.guard';
 import { Roles } from '../../../infrastructure/auth/roles.decorator';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
 import { JwtAuthGuard } from 'src/infrastructure/auth/auth.guard';
 
 @Controller('orders')
@@ -32,10 +34,11 @@ export class OrderController {
     return this.orderRepository.findAll();
   }
 
-  @Get(':id')
-  @UseGuards(JwtAuthGuard)
-  async findById(@Param('id') id: string) {
-    return this.orderRepository.findById(id);
+  @Get(':deliverymanId/deliverymen')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('deliveryman')
+  async findByDeliveryman(@Param('deliverymanId') deliverymanId: string) {
+    return this.orderRepository.findByDeliveryman(deliverymanId);
   }
 
   @Put(':id/pickup')
@@ -48,11 +51,26 @@ export class OrderController {
   @Put(':id/deliver')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('deliveryman')
-  @UseInterceptors(FileInterceptor('photo'))
-  async deliver(
-    @Param('id') id: string,
-    @UploadedFile() photo: Express.Multer.File,
-  ) {
-    return this.deliverOrderUseCase.execute(id, photo);
+  @UseInterceptors(
+    FileInterceptor('photo', {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: (req, file, cb) => {
+          const randomName = Array(32).fill(null).map(() => Math.round(Math.random() * 16).toString(16)).join('');
+          return cb(null, `${randomName}${extname(file.originalname)}`);
+        },
+      }),
+    }),
+  )
+  async deliver(@Param('id') id: string, @UploadedFile() photo: Express.Multer.File) {
+    const photoUrl = `/uploads/${photo.filename}`;
+    return this.deliverOrderUseCase.execute(id, photoUrl);
+  }
+
+  @Put(':id/return')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('deliveryman')
+  async returnOrder(@Param('id') id: string) {
+    return this.orderRepository.update(id, { status: 'returned', returnedAt: new Date() });
   }
 }

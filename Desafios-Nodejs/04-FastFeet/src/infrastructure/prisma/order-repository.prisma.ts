@@ -30,7 +30,7 @@ export class PrismaOrderRepository implements OrderRepository {
       order.id,
       order.recipientId,
       order.deliverymanId,
-      order.status as 'awaiting' | 'picked_up' | 'delivered' | 'returned',
+      order.status as any,
       order.photoUrl,
       order.createdAt,
       order.pickedUpAt,
@@ -41,63 +41,64 @@ export class PrismaOrderRepository implements OrderRepository {
 
   async findAll(): Promise<Order[]> {
     const orders = await this.prisma.order.findMany();
-    return orders.map((o) =>
-      new Order(
-        o.id,
-        o.recipientId,
-        o.deliverymanId,
-        o.status as 'awaiting' | 'picked_up' | 'delivered' | 'returned',
-        o.photoUrl,
-        o.createdAt,
-        o.pickedUpAt,
-        o.deliveredAt,
-        o.returnedAt,
-      )
-    );
+    return orders.map(order => new Order(
+      order.id,
+      order.recipientId,
+      order.deliverymanId,
+      order.status as any,
+      order.photoUrl,
+      order.createdAt,
+      order.pickedUpAt,
+      order.deliveredAt,
+      order.returnedAt,
+    ));
   }
 
-  async findByDeliverymanId(deliverymanId: string): Promise<Order[]> {
+  async findByDeliveryman(deliverymanId: string): Promise<Order[]> {
     const orders = await this.prisma.order.findMany({ where: { deliverymanId } });
-    return orders.map((o) =>
-      new Order(
-        o.id,
-        o.recipientId,
-        o.deliverymanId,
-        o.status as 'awaiting' | 'picked_up' | 'delivered' | 'returned',
-        o.photoUrl,
-        o.createdAt,
-        o.pickedUpAt,
-        o.deliveredAt,
-        o.returnedAt,
-      )
-    );
+    return orders.map(order => new Order(
+      order.id,
+      order.recipientId,
+      order.deliverymanId,
+      order.status as any,
+      order.photoUrl,
+      order.createdAt,
+      order.pickedUpAt,
+      order.deliveredAt,
+      order.returnedAt,
+    ));
+  }
+
+  async findByRecipient(recipientId: string): Promise<Order[]> {
+    const orders = await this.prisma.order.findMany({ where: { recipientId } });
+    return orders.map(order => new Order(
+      order.id,
+      order.recipientId,
+      order.deliverymanId,
+      order.status as any,
+      order.photoUrl,
+      order.createdAt,
+      order.pickedUpAt,
+      order.deliveredAt,
+      order.returnedAt,
+    ));
   }
 
   async update(id: string, data: Partial<Order>): Promise<Order> {
     const updatedOrder = await this.prisma.order.update({
       where: { id },
-      data: {
-        status: data.status,
-        photoUrl: data.photoUrl,
-        pickedUpAt: data.pickedUpAt,
-        deliveredAt: data.deliveredAt,
-        returnedAt: data.returnedAt,
-      },
+      data,
     });
     return new Order(
       updatedOrder.id,
       updatedOrder.recipientId,
       updatedOrder.deliverymanId,
-      updatedOrder.status as 'awaiting' | 'picked_up' | 'delivered' | 'returned',
+      updatedOrder.status as any,
       updatedOrder.photoUrl,
       updatedOrder.createdAt,
       updatedOrder.pickedUpAt,
       updatedOrder.deliveredAt,
       updatedOrder.returnedAt,
     );
-  }
-
-  async delete(id: string): Promise<void> {
-    await this.prisma.order.delete({ where: { id } });
   }
 }
