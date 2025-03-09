@@ -27,14 +27,11 @@ export class UpdateDeliverymanUseCase {
       data.longitude !== undefined ? data.longitude : user.longitude,
     );
 
-    await this.prisma.user.update({
-      where: { id },
-      data: {
-        name: updatedUser.name,
-        password: updatedUser.password,
-        latitude: updatedUser.latitude,
-        longitude: updatedUser.longitude,
-      },
+    await this.userRepository.update(id, {
+      name: updatedUser.name,
+      password: updatedUser.password,
+      latitude: updatedUser.latitude,
+      longitude: updatedUser.longitude,
     });
     return updatedUser;
   }

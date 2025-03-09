@@ -9,6 +9,6 @@ export class DeleteDeliverymanUseCase {
     const user = await this.userRepository.findById(id);
     if (!user || user.role !== 'deliveryman') throw new NotFoundException('Deliveryman not found');
 
-    await this.prisma.user.delete({ where: { id } });
+    await this.userRepository.delete(id);
   }
 }

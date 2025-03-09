@@ -6,7 +6,7 @@ import { CreateDeliverymanUseCase } from '../../domain/user/use-cases/create-del
 import { UpdateDeliverymanUseCase } from '../../domain/user/use-cases/update-deliveryman.use-case';
 import { DeleteDeliverymanUseCase } from '../../domain/user/use-cases/delete-deliveryman.use-case';
 import { AuthModule } from '../../infrastructure/auth/auth.module';
-import { ListDeliverymenUseCase } from 'src/domain/user/use-cases/list-deliveries.use-case';
+import { ListDeliverymenUseCase } from 'src/domain/user/use-cases/list-deliverymen.use-case';
 
 @Module({
   imports: [AuthModule],
