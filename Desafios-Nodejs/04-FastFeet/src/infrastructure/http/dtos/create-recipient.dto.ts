@@ -1,15 +1,27 @@
-import { IsString, IsNumber } from 'class-validator';
+import { IsString, IsNumber, IsNotEmpty } from 'class-validator';
 
 export class CreateRecipientDto {
   @IsString()
-  name!: string;
+  @IsNotEmpty()
+  name: string;
 
   @IsString()
-  address!: string;
+  @IsNotEmpty()
+  cpf: string;
+
+  @IsString()
+  @IsNotEmpty()
+  password: string;
+
+  @IsString()
+  @IsNotEmpty()
+  address: string;
 
   @IsNumber()
-  latitude!: number;
+  @IsNotEmpty()
+  latitude: number;
 
   @IsNumber()
-  longitude!: number;
+  @IsNotEmpty()
+  longitude: number;
 }
