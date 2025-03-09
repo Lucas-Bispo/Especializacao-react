@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { UserRepository } from '../repositories/user.repository'; // Ajustado pra pasta user
-import { User } from '../entities/user.entity'; // Ajustado pra pasta user
+ // Ajustado
+import { User } from '../entities/user.entity'; // Ajustado
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcrypt';
+import { UserRepository } from '../repositories/user.repository';
 
 @Injectable()
 export class CreateDeliverymanUseCase {

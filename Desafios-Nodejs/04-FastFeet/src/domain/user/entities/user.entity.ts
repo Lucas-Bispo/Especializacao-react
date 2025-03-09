@@ -5,7 +5,7 @@ export class User {
     public password: string,
     public role: 'admin' | 'deliveryman' | 'recipient',
     public name: string,
-    public latitude?: number | null,
-    public longitude?: number | null,
+    public latitude?: number,
+    public longitude?: number,
   ) {}
 }

@@ -4,7 +4,7 @@ import { RecipientModule } from '../infrastructure/http/modules/recipient.module
 import { OrderModule } from './modules/order.module';
 import { AuthModule } from '../infrastructure/auth/auth.module';
 import { PrismaService } from '../infrastructure/prisma/prisma.service';
-import { DeliverymanController } from '../infrastructure/http/controllers/deliveryman.controller'; // Caminho corrigido
+import { DeliverymanController } from '../infrastructure/http/controllers/deliveryman.controller';
 import { CreateDeliverymanUseCase } from '../domain/user/use-cases/create-deliveryman.use-case';
 import { UserRepository } from '../domain/user/repositories/user.repository';
 import { PrismaUserRepository } from '../infrastructure/auth/prisma-user.repository';
