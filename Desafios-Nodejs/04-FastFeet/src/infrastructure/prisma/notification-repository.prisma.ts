@@ -24,6 +24,8 @@ export class PrismaNotificationRepository implements NotificationRepository {
       where: { recipientId },
       orderBy: { sentAt: 'desc' },
     });
-    return notifications.map(n => new Notification(n.id, n.recipientId, n.orderId, n.message, n.sentAt));
+    return notifications.map((n: { id: string; recipientId: string; orderId: string; message: string; sentAt: Date }) =>
+      new Notification(n.id, n.recipientId, n.orderId, n.message, n.sentAt)
+    );
   }
 }

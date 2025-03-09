@@ -38,15 +38,17 @@ export class PrismaUserRepository implements UserRepository {
 
   async findAllDeliverymen(): Promise<User[]> {
     const deliverymen = await this.prisma.user.findMany({ where: { role: 'deliveryman' } });
-    return deliverymen.map(d => new User(d.id, d.cpf, d.password, d.role, d.name, d.latitude, d.longitude));
+    return deliverymen.map((d: { id: string; cpf: string; password: string; role: 'admin' | 'deliveryman' | 'recipient'; name: string; latitude: number | null; longitude: number | null }) =>
+      new User(d.id, d.cpf, d.password, d.role, d.name, d.latitude, d.longitude)
+    );
   }
 
   async create(data: {
     cpf: string;
     password: string;
     name: string;
-    latitude?: number;
-    longitude?: number;
+    latitude?: number | null;
+    longitude?: number | null;
   }): Promise<User> {
     const hashedPassword = await bcrypt.hash(data.password, 10);
     const user = await this.prisma.user.create({
@@ -55,23 +57,24 @@ export class PrismaUserRepository implements UserRepository {
         password: hashedPassword,
         role: 'deliveryman',
         name: data.name,
-        latitude: data.latitude,
-        longitude: data.longitude,
+        latitude: data.latitude ?? null,
+        longitude: data.longitude ?? null,
       },
     });
     return new User(user.id, user.cpf, user.password, user.role, user.name, user.latitude, user.longitude);
   }
 
-  async update(id: string, data: Partial<User>): Promise<void> {
-    await this.prisma.user.update({
+  async update(id: string, data: Partial<User>): Promise<User> {
+    const updatedUser = await this.prisma.user.update({
       where: { id },
       data: {
         name: data.name,
         password: data.password,
-        latitude: data.latitude,
-        longitude: data.longitude,
+        latitude: data.latitude ?? null,
+        longitude: data.longitude ?? null,
       },
     });
+    return new User(updatedUser.id, updatedUser.cpf, updatedUser.password, updatedUser.role, updatedUser.name, updatedUser.latitude, updatedUser.longitude);
   }
 
   async delete(id: string): Promise<void> {
