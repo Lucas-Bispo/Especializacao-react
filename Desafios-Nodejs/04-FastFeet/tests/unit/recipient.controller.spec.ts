@@ -1,28 +1,28 @@
 import { Test } from '@nestjs/testing';
 import { RecipientController } from '../../src/infrastructure/http/controllers/recipient.controller';
+import { RecipientRepository } from '../../src/domain/recipient/repositories/recipient.repository';
 import { vi } from 'vitest';
-import { RecipientService } from '../../src/infrastructure/recipient/recipient.service'; // Ajuste se existir
 
 describe('RecipientController', () => {
   let controller: RecipientController;
-  let recipientService: RecipientService;
+  let recipientRepository: RecipientRepository;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       controllers: [RecipientController],
       providers: [
-        { provide: RecipientService, useValue: { create: vi.fn() } },
+        { provide: RecipientRepository, useValue: { create: vi.fn() } }, // Sem retorno
       ],
     }).compile();
 
     controller = module.get<RecipientController>(RecipientController);
-    recipientService = module.get<RecipientService>(RecipientService);
+    recipientRepository = module.get<RecipientRepository>(RecipientRepository);
   });
 
   it('should create a recipient', async () => {
-    const dto = { name: 'Maria', address: 'Rua 1' };
-    vi.spyOn(recipientService, 'create').mockResolvedValue({ id: '1', ...dto });
-    const result = await controller.create(dto);
-    expect(result).toEqual({ id: '1', ...dto });
+    const dto = { name: 'Maria', cpf: '123.456.789-00', password: 'senha123', address: 'Rua 1' };
+    vi.spyOn(recipientRepository, 'create').mockResolvedValue(undefined); // void
+    await controller.create(dto);
+    expect(recipientRepository.create).toHaveBeenCalledWith(dto);
   });
 });

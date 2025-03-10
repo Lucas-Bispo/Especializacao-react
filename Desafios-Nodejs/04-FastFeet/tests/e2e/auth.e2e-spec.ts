@@ -1,8 +1,9 @@
 import { Test } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from '../../src/app.module';
+ // Caminho ajustado
 import { vi } from 'vitest';
+import { AppModule } from 'src/application/app.module';
 
 describe('Auth (e2e)', () => {
   let app: INestApplication;
@@ -26,6 +27,6 @@ describe('Auth (e2e)', () => {
       .send({ cpf: '123.456.789-00', password: 'senha123' })
       .expect(201);
 
-    expect(response.body).toHaveProperty('token');
+    expect(response.body).toHaveProperty('access_token');
   });
 });

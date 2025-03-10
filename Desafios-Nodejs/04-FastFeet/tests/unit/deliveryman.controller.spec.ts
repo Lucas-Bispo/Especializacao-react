@@ -27,9 +27,13 @@ describe('DeliverymanController', () => {
 
   it('should create a deliveryman', async () => {
     const dto = { cpf: '123.456.789-00', password: 'senha123', name: 'João' };
-    vi.spyOn(createDeliverymanUseCase, 'execute').mockResolvedValue({ id: '1', ...dto });
+    vi.spyOn(createDeliverymanUseCase, 'execute').mockResolvedValue({
+      id: '1',
+      ...dto,
+      role: 'deliveryman', // Adicionado
+    });
     const result = await controller.create(dto);
-    expect(result).toEqual({ id: '1', ...dto });
+    expect(result).toEqual({ id: '1', ...dto, role: 'deliveryman' });
     expect(createDeliverymanUseCase.execute).toHaveBeenCalledWith(dto);
   });
 });

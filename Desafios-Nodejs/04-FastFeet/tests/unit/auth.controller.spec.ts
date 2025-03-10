@@ -24,9 +24,9 @@ describe('AuthController', () => {
 
   it('should login successfully', async () => {
     const data = { cpf: '123.456.789-00', password: 'senha123' };
-    vi.spyOn(authService, 'login').mockResolvedValue({ token: 'jwt' });
+    vi.spyOn(authService, 'login').mockResolvedValue({ access_token: 'jwt' }); // Ajustado
     const result = await authController.login(data);
-    expect(result).toEqual({ token: 'jwt' });
+    expect(result).toEqual({ access_token: 'jwt' }); // Ajustado
     expect(authService.login).toHaveBeenCalledWith(data);
   });
 });
