@@ -1,11 +1,11 @@
 export class Recipient {
   constructor(
-    public id: string,
-    public name: string,
-    public cpf: string,
-    public password: string,
-    public address: string,
-    public latitude: number,
-    public longitude: number,
+    public readonly id: string,
+    public readonly name: string,
+    public readonly cpf: string,
+    public readonly password: string,
+    public readonly address: string,
+    public readonly latitude?: number,
+    public readonly longitude?: number,
   ) {}
 }

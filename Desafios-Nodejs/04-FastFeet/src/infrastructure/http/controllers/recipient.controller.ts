@@ -1,6 +1,5 @@
 import { Controller, Post, Get, Put, Delete, Param, Body, UseGuards } from '@nestjs/common';
 import { RecipientRepository } from '../../../domain/recipient/repositories/recipient.repository';
-
 import { RolesGuard } from '../../../infrastructure/auth/roles.guard';
 import { Roles } from '../../../infrastructure/auth/roles.decorator';
 import { Recipient } from '../../../domain/recipient/entities/recipient.entity';
@@ -20,8 +19,8 @@ export class RecipientController {
       data.cpf,
       data.password,
       data.address,
-      data.latitude,
-      data.longitude,
+      data.latitude !== undefined ? data.latitude : undefined, // Garante compatibilidade
+      data.longitude !== undefined ? data.longitude : undefined, // Garante compatibilidade
     );
     return this.recipientRepository.create(recipient);
   }
