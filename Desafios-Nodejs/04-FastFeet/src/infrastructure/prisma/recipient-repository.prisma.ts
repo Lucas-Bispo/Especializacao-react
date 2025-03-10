@@ -11,13 +11,13 @@ export class PrismaRecipientRepository implements RecipientRepository {
   async create(recipient: Recipient): Promise<void> {
     await this.prisma.recipient.create({
       data: {
-        id: recipient.id, // Será sobrescrito pelo Prisma se não fornecido
+        id: recipient.id,
         name: recipient.name,
         cpf: recipient.cpf,
         password: recipient.password,
         address: recipient.address,
-        latitude: recipient.latitude,
-        longitude: recipient.longitude,
+        latitude: recipient.latitude ?? null, // Null é aceito com Float?
+        longitude: recipient.longitude ?? null, // Null é aceito com Float?
       },
     });
   }
@@ -49,8 +49,8 @@ export class PrismaRecipientRepository implements RecipientRepository {
       data: {
         name: data.name,
         address: data.address,
-        latitude: data.latitude,
-        longitude: data.longitude,
+        latitude: data.latitude !== undefined ? data.latitude : null, // Explícito: undefined ou null
+        longitude: data.longitude !== undefined ? data.longitude : null, // Explícito: undefined ou null
       },
     });
     return new Recipient(
@@ -78,7 +78,7 @@ export class PrismaRecipientRepository implements RecipientRepository {
           o.id,
           o.recipientId,
           o.deliverymanId,
-          o.status as 'awaiting' | 'picked_up' | 'delivered' | 'returned',
+          o.status as any,
           o.photoUrl ?? null,
           o.createdAt,
           o.pickedUpAt ?? null,
