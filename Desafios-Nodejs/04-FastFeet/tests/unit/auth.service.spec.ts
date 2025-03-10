@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
-import { AuthService } from './auth.service';
+import { AuthService } from '../../src/infrastructure/auth/auth.service';
 import { JwtService } from '@nestjs/jwt';
-import { UserRepository } from '../../domain/user/repositories/user.repository';
+import { UserRepository } from '../../src/domain/user/repositories/user.repository';
 import { vi } from 'vitest';
 
 describe('AuthService', () => {

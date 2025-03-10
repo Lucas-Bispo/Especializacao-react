@@ -1,8 +1,7 @@
 import { Test } from '@nestjs/testing';
-import { RecipientController } from './recipient.controller';
+import { RecipientController } from '../../src/infrastructure/http/controllers/recipient.controller';
 import { vi } from 'vitest';
-// Supondo que tenha um RecipientService
-import { RecipientService } from '../../../infrastructure/recipient/recipient.service';
+import { RecipientService } from '../../src/infrastructure/recipient/recipient.service'; // Ajuste se existir
 
 describe('RecipientController', () => {
   let controller: RecipientController;

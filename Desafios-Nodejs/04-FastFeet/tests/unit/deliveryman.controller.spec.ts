@@ -1,9 +1,9 @@
 import { Test } from '@nestjs/testing';
-import { DeliverymanController } from './deliveryman.controller';
-import { CreateDeliverymanUseCase } from '../../../domain/user/use-cases/create-deliveryman.use-case';
-import { ListDeliverymenUseCase } from '../../../domain/user/use-cases/list-deliverymen.use-case';
-import { UpdatePasswordUseCase } from '../../../domain/user/use-cases/update-password.use-case';
-import { UserRepository } from '../../../domain/user/repositories/user.repository';
+import { DeliverymanController } from '../../src/infrastructure/http/controllers/deliveryman.controller';
+import { CreateDeliverymanUseCase } from '../../src/domain/user/use-cases/create-deliveryman.use-case';
+import { ListDeliverymenUseCase } from '../../src/domain/user/use-cases/list-deliverymen.use-case';
+import { UpdatePasswordUseCase } from '../../src/domain/user/use-cases/update-password.use-case';
+import { UserRepository } from '../../src/domain/user/repositories/user.repository';
 import { vi } from 'vitest';
 
 describe('DeliverymanController', () => {

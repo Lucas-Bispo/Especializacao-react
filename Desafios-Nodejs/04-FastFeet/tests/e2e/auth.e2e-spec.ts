@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from '../src/app.module'; // Ajuste o caminho pro seu AppModule
+import { AppModule } from '../../src/app.module';
 import { vi } from 'vitest';
 
 describe('Auth (e2e)', () => {

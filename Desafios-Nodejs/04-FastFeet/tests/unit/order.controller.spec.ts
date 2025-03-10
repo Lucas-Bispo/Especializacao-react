@@ -1,8 +1,7 @@
 import { Test } from '@nestjs/testing';
-import { OrderController } from './order.controller';
+import { OrderController } from '../../src/infrastructure/http/controllers/order.controller';
 import { vi } from 'vitest';
-// Supondo que tenha um OrderService
-import { OrderService } from '../../../infrastructure/order/order.service';
+import { OrderService } from '../../src/infrastructure/order/order.service'; // Ajuste se existir
 
 describe('OrderController', () => {
   let controller: OrderController;
