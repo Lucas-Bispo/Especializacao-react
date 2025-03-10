@@ -11,7 +11,7 @@ describe('RecipientController', () => {
     const module = await Test.createTestingModule({
       controllers: [RecipientController],
       providers: [
-        { provide: RecipientRepository, useValue: { create: vi.fn() } }, // Sem retorno
+        { provide: RecipientRepository, useValue: { create: vi.fn() } },
       ],
     }).compile();
 
@@ -21,7 +21,7 @@ describe('RecipientController', () => {
 
   it('should create a recipient', async () => {
     const dto = { name: 'Maria', cpf: '123.456.789-00', password: 'senha123', address: 'Rua 1' };
-    vi.spyOn(recipientRepository, 'create').mockResolvedValue(undefined); // void
+    vi.spyOn(recipientRepository, 'create').mockResolvedValue(undefined);
     await controller.create(dto);
     expect(recipientRepository.create).toHaveBeenCalledWith(dto);
   });

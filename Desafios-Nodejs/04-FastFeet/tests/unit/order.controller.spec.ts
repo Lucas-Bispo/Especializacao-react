@@ -11,7 +11,10 @@ describe('OrderController', () => {
     const module = await Test.createTestingModule({
       controllers: [OrderController],
       providers: [
-        { provide: CreateOrderUseCase, useValue: { execute: vi.fn() } },
+        {
+          provide: CreateOrderUseCase,
+          useValue: { execute: vi.fn() },
+        },
       ],
     }).compile();
 
@@ -29,7 +32,7 @@ describe('OrderController', () => {
       createdAt: new Date(),
       pickedUpAt: null,
       deliveredAt: null,
-      returnedAt: null, // Adicionado
+      returnedAt: null,
     });
     const result = await controller.create(dto);
     expect(result).toEqual({
@@ -40,7 +43,7 @@ describe('OrderController', () => {
       createdAt: expect.any(Date),
       pickedUpAt: null,
       deliveredAt: null,
-      returnedAt: null, // Adicionado
+      returnedAt: null,
     });
   });
 });

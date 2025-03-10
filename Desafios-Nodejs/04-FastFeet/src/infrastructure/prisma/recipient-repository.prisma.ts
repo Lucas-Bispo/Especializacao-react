@@ -1,46 +1,45 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from './prisma.service';
-import { RecipientRepository } from '../../domain/recipient/repositories/recipient.repository';
-import { Recipient } from '../../domain/recipient/entities/recipient.entity';
-import { Order } from '../../domain/order/entities/order.entity';
+import { PrismaClient } from '@prisma/client';
+import { Order } from 'src/domain/order/entities/order.entity';
+import { Recipient } from 'src/domain/recipient/entities/recipient.entity';
+import { RecipientRepository } from 'src/domain/recipient/repositories/recipient.repository';
+//import { Recipient } from '../../../domain/recipient/entities/recipient.entity';
+//import { RecipientRepository } from '../../../domain/recipient/repositories/recipient.repository';
 
-@Injectable()
 export class PrismaRecipientRepository implements RecipientRepository {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private prisma: PrismaClient) {}
+  findAll(): Promise<Recipient[]> {
+    throw new Error('Method not implemented.');
+  }
+  findOrdersByRecipient(recipientId: string): Promise<Order[]> {
+    throw new Error('Method not implemented.');
+  }
 
-  async create(recipient: Recipient): Promise<void> {
+  async create(data: Recipient): Promise<void> {
     await this.prisma.recipient.create({
       data: {
-        id: recipient.id,
-        name: recipient.name,
-        cpf: recipient.cpf,
-        password: recipient.password,
-        address: recipient.address,
-        latitude: recipient.latitude ?? null, // Null é aceito com Float?
-        longitude: recipient.longitude ?? null, // Null é aceito com Float?
+        name: data.name,
+        cpf: data.cpf,
+        password: data.password,
+        address: data.address,
+        latitude: data.latitude ?? 0,
+        longitude: data.longitude ?? 0,
       },
     });
+    // Não retorna nada, apenas cria
+  }
+
+  async findByCpf(cpf: string): Promise<Recipient | null> {
+    const recipient = await this.prisma.recipient.findUnique({
+      where: { cpf },
+    });
+    return recipient;
   }
 
   async findById(id: string): Promise<Recipient | null> {
-    const recipient = await this.prisma.recipient.findUnique({ where: { id } });
-    if (!recipient) return null;
-    return new Recipient(
-      recipient.id,
-      recipient.name,
-      recipient.cpf,
-      recipient.password,
-      recipient.address,
-      recipient.latitude ?? undefined,
-      recipient.longitude ?? undefined,
-    );
-  }
-
-  async findAll(): Promise<Recipient[]> {
-    const recipients = await this.prisma.recipient.findMany();
-    return recipients.map(
-      r => new Recipient(r.id, r.name, r.cpf, r.password, r.address, r.latitude ?? undefined, r.longitude ?? undefined),
-    );
+    const recipient = await this.prisma.recipient.findUnique({
+      where: { id },
+    });
+    return recipient;
   }
 
   async update(id: string, data: Partial<Recipient>): Promise<Recipient> {
@@ -48,43 +47,19 @@ export class PrismaRecipientRepository implements RecipientRepository {
       where: { id },
       data: {
         name: data.name,
+        cpf: data.cpf,
+        password: data.password,
         address: data.address,
-        latitude: data.latitude !== undefined ? data.latitude : null, // Explícito: undefined ou null
-        longitude: data.longitude !== undefined ? data.longitude : null, // Explícito: undefined ou null
+        latitude: data.latitude !== undefined ? (data.latitude ?? 0) : undefined,
+        longitude: data.longitude !== undefined ? (data.longitude ?? 0) : undefined,
       },
     });
-    return new Recipient(
-      recipient.id,
-      recipient.name,
-      recipient.cpf,
-      recipient.password,
-      recipient.address,
-      recipient.latitude ?? undefined,
-      recipient.longitude ?? undefined,
-    );
+    return recipient;
   }
 
   async delete(id: string): Promise<void> {
-    await this.prisma.recipient.delete({ where: { id } });
-  }
-
-  async findOrdersByRecipient(recipientId: string): Promise<Order[]> {
-    const orders = await this.prisma.order.findMany({
-      where: { recipientId },
+    await this.prisma.recipient.delete({
+      where: { id },
     });
-    return orders.map(
-      o =>
-        new Order(
-          o.id,
-          o.recipientId,
-          o.deliverymanId,
-          o.status as any,
-          o.photoUrl ?? null,
-          o.createdAt,
-          o.pickedUpAt ?? null,
-          o.deliveredAt ?? null,
-          o.returnedAt ?? null,
-        ),
-    );
   }
 }

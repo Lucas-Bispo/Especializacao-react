@@ -5,20 +5,22 @@ import { UserRepository } from '../../src/domain/user/repositories/user.reposito
 import { vi } from 'vitest';
 
 describe('AuthService', () => {
-  let authService: AuthService;
+  let service: AuthService;
   let userRepository: UserRepository;
+  let jwtService: JwtService;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       providers: [
         AuthService,
-        { provide: JwtService, useValue: { sign: vi.fn(() => 'jwt') } },
         { provide: UserRepository, useValue: { findByCpf: vi.fn() } },
+        { provide: JwtService, useValue: { sign: vi.fn(() => 'jwt') } },
       ],
     }).compile();
 
-    authService = module.get<AuthService>(AuthService);
+    service = module.get<AuthService>(AuthService);
     userRepository = module.get<UserRepository>(UserRepository);
+    jwtService = module.get<JwtService>(JwtService);
   });
 
   it('should login successfully', async () => {
@@ -27,10 +29,10 @@ describe('AuthService', () => {
       id: '1',
       cpf: data.cpf,
       password: data.password,
-      role: 'recipient', // Corrigido de 'user' pra 'recipient'
+      role: 'recipient',
       name: 'Test User',
     });
-    const result = await authService.login(data);
+    const result = await service.login(data);
     expect(result).toEqual({ access_token: 'jwt' });
   });
 });
