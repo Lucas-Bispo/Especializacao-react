@@ -5,7 +5,6 @@ import { vi } from 'vitest';
 
 describe('OrderController', () => {
   let controller: OrderController;
-  let createOrderUseCase: CreateOrderUseCase;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
@@ -13,27 +12,28 @@ describe('OrderController', () => {
       providers: [
         {
           provide: CreateOrderUseCase,
-          useValue: { execute: vi.fn() },
+          useValue: {
+            execute: vi.fn().mockResolvedValue({
+              id: '1',
+              recipientId: '1',
+              deliverymanId: '2',
+              status: 'awaiting',
+              photoUrl: null,
+              createdAt: new Date(),
+              pickedUpAt: null,
+              deliveredAt: null,
+              returnedAt: null,
+            }),
+          },
         },
       ],
     }).compile();
 
     controller = module.get<OrderController>(OrderController);
-    createOrderUseCase = module.get<CreateOrderUseCase>(CreateOrderUseCase);
   });
 
   it('should create an order', async () => {
     const dto = { recipientId: '1', deliverymanId: '2' };
-    vi.spyOn(createOrderUseCase, 'execute').mockResolvedValue({
-      id: '1',
-      ...dto,
-      status: 'awaiting',
-      photoUrl: null,
-      createdAt: new Date(),
-      pickedUpAt: null,
-      deliveredAt: null,
-      returnedAt: null,
-    });
     const result = await controller.create(dto);
     expect(result).toEqual({
       id: '1',
