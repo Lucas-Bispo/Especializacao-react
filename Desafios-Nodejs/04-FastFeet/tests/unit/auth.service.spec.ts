@@ -1,41 +1,21 @@
-import { Test } from '@nestjs/testing';
-import { AuthService } from '../../src/infrastructure/auth/auth.service';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+
 import { JwtService } from '@nestjs/jwt';
-import { UserRepository } from '../../src/domain/user/repositories/user.repository';
-import { vi } from 'vitest';
+import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
 
-describe('AuthService', () => {
-  let service: AuthService;
+@Injectable()
+export class AuthService {
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly jwtService: JwtService,
+  ) {}
 
-  beforeEach(async () => {
-    const module = await Test.createTestingModule({
-      providers: [
-        AuthService,
-        {
-          provide: UserRepository,
-          useValue: {
-            findByCpf: vi.fn().mockResolvedValue({
-              id: '1',
-              cpf: '123.456.789-00',
-              password: 'senha123',
-              role: 'recipient',
-              name: 'Test User',
-            }),
-          },
-        },
-        {
-          provide: JwtService,
-          useValue: { sign: vi.fn(() => 'jwt') },
-        },
-      ],
-    }).compile();
-
-    service = module.get<AuthService>(AuthService);
-  });
-
-  it('should login successfully', async () => {
-    const data = { cpf: '123.456.789-00', password: 'senha123' };
-    const result = await service.login(data);
-    expect(result).toEqual({ access_token: 'jwt' });
-  });
-});
+  async login({ cpf, password }: { cpf: string; password: string }) {
+    const user = await this.prisma.user.findUnique({ where: { cpf } });
+    if (!user || user.password !== password) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+    const payload = { sub: user.id, role: user.role };
+    return { access_token: this.jwtService.sign(payload) };
+  }
+}

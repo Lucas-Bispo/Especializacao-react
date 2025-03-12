@@ -1,55 +1,47 @@
-import { Controller, Post, Get, Put, Delete, Param, Body, UseGuards } from '@nestjs/common';
+// src/infrastructure/http/controllers/deliveryman.controller.ts
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { CreateDeliverymanUseCase } from '../../../domain/user/use-cases/create-deliveryman.use-case';
-import { ListDeliverymenUseCase } from '../../../domain/user/use-cases/list-deliverymen.use-case';
-import { UpdatePasswordUseCase } from '../../../domain/user/use-cases/update-password.use-case';
-import { UserRepository } from '../../../domain/user/repositories/user.repository';
-import { RolesGuard } from '../../../infrastructure/auth/roles.guard';
-import { Roles } from '../../../infrastructure/auth/roles.decorator';
-import { CreateDeliverymanDto, createDeliverymanSchema } from '../dtos/create-deliveryman.dto';
-import { ZodValidationPipe } from '../pipes/zod-validation.pipe';
-import { JwtAuthGuard } from 'src/infrastructure/auth/auth.guard';
+import { JwtAuthGuard } from '../../auth/auth.guard';
+import { RolesGuard } from '../../auth/roles.guard';
+import { Roles } from '../../auth/roles.decorator';
+import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
+
 
 @Controller('deliverymen')
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class DeliverymanController {
   constructor(
     private readonly createDeliverymanUseCase: CreateDeliverymanUseCase,
-    private readonly listDeliverymenUseCase: ListDeliverymenUseCase,
-    private readonly updatePasswordUseCase: UpdatePasswordUseCase,
-    private readonly userRepository: UserRepository,
+    private readonly prisma: PrismaService,
   ) {}
 
   @Post()
-  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin')
-  async create(@Body(new ZodValidationPipe(createDeliverymanSchema)) dto: CreateDeliverymanDto) {
+  async create(@Body() dto: { name: string; cpf: string; password: string }) {
     return this.createDeliverymanUseCase.execute(dto);
   }
 
   @Get()
-  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin')
-  async list() {
-    return this.listDeliverymenUseCase.execute();
+  async findAll() {
+    return this.prisma.user.findMany({ where: { role: 'deliveryman' } });
+  }
+
+  @Get(':id')
+  @Roles('admin')
+  async findOne(@Param('id') id: string) {
+    return this.prisma.user.findUnique({ where: { id, role: 'deliveryman' } });
   }
 
   @Put(':id')
-  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin')
-  async update(@Param('id') id: string, @Body() data: Partial<CreateDeliverymanDto>) {
-    return this.userRepository.update(id, { ...data, role: 'deliveryman' });
+  async update(@Param('id') id: string, @Body() dto: { name?: string; cpf?: string; password?: string }) {
+    return this.prisma.user.update({ where: { id, role: 'deliveryman' }, data: dto });
   }
 
   @Delete(':id')
-  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin')
   async delete(@Param('id') id: string) {
-    return this.userRepository.delete(id);
-  }
-
-  @Put(':id/password')
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin')
-  async updatePassword(@Param('id') id: string, @Body() data: { password: string }) {
-    return this.updatePasswordUseCase.execute(id, data.password);
+    return this.prisma.user.delete({ where: { id, role: 'deliveryman' } });
   }
 }
